@@ -1,0 +1,1713 @@
+[
+  {
+    "id": "schema.mytour",
+    "label": "Create schema \"mytour\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres"
+    },
+    "precheck": [],
+    "execute": [
+      {
+        "description": "Create schema \"mytour\"",
+        "sql": "CREATE SCHEMA IF NOT EXISTS \"mytour\"",
+        "params": []
+      }
+    ],
+    "postcheck": []
+  },
+  {
+    "id": "schema.public",
+    "label": "Create schema \"public\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres"
+    },
+    "precheck": [],
+    "execute": [
+      {
+        "description": "Create schema \"public\"",
+        "sql": "CREATE SCHEMA IF NOT EXISTS \"public\"",
+        "params": []
+      }
+    ],
+    "postcheck": []
+  },
+  {
+    "id": "table.Account",
+    "label": "Create table \"Account\"",
+    "summary": "Creates table \"Account\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "mytour",
+        "objectType": "table",
+        "name": "Account"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure table \"Account\" does not exist",
+        "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
+        "params": [
+          "\"mytour\".\"Account\""
+        ]
+      }
+    ],
+    "execute": [
+      {
+        "description": "create table \"Account\"",
+        "sql": "CREATE TABLE \"mytour\".\"Account\" (\n  \"access_token\" text,\n  \"createdAt\" timestamptz NOT NULL,\n  \"expires_at\" int4,\n  \"id\" character(36) NOT NULL,\n  \"id_token\" text,\n  \"oauth_token\" text,\n  \"oauth_token_secret\" text,\n  \"provider\" text NOT NULL,\n  \"providerAccountId\" text NOT NULL,\n  \"refresh_token\" text,\n  \"scope\" text,\n  \"session_state\" text,\n  \"token_type\" text,\n  \"type\" text NOT NULL,\n  \"updatedAt\" timestamptz NOT NULL,\n  \"userId\" character(36) NOT NULL,\n  PRIMARY KEY (\"id\")\n)",
+        "params": []
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify table \"Account\" exists",
+        "sql": "SELECT (to_regclass($1)) IS NOT NULL AS \"result\"",
+        "params": [
+          "\"mytour\".\"Account\""
+        ]
+      }
+    ]
+  },
+  {
+    "id": "table.AuditLog",
+    "label": "Create table \"AuditLog\"",
+    "summary": "Creates table \"AuditLog\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "mytour",
+        "objectType": "table",
+        "name": "AuditLog"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure table \"AuditLog\" does not exist",
+        "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
+        "params": [
+          "\"mytour\".\"AuditLog\""
+        ]
+      }
+    ],
+    "execute": [
+      {
+        "description": "create table \"AuditLog\"",
+        "sql": "CREATE TABLE \"mytour\".\"AuditLog\" (\n  \"action\" text NOT NULL,\n  \"actorId\" character(36) NOT NULL,\n  \"createdAt\" timestamptz NOT NULL,\n  \"id\" character(36) NOT NULL,\n  \"note\" text,\n  \"targetId\" text NOT NULL,\n  \"targetType\" text NOT NULL,\n  PRIMARY KEY (\"id\")\n)",
+        "params": []
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify table \"AuditLog\" exists",
+        "sql": "SELECT (to_regclass($1)) IS NOT NULL AS \"result\"",
+        "params": [
+          "\"mytour\".\"AuditLog\""
+        ]
+      }
+    ]
+  },
+  {
+    "id": "table.AvailabilityBlock",
+    "label": "Create table \"AvailabilityBlock\"",
+    "summary": "Creates table \"AvailabilityBlock\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "mytour",
+        "objectType": "table",
+        "name": "AvailabilityBlock"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure table \"AvailabilityBlock\" does not exist",
+        "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
+        "params": [
+          "\"mytour\".\"AvailabilityBlock\""
+        ]
+      }
+    ],
+    "execute": [
+      {
+        "description": "create table \"AvailabilityBlock\"",
+        "sql": "CREATE TABLE \"mytour\".\"AvailabilityBlock\" (\n  \"createdAt\" timestamptz NOT NULL,\n  \"endsAt\" timestamptz NOT NULL,\n  \"id\" character(36) NOT NULL,\n  \"listingId\" character(36) NOT NULL,\n  \"note\" text,\n  \"startsAt\" timestamptz NOT NULL,\n  PRIMARY KEY (\"id\")\n)",
+        "params": []
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify table \"AvailabilityBlock\" exists",
+        "sql": "SELECT (to_regclass($1)) IS NOT NULL AS \"result\"",
+        "params": [
+          "\"mytour\".\"AvailabilityBlock\""
+        ]
+      }
+    ]
+  },
+  {
+    "id": "table.Booking",
+    "label": "Create table \"Booking\"",
+    "summary": "Creates table \"Booking\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "mytour",
+        "objectType": "table",
+        "name": "Booking"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure table \"Booking\" does not exist",
+        "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
+        "params": [
+          "\"mytour\".\"Booking\""
+        ]
+      }
+    ],
+    "execute": [
+      {
+        "description": "create table \"Booking\"",
+        "sql": "CREATE TABLE \"mytour\".\"Booking\" (\n  \"advanceAmount\" int4 DEFAULT 0 NOT NULL,\n  \"approvedAt\" timestamptz,\n  \"cancelledAt\" timestamptz,\n  \"checkIn\" timestamptz NOT NULL,\n  \"checkOut\" timestamptz NOT NULL,\n  \"completedAt\" timestamptz,\n  \"createdAt\" timestamptz NOT NULL,\n  \"declineReason\" text,\n  \"declinedAt\" timestamptz,\n  \"discountAmount\" int4 DEFAULT 0 NOT NULL,\n  \"id\" character(36) NOT NULL,\n  \"listingId\" character(36) NOT NULL,\n  \"monthlyRentSnapshot\" int4 NOT NULL,\n  \"renterId\" character(36) NOT NULL,\n  \"renterNote\" text,\n  \"serviceChargeAmount\" int4 DEFAULT 0 NOT NULL,\n  \"status\" text DEFAULT 'PENDING' NOT NULL,\n  \"totalAmount\" int4 NOT NULL,\n  \"updatedAt\" timestamptz NOT NULL,\n  PRIMARY KEY (\"id\"),\n  CONSTRAINT \"Booking_status_check_cd3064cb\" CHECK (\"status\" IN ('PENDING', 'APPROVED', 'DECLINED', 'CANCELLED', 'COMPLETED'))\n)",
+        "params": []
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify table \"Booking\" exists",
+        "sql": "SELECT (to_regclass($1)) IS NOT NULL AS \"result\"",
+        "params": [
+          "\"mytour\".\"Booking\""
+        ]
+      }
+    ]
+  },
+  {
+    "id": "table.Favorite",
+    "label": "Create table \"Favorite\"",
+    "summary": "Creates table \"Favorite\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "mytour",
+        "objectType": "table",
+        "name": "Favorite"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure table \"Favorite\" does not exist",
+        "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
+        "params": [
+          "\"mytour\".\"Favorite\""
+        ]
+      }
+    ],
+    "execute": [
+      {
+        "description": "create table \"Favorite\"",
+        "sql": "CREATE TABLE \"mytour\".\"Favorite\" (\n  \"createdAt\" timestamptz NOT NULL,\n  \"id\" character(36) NOT NULL,\n  \"listingId\" character(36) NOT NULL,\n  \"userId\" character(36) NOT NULL,\n  PRIMARY KEY (\"id\")\n)",
+        "params": []
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify table \"Favorite\" exists",
+        "sql": "SELECT (to_regclass($1)) IS NOT NULL AS \"result\"",
+        "params": [
+          "\"mytour\".\"Favorite\""
+        ]
+      }
+    ]
+  },
+  {
+    "id": "table.Listing",
+    "label": "Create table \"Listing\"",
+    "summary": "Creates table \"Listing\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "mytour",
+        "objectType": "table",
+        "name": "Listing"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure table \"Listing\" does not exist",
+        "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
+        "params": [
+          "\"mytour\".\"Listing\""
+        ]
+      }
+    ],
+    "execute": [
+      {
+        "description": "create table \"Listing\"",
+        "sql": "CREATE TABLE \"mytour\".\"Listing\" (\n  \"addressNote\" text,\n  \"advanceAmount\" int4,\n  \"amenities\" text[] NOT NULL,\n  \"area\" text NOT NULL,\n  \"availableFrom\" timestamptz,\n  \"availableTo\" timestamptz,\n  \"bathrooms\" int4 NOT NULL,\n  \"bedrooms\" int4 NOT NULL,\n  \"city\" text NOT NULL,\n  \"createdAt\" timestamptz NOT NULL,\n  \"description\" text NOT NULL,\n  \"furnished\" bool DEFAULT false NOT NULL,\n  \"houseRules\" text,\n  \"id\" character(36) NOT NULL,\n  \"monthlyRent\" int4 NOT NULL,\n  \"ownerId\" character(36) NOT NULL,\n  \"propertyType\" text NOT NULL,\n  \"serviceChargeNote\" text,\n  \"sizeSqft\" int4 NOT NULL,\n  \"status\" text DEFAULT 'DRAFT' NOT NULL,\n  \"title\" text NOT NULL,\n  \"updatedAt\" timestamptz NOT NULL,\n  PRIMARY KEY (\"id\"),\n  CONSTRAINT \"Listing_amenities_elem_not_null_8aca8596\" CHECK (array_position(\"amenities\", NULL) IS NULL),\n  CONSTRAINT \"Listing_propertyType_check_64a3c017\" CHECK (\"propertyType\" IN ('APARTMENT', 'HOUSE', 'ROOM', 'VILLA', 'OTHER')),\n  CONSTRAINT \"Listing_status_check_962311ea\" CHECK (\"status\" IN ('DRAFT', 'PUBLISHED', 'UNPUBLISHED', 'ARCHIVED'))\n)",
+        "params": []
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify table \"Listing\" exists",
+        "sql": "SELECT (to_regclass($1)) IS NOT NULL AS \"result\"",
+        "params": [
+          "\"mytour\".\"Listing\""
+        ]
+      }
+    ]
+  },
+  {
+    "id": "table.ListingPhoto",
+    "label": "Create table \"ListingPhoto\"",
+    "summary": "Creates table \"ListingPhoto\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "mytour",
+        "objectType": "table",
+        "name": "ListingPhoto"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure table \"ListingPhoto\" does not exist",
+        "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
+        "params": [
+          "\"mytour\".\"ListingPhoto\""
+        ]
+      }
+    ],
+    "execute": [
+      {
+        "description": "create table \"ListingPhoto\"",
+        "sql": "CREATE TABLE \"mytour\".\"ListingPhoto\" (\n  \"caption\" text,\n  \"createdAt\" timestamptz NOT NULL,\n  \"id\" character(36) NOT NULL,\n  \"listingId\" character(36) NOT NULL,\n  \"sortOrder\" int4 DEFAULT 0 NOT NULL,\n  \"url\" text NOT NULL,\n  PRIMARY KEY (\"id\")\n)",
+        "params": []
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify table \"ListingPhoto\" exists",
+        "sql": "SELECT (to_regclass($1)) IS NOT NULL AS \"result\"",
+        "params": [
+          "\"mytour\".\"ListingPhoto\""
+        ]
+      }
+    ]
+  },
+  {
+    "id": "table.ListingReport",
+    "label": "Create table \"ListingReport\"",
+    "summary": "Creates table \"ListingReport\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "mytour",
+        "objectType": "table",
+        "name": "ListingReport"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure table \"ListingReport\" does not exist",
+        "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
+        "params": [
+          "\"mytour\".\"ListingReport\""
+        ]
+      }
+    ],
+    "execute": [
+      {
+        "description": "create table \"ListingReport\"",
+        "sql": "CREATE TABLE \"mytour\".\"ListingReport\" (\n  \"createdAt\" timestamptz NOT NULL,\n  \"id\" character(36) NOT NULL,\n  \"listingId\" character(36) NOT NULL,\n  \"reason\" text NOT NULL,\n  \"reporterId\" character(36) NOT NULL,\n  \"resolutionNote\" text,\n  \"resolvedAt\" timestamptz,\n  \"resolvedById\" character(36),\n  \"status\" text DEFAULT 'OPEN' NOT NULL,\n  \"updatedAt\" timestamptz NOT NULL,\n  PRIMARY KEY (\"id\"),\n  CONSTRAINT \"ListingReport_status_check_029bb120\" CHECK (\"status\" IN ('OPEN', 'REVIEWED', 'DISMISSED'))\n)",
+        "params": []
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify table \"ListingReport\" exists",
+        "sql": "SELECT (to_regclass($1)) IS NOT NULL AS \"result\"",
+        "params": [
+          "\"mytour\".\"ListingReport\""
+        ]
+      }
+    ]
+  },
+  {
+    "id": "table.Review",
+    "label": "Create table \"Review\"",
+    "summary": "Creates table \"Review\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "mytour",
+        "objectType": "table",
+        "name": "Review"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure table \"Review\" does not exist",
+        "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
+        "params": [
+          "\"mytour\".\"Review\""
+        ]
+      }
+    ],
+    "execute": [
+      {
+        "description": "create table \"Review\"",
+        "sql": "CREATE TABLE \"mytour\".\"Review\" (\n  \"bookingId\" character(36) NOT NULL,\n  \"comment\" text,\n  \"createdAt\" timestamptz NOT NULL,\n  \"id\" character(36) NOT NULL,\n  \"rating\" int4 NOT NULL,\n  \"revieweeId\" character(36) NOT NULL,\n  \"reviewerId\" character(36) NOT NULL,\n  \"updatedAt\" timestamptz NOT NULL,\n  PRIMARY KEY (\"id\")\n)",
+        "params": []
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify table \"Review\" exists",
+        "sql": "SELECT (to_regclass($1)) IS NOT NULL AS \"result\"",
+        "params": [
+          "\"mytour\".\"Review\""
+        ]
+      }
+    ]
+  },
+  {
+    "id": "table.Session",
+    "label": "Create table \"Session\"",
+    "summary": "Creates table \"Session\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "mytour",
+        "objectType": "table",
+        "name": "Session"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure table \"Session\" does not exist",
+        "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
+        "params": [
+          "\"mytour\".\"Session\""
+        ]
+      }
+    ],
+    "execute": [
+      {
+        "description": "create table \"Session\"",
+        "sql": "CREATE TABLE \"mytour\".\"Session\" (\n  \"createdAt\" timestamptz NOT NULL,\n  \"expires\" timestamptz NOT NULL,\n  \"id\" character(36) NOT NULL,\n  \"sessionToken\" text NOT NULL,\n  \"userId\" character(36) NOT NULL,\n  PRIMARY KEY (\"id\")\n)",
+        "params": []
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify table \"Session\" exists",
+        "sql": "SELECT (to_regclass($1)) IS NOT NULL AS \"result\"",
+        "params": [
+          "\"mytour\".\"Session\""
+        ]
+      }
+    ]
+  },
+  {
+    "id": "table.User",
+    "label": "Create table \"User\"",
+    "summary": "Creates table \"User\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "mytour",
+        "objectType": "table",
+        "name": "User"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure table \"User\" does not exist",
+        "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
+        "params": [
+          "\"mytour\".\"User\""
+        ]
+      }
+    ],
+    "execute": [
+      {
+        "description": "create table \"User\"",
+        "sql": "CREATE TABLE \"mytour\".\"User\" (\n  \"createdAt\" timestamptz NOT NULL,\n  \"email\" text NOT NULL,\n  \"emailVerified\" timestamptz,\n  \"id\" character(36) NOT NULL,\n  \"image\" text,\n  \"isAdmin\" bool DEFAULT false NOT NULL,\n  \"isSuspended\" bool DEFAULT false NOT NULL,\n  \"name\" text,\n  \"passwordHash\" text,\n  \"phone\" text,\n  \"role\" text DEFAULT 'RENTER' NOT NULL,\n  \"updatedAt\" timestamptz NOT NULL,\n  PRIMARY KEY (\"id\"),\n  CONSTRAINT \"User_role_check_e7d7f8cc\" CHECK (\"role\" IN ('RENTER', 'OWNER'))\n)",
+        "params": []
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify table \"User\" exists",
+        "sql": "SELECT (to_regclass($1)) IS NOT NULL AS \"result\"",
+        "params": [
+          "\"mytour\".\"User\""
+        ]
+      }
+    ]
+  },
+  {
+    "id": "table.VerificationToken",
+    "label": "Create table \"VerificationToken\"",
+    "summary": "Creates table \"VerificationToken\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "mytour",
+        "objectType": "table",
+        "name": "VerificationToken"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure table \"VerificationToken\" does not exist",
+        "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
+        "params": [
+          "\"mytour\".\"VerificationToken\""
+        ]
+      }
+    ],
+    "execute": [
+      {
+        "description": "create table \"VerificationToken\"",
+        "sql": "CREATE TABLE \"mytour\".\"VerificationToken\" (\n  \"expires\" timestamptz NOT NULL,\n  \"id\" character(36) NOT NULL,\n  \"identifier\" text NOT NULL,\n  \"token\" text NOT NULL,\n  PRIMARY KEY (\"id\")\n)",
+        "params": []
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify table \"VerificationToken\" exists",
+        "sql": "SELECT (to_regclass($1)) IS NOT NULL AS \"result\"",
+        "params": [
+          "\"mytour\".\"VerificationToken\""
+        ]
+      }
+    ]
+  },
+  {
+    "id": "unique.Account.Account_provider_providerAccountId_key",
+    "label": "Add unique constraint on \"Account\" (provider, providerAccountId)",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "mytour",
+        "objectType": "unique",
+        "name": "Account_provider_providerAccountId_key",
+        "table": "Account"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure constraint \"Account_provider_providerAccountId_key\" does not exist",
+        "sql": "SELECT NOT EXISTS (SELECT 1 AS \"one\" FROM \"pg_constraint\" AS \"c\" INNER JOIN \"pg_namespace\" AS \"n\" ON \"n\".\"oid\" = \"c\".\"connamespace\" WHERE (\"c\".\"conname\" = $1 AND \"n\".\"nspname\" = $2 AND \"c\".\"conrelid\" = to_regclass($3))) AS \"result\"",
+        "params": [
+          "Account_provider_providerAccountId_key",
+          "mytour",
+          "\"mytour\".\"Account\""
+        ]
+      }
+    ],
+    "execute": [
+      {
+        "description": "add unique constraint \"Account_provider_providerAccountId_key\"",
+        "sql": "ALTER TABLE \"mytour\".\"Account\" ADD CONSTRAINT \"Account_provider_providerAccountId_key\" UNIQUE (\"provider\", \"providerAccountId\")"
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify constraint \"Account_provider_providerAccountId_key\" exists",
+        "sql": "SELECT EXISTS (SELECT 1 AS \"one\" FROM \"pg_constraint\" AS \"c\" INNER JOIN \"pg_namespace\" AS \"n\" ON \"n\".\"oid\" = \"c\".\"connamespace\" WHERE (\"c\".\"conname\" = $1 AND \"n\".\"nspname\" = $2 AND \"c\".\"conrelid\" = to_regclass($3))) AS \"result\"",
+        "params": [
+          "Account_provider_providerAccountId_key",
+          "mytour",
+          "\"mytour\".\"Account\""
+        ]
+      }
+    ]
+  },
+  {
+    "id": "unique.Favorite.Favorite_userId_listingId_key",
+    "label": "Add unique constraint on \"Favorite\" (userId, listingId)",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "mytour",
+        "objectType": "unique",
+        "name": "Favorite_userId_listingId_key",
+        "table": "Favorite"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure constraint \"Favorite_userId_listingId_key\" does not exist",
+        "sql": "SELECT NOT EXISTS (SELECT 1 AS \"one\" FROM \"pg_constraint\" AS \"c\" INNER JOIN \"pg_namespace\" AS \"n\" ON \"n\".\"oid\" = \"c\".\"connamespace\" WHERE (\"c\".\"conname\" = $1 AND \"n\".\"nspname\" = $2 AND \"c\".\"conrelid\" = to_regclass($3))) AS \"result\"",
+        "params": [
+          "Favorite_userId_listingId_key",
+          "mytour",
+          "\"mytour\".\"Favorite\""
+        ]
+      }
+    ],
+    "execute": [
+      {
+        "description": "add unique constraint \"Favorite_userId_listingId_key\"",
+        "sql": "ALTER TABLE \"mytour\".\"Favorite\" ADD CONSTRAINT \"Favorite_userId_listingId_key\" UNIQUE (\"userId\", \"listingId\")"
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify constraint \"Favorite_userId_listingId_key\" exists",
+        "sql": "SELECT EXISTS (SELECT 1 AS \"one\" FROM \"pg_constraint\" AS \"c\" INNER JOIN \"pg_namespace\" AS \"n\" ON \"n\".\"oid\" = \"c\".\"connamespace\" WHERE (\"c\".\"conname\" = $1 AND \"n\".\"nspname\" = $2 AND \"c\".\"conrelid\" = to_regclass($3))) AS \"result\"",
+        "params": [
+          "Favorite_userId_listingId_key",
+          "mytour",
+          "\"mytour\".\"Favorite\""
+        ]
+      }
+    ]
+  },
+  {
+    "id": "unique.Review.Review_bookingId_reviewerId_key",
+    "label": "Add unique constraint on \"Review\" (bookingId, reviewerId)",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "mytour",
+        "objectType": "unique",
+        "name": "Review_bookingId_reviewerId_key",
+        "table": "Review"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure constraint \"Review_bookingId_reviewerId_key\" does not exist",
+        "sql": "SELECT NOT EXISTS (SELECT 1 AS \"one\" FROM \"pg_constraint\" AS \"c\" INNER JOIN \"pg_namespace\" AS \"n\" ON \"n\".\"oid\" = \"c\".\"connamespace\" WHERE (\"c\".\"conname\" = $1 AND \"n\".\"nspname\" = $2 AND \"c\".\"conrelid\" = to_regclass($3))) AS \"result\"",
+        "params": [
+          "Review_bookingId_reviewerId_key",
+          "mytour",
+          "\"mytour\".\"Review\""
+        ]
+      }
+    ],
+    "execute": [
+      {
+        "description": "add unique constraint \"Review_bookingId_reviewerId_key\"",
+        "sql": "ALTER TABLE \"mytour\".\"Review\" ADD CONSTRAINT \"Review_bookingId_reviewerId_key\" UNIQUE (\"bookingId\", \"reviewerId\")"
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify constraint \"Review_bookingId_reviewerId_key\" exists",
+        "sql": "SELECT EXISTS (SELECT 1 AS \"one\" FROM \"pg_constraint\" AS \"c\" INNER JOIN \"pg_namespace\" AS \"n\" ON \"n\".\"oid\" = \"c\".\"connamespace\" WHERE (\"c\".\"conname\" = $1 AND \"n\".\"nspname\" = $2 AND \"c\".\"conrelid\" = to_regclass($3))) AS \"result\"",
+        "params": [
+          "Review_bookingId_reviewerId_key",
+          "mytour",
+          "\"mytour\".\"Review\""
+        ]
+      }
+    ]
+  },
+  {
+    "id": "unique.Session.Session_sessionToken_key",
+    "label": "Add unique constraint on \"Session\" (sessionToken)",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "mytour",
+        "objectType": "unique",
+        "name": "Session_sessionToken_key",
+        "table": "Session"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure constraint \"Session_sessionToken_key\" does not exist",
+        "sql": "SELECT NOT EXISTS (SELECT 1 AS \"one\" FROM \"pg_constraint\" AS \"c\" INNER JOIN \"pg_namespace\" AS \"n\" ON \"n\".\"oid\" = \"c\".\"connamespace\" WHERE (\"c\".\"conname\" = $1 AND \"n\".\"nspname\" = $2 AND \"c\".\"conrelid\" = to_regclass($3))) AS \"result\"",
+        "params": [
+          "Session_sessionToken_key",
+          "mytour",
+          "\"mytour\".\"Session\""
+        ]
+      }
+    ],
+    "execute": [
+      {
+        "description": "add unique constraint \"Session_sessionToken_key\"",
+        "sql": "ALTER TABLE \"mytour\".\"Session\" ADD CONSTRAINT \"Session_sessionToken_key\" UNIQUE (\"sessionToken\")"
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify constraint \"Session_sessionToken_key\" exists",
+        "sql": "SELECT EXISTS (SELECT 1 AS \"one\" FROM \"pg_constraint\" AS \"c\" INNER JOIN \"pg_namespace\" AS \"n\" ON \"n\".\"oid\" = \"c\".\"connamespace\" WHERE (\"c\".\"conname\" = $1 AND \"n\".\"nspname\" = $2 AND \"c\".\"conrelid\" = to_regclass($3))) AS \"result\"",
+        "params": [
+          "Session_sessionToken_key",
+          "mytour",
+          "\"mytour\".\"Session\""
+        ]
+      }
+    ]
+  },
+  {
+    "id": "unique.User.User_email_key",
+    "label": "Add unique constraint on \"User\" (email)",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "mytour",
+        "objectType": "unique",
+        "name": "User_email_key",
+        "table": "User"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure constraint \"User_email_key\" does not exist",
+        "sql": "SELECT NOT EXISTS (SELECT 1 AS \"one\" FROM \"pg_constraint\" AS \"c\" INNER JOIN \"pg_namespace\" AS \"n\" ON \"n\".\"oid\" = \"c\".\"connamespace\" WHERE (\"c\".\"conname\" = $1 AND \"n\".\"nspname\" = $2 AND \"c\".\"conrelid\" = to_regclass($3))) AS \"result\"",
+        "params": [
+          "User_email_key",
+          "mytour",
+          "\"mytour\".\"User\""
+        ]
+      }
+    ],
+    "execute": [
+      {
+        "description": "add unique constraint \"User_email_key\"",
+        "sql": "ALTER TABLE \"mytour\".\"User\" ADD CONSTRAINT \"User_email_key\" UNIQUE (\"email\")"
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify constraint \"User_email_key\" exists",
+        "sql": "SELECT EXISTS (SELECT 1 AS \"one\" FROM \"pg_constraint\" AS \"c\" INNER JOIN \"pg_namespace\" AS \"n\" ON \"n\".\"oid\" = \"c\".\"connamespace\" WHERE (\"c\".\"conname\" = $1 AND \"n\".\"nspname\" = $2 AND \"c\".\"conrelid\" = to_regclass($3))) AS \"result\"",
+        "params": [
+          "User_email_key",
+          "mytour",
+          "\"mytour\".\"User\""
+        ]
+      }
+    ]
+  },
+  {
+    "id": "unique.User.User_phone_key",
+    "label": "Add unique constraint on \"User\" (phone)",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "mytour",
+        "objectType": "unique",
+        "name": "User_phone_key",
+        "table": "User"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure constraint \"User_phone_key\" does not exist",
+        "sql": "SELECT NOT EXISTS (SELECT 1 AS \"one\" FROM \"pg_constraint\" AS \"c\" INNER JOIN \"pg_namespace\" AS \"n\" ON \"n\".\"oid\" = \"c\".\"connamespace\" WHERE (\"c\".\"conname\" = $1 AND \"n\".\"nspname\" = $2 AND \"c\".\"conrelid\" = to_regclass($3))) AS \"result\"",
+        "params": [
+          "User_phone_key",
+          "mytour",
+          "\"mytour\".\"User\""
+        ]
+      }
+    ],
+    "execute": [
+      {
+        "description": "add unique constraint \"User_phone_key\"",
+        "sql": "ALTER TABLE \"mytour\".\"User\" ADD CONSTRAINT \"User_phone_key\" UNIQUE (\"phone\")"
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify constraint \"User_phone_key\" exists",
+        "sql": "SELECT EXISTS (SELECT 1 AS \"one\" FROM \"pg_constraint\" AS \"c\" INNER JOIN \"pg_namespace\" AS \"n\" ON \"n\".\"oid\" = \"c\".\"connamespace\" WHERE (\"c\".\"conname\" = $1 AND \"n\".\"nspname\" = $2 AND \"c\".\"conrelid\" = to_regclass($3))) AS \"result\"",
+        "params": [
+          "User_phone_key",
+          "mytour",
+          "\"mytour\".\"User\""
+        ]
+      }
+    ]
+  },
+  {
+    "id": "unique.VerificationToken.VerificationToken_identifier_token_key",
+    "label": "Add unique constraint on \"VerificationToken\" (identifier, token)",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "mytour",
+        "objectType": "unique",
+        "name": "VerificationToken_identifier_token_key",
+        "table": "VerificationToken"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure constraint \"VerificationToken_identifier_token_key\" does not exist",
+        "sql": "SELECT NOT EXISTS (SELECT 1 AS \"one\" FROM \"pg_constraint\" AS \"c\" INNER JOIN \"pg_namespace\" AS \"n\" ON \"n\".\"oid\" = \"c\".\"connamespace\" WHERE (\"c\".\"conname\" = $1 AND \"n\".\"nspname\" = $2 AND \"c\".\"conrelid\" = to_regclass($3))) AS \"result\"",
+        "params": [
+          "VerificationToken_identifier_token_key",
+          "mytour",
+          "\"mytour\".\"VerificationToken\""
+        ]
+      }
+    ],
+    "execute": [
+      {
+        "description": "add unique constraint \"VerificationToken_identifier_token_key\"",
+        "sql": "ALTER TABLE \"mytour\".\"VerificationToken\" ADD CONSTRAINT \"VerificationToken_identifier_token_key\" UNIQUE (\"identifier\", \"token\")"
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify constraint \"VerificationToken_identifier_token_key\" exists",
+        "sql": "SELECT EXISTS (SELECT 1 AS \"one\" FROM \"pg_constraint\" AS \"c\" INNER JOIN \"pg_namespace\" AS \"n\" ON \"n\".\"oid\" = \"c\".\"connamespace\" WHERE (\"c\".\"conname\" = $1 AND \"n\".\"nspname\" = $2 AND \"c\".\"conrelid\" = to_regclass($3))) AS \"result\"",
+        "params": [
+          "VerificationToken_identifier_token_key",
+          "mytour",
+          "\"mytour\".\"VerificationToken\""
+        ]
+      }
+    ]
+  },
+  {
+    "id": "index.Account.Account_userId_idx_a489d58a",
+    "label": "Create index \"Account_userId_idx_a489d58a\" on \"Account\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "mytour",
+        "objectType": "index",
+        "name": "Account_userId_idx_a489d58a",
+        "table": "Account"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure index \"Account_userId_idx_a489d58a\" does not exist",
+        "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
+        "params": [
+          "\"mytour\".\"Account_userId_idx_a489d58a\""
+        ]
+      }
+    ],
+    "execute": [
+      {
+        "description": "create index \"Account_userId_idx_a489d58a\"",
+        "sql": "CREATE INDEX \"Account_userId_idx_a489d58a\" ON \"mytour\".\"Account\" (\"userId\")",
+        "params": []
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify index \"Account_userId_idx_a489d58a\" exists",
+        "sql": "SELECT (to_regclass($1)) IS NOT NULL AS \"result\"",
+        "params": [
+          "\"mytour\".\"Account_userId_idx_a489d58a\""
+        ]
+      }
+    ]
+  },
+  {
+    "id": "index.AuditLog.audit_actor_recent_0e9f1adf",
+    "label": "Create index \"audit_actor_recent_0e9f1adf\" on \"AuditLog\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "mytour",
+        "objectType": "index",
+        "name": "audit_actor_recent_0e9f1adf",
+        "table": "AuditLog"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure index \"audit_actor_recent_0e9f1adf\" does not exist",
+        "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
+        "params": [
+          "\"mytour\".\"audit_actor_recent_0e9f1adf\""
+        ]
+      }
+    ],
+    "execute": [
+      {
+        "description": "create index \"audit_actor_recent_0e9f1adf\"",
+        "sql": "CREATE INDEX \"audit_actor_recent_0e9f1adf\" ON \"mytour\".\"AuditLog\" (\"actorId\", \"createdAt\")",
+        "params": []
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify index \"audit_actor_recent_0e9f1adf\" exists",
+        "sql": "SELECT (to_regclass($1)) IS NOT NULL AS \"result\"",
+        "params": [
+          "\"mytour\".\"audit_actor_recent_0e9f1adf\""
+        ]
+      }
+    ]
+  },
+  {
+    "id": "index.AvailabilityBlock.AvailabilityBlock_listingId_idx_953decda",
+    "label": "Create index \"AvailabilityBlock_listingId_idx_953decda\" on \"AvailabilityBlock\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "mytour",
+        "objectType": "index",
+        "name": "AvailabilityBlock_listingId_idx_953decda",
+        "table": "AvailabilityBlock"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure index \"AvailabilityBlock_listingId_idx_953decda\" does not exist",
+        "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
+        "params": [
+          "\"mytour\".\"AvailabilityBlock_listingId_idx_953decda\""
+        ]
+      }
+    ],
+    "execute": [
+      {
+        "description": "create index \"AvailabilityBlock_listingId_idx_953decda\"",
+        "sql": "CREATE INDEX \"AvailabilityBlock_listingId_idx_953decda\" ON \"mytour\".\"AvailabilityBlock\" (\"listingId\")",
+        "params": []
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify index \"AvailabilityBlock_listingId_idx_953decda\" exists",
+        "sql": "SELECT (to_regclass($1)) IS NOT NULL AS \"result\"",
+        "params": [
+          "\"mytour\".\"AvailabilityBlock_listingId_idx_953decda\""
+        ]
+      }
+    ]
+  },
+  {
+    "id": "index.AvailabilityBlock.availability_listing_start_7b8c2bae",
+    "label": "Create index \"availability_listing_start_7b8c2bae\" on \"AvailabilityBlock\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "mytour",
+        "objectType": "index",
+        "name": "availability_listing_start_7b8c2bae",
+        "table": "AvailabilityBlock"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure index \"availability_listing_start_7b8c2bae\" does not exist",
+        "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
+        "params": [
+          "\"mytour\".\"availability_listing_start_7b8c2bae\""
+        ]
+      }
+    ],
+    "execute": [
+      {
+        "description": "create index \"availability_listing_start_7b8c2bae\"",
+        "sql": "CREATE INDEX \"availability_listing_start_7b8c2bae\" ON \"mytour\".\"AvailabilityBlock\" (\"listingId\", \"startsAt\")",
+        "params": []
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify index \"availability_listing_start_7b8c2bae\" exists",
+        "sql": "SELECT (to_regclass($1)) IS NOT NULL AS \"result\"",
+        "params": [
+          "\"mytour\".\"availability_listing_start_7b8c2bae\""
+        ]
+      }
+    ]
+  },
+  {
+    "id": "index.Booking.booking_listing_dates_533749d6",
+    "label": "Create index \"booking_listing_dates_533749d6\" on \"Booking\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "mytour",
+        "objectType": "index",
+        "name": "booking_listing_dates_533749d6",
+        "table": "Booking"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure index \"booking_listing_dates_533749d6\" does not exist",
+        "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
+        "params": [
+          "\"mytour\".\"booking_listing_dates_533749d6\""
+        ]
+      }
+    ],
+    "execute": [
+      {
+        "description": "create index \"booking_listing_dates_533749d6\"",
+        "sql": "CREATE INDEX \"booking_listing_dates_533749d6\" ON \"mytour\".\"Booking\" (\"listingId\", \"status\", \"checkIn\", \"checkOut\")",
+        "params": []
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify index \"booking_listing_dates_533749d6\" exists",
+        "sql": "SELECT (to_regclass($1)) IS NOT NULL AS \"result\"",
+        "params": [
+          "\"mytour\".\"booking_listing_dates_533749d6\""
+        ]
+      }
+    ]
+  },
+  {
+    "id": "index.Booking.booking_renter_status_9a7f078e",
+    "label": "Create index \"booking_renter_status_9a7f078e\" on \"Booking\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "mytour",
+        "objectType": "index",
+        "name": "booking_renter_status_9a7f078e",
+        "table": "Booking"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure index \"booking_renter_status_9a7f078e\" does not exist",
+        "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
+        "params": [
+          "\"mytour\".\"booking_renter_status_9a7f078e\""
+        ]
+      }
+    ],
+    "execute": [
+      {
+        "description": "create index \"booking_renter_status_9a7f078e\"",
+        "sql": "CREATE INDEX \"booking_renter_status_9a7f078e\" ON \"mytour\".\"Booking\" (\"renterId\", \"status\")",
+        "params": []
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify index \"booking_renter_status_9a7f078e\" exists",
+        "sql": "SELECT (to_regclass($1)) IS NOT NULL AS \"result\"",
+        "params": [
+          "\"mytour\".\"booking_renter_status_9a7f078e\""
+        ]
+      }
+    ]
+  },
+  {
+    "id": "index.Favorite.Favorite_listingId_idx_953decda",
+    "label": "Create index \"Favorite_listingId_idx_953decda\" on \"Favorite\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "mytour",
+        "objectType": "index",
+        "name": "Favorite_listingId_idx_953decda",
+        "table": "Favorite"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure index \"Favorite_listingId_idx_953decda\" does not exist",
+        "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
+        "params": [
+          "\"mytour\".\"Favorite_listingId_idx_953decda\""
+        ]
+      }
+    ],
+    "execute": [
+      {
+        "description": "create index \"Favorite_listingId_idx_953decda\"",
+        "sql": "CREATE INDEX \"Favorite_listingId_idx_953decda\" ON \"mytour\".\"Favorite\" (\"listingId\")",
+        "params": []
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify index \"Favorite_listingId_idx_953decda\" exists",
+        "sql": "SELECT (to_regclass($1)) IS NOT NULL AS \"result\"",
+        "params": [
+          "\"mytour\".\"Favorite_listingId_idx_953decda\""
+        ]
+      }
+    ]
+  },
+  {
+    "id": "index.Favorite.Favorite_userId_idx_a489d58a",
+    "label": "Create index \"Favorite_userId_idx_a489d58a\" on \"Favorite\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "mytour",
+        "objectType": "index",
+        "name": "Favorite_userId_idx_a489d58a",
+        "table": "Favorite"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure index \"Favorite_userId_idx_a489d58a\" does not exist",
+        "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
+        "params": [
+          "\"mytour\".\"Favorite_userId_idx_a489d58a\""
+        ]
+      }
+    ],
+    "execute": [
+      {
+        "description": "create index \"Favorite_userId_idx_a489d58a\"",
+        "sql": "CREATE INDEX \"Favorite_userId_idx_a489d58a\" ON \"mytour\".\"Favorite\" (\"userId\")",
+        "params": []
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify index \"Favorite_userId_idx_a489d58a\" exists",
+        "sql": "SELECT (to_regclass($1)) IS NOT NULL AS \"result\"",
+        "params": [
+          "\"mytour\".\"Favorite_userId_idx_a489d58a\""
+        ]
+      }
+    ]
+  },
+  {
+    "id": "index.Listing.listing_browse_3a3c3d1e",
+    "label": "Create index \"listing_browse_3a3c3d1e\" on \"Listing\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "mytour",
+        "objectType": "index",
+        "name": "listing_browse_3a3c3d1e",
+        "table": "Listing"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure index \"listing_browse_3a3c3d1e\" does not exist",
+        "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
+        "params": [
+          "\"mytour\".\"listing_browse_3a3c3d1e\""
+        ]
+      }
+    ],
+    "execute": [
+      {
+        "description": "create index \"listing_browse_3a3c3d1e\"",
+        "sql": "CREATE INDEX \"listing_browse_3a3c3d1e\" ON \"mytour\".\"Listing\" (\"status\", \"monthlyRent\")",
+        "params": []
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify index \"listing_browse_3a3c3d1e\" exists",
+        "sql": "SELECT (to_regclass($1)) IS NOT NULL AS \"result\"",
+        "params": [
+          "\"mytour\".\"listing_browse_3a3c3d1e\""
+        ]
+      }
+    ]
+  },
+  {
+    "id": "index.Listing.listing_location_be494fa7",
+    "label": "Create index \"listing_location_be494fa7\" on \"Listing\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "mytour",
+        "objectType": "index",
+        "name": "listing_location_be494fa7",
+        "table": "Listing"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure index \"listing_location_be494fa7\" does not exist",
+        "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
+        "params": [
+          "\"mytour\".\"listing_location_be494fa7\""
+        ]
+      }
+    ],
+    "execute": [
+      {
+        "description": "create index \"listing_location_be494fa7\"",
+        "sql": "CREATE INDEX \"listing_location_be494fa7\" ON \"mytour\".\"Listing\" (\"city\", \"area\")",
+        "params": []
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify index \"listing_location_be494fa7\" exists",
+        "sql": "SELECT (to_regclass($1)) IS NOT NULL AS \"result\"",
+        "params": [
+          "\"mytour\".\"listing_location_be494fa7\""
+        ]
+      }
+    ]
+  },
+  {
+    "id": "index.Listing.listing_owner_e2d0c1ef",
+    "label": "Create index \"listing_owner_e2d0c1ef\" on \"Listing\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "mytour",
+        "objectType": "index",
+        "name": "listing_owner_e2d0c1ef",
+        "table": "Listing"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure index \"listing_owner_e2d0c1ef\" does not exist",
+        "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
+        "params": [
+          "\"mytour\".\"listing_owner_e2d0c1ef\""
+        ]
+      }
+    ],
+    "execute": [
+      {
+        "description": "create index \"listing_owner_e2d0c1ef\"",
+        "sql": "CREATE INDEX \"listing_owner_e2d0c1ef\" ON \"mytour\".\"Listing\" (\"ownerId\")",
+        "params": []
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify index \"listing_owner_e2d0c1ef\" exists",
+        "sql": "SELECT (to_regclass($1)) IS NOT NULL AS \"result\"",
+        "params": [
+          "\"mytour\".\"listing_owner_e2d0c1ef\""
+        ]
+      }
+    ]
+  },
+  {
+    "id": "index.ListingPhoto.ListingPhoto_listingId_idx_953decda",
+    "label": "Create index \"ListingPhoto_listingId_idx_953decda\" on \"ListingPhoto\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "mytour",
+        "objectType": "index",
+        "name": "ListingPhoto_listingId_idx_953decda",
+        "table": "ListingPhoto"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure index \"ListingPhoto_listingId_idx_953decda\" does not exist",
+        "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
+        "params": [
+          "\"mytour\".\"ListingPhoto_listingId_idx_953decda\""
+        ]
+      }
+    ],
+    "execute": [
+      {
+        "description": "create index \"ListingPhoto_listingId_idx_953decda\"",
+        "sql": "CREATE INDEX \"ListingPhoto_listingId_idx_953decda\" ON \"mytour\".\"ListingPhoto\" (\"listingId\")",
+        "params": []
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify index \"ListingPhoto_listingId_idx_953decda\" exists",
+        "sql": "SELECT (to_regclass($1)) IS NOT NULL AS \"result\"",
+        "params": [
+          "\"mytour\".\"ListingPhoto_listingId_idx_953decda\""
+        ]
+      }
+    ]
+  },
+  {
+    "id": "index.ListingPhoto.listing_photo_order_c6074c87",
+    "label": "Create index \"listing_photo_order_c6074c87\" on \"ListingPhoto\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "mytour",
+        "objectType": "index",
+        "name": "listing_photo_order_c6074c87",
+        "table": "ListingPhoto"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure index \"listing_photo_order_c6074c87\" does not exist",
+        "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
+        "params": [
+          "\"mytour\".\"listing_photo_order_c6074c87\""
+        ]
+      }
+    ],
+    "execute": [
+      {
+        "description": "create index \"listing_photo_order_c6074c87\"",
+        "sql": "CREATE INDEX \"listing_photo_order_c6074c87\" ON \"mytour\".\"ListingPhoto\" (\"listingId\", \"sortOrder\")",
+        "params": []
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify index \"listing_photo_order_c6074c87\" exists",
+        "sql": "SELECT (to_regclass($1)) IS NOT NULL AS \"result\"",
+        "params": [
+          "\"mytour\".\"listing_photo_order_c6074c87\""
+        ]
+      }
+    ]
+  },
+  {
+    "id": "index.ListingReport.report_listing_status_1b030a2f",
+    "label": "Create index \"report_listing_status_1b030a2f\" on \"ListingReport\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "mytour",
+        "objectType": "index",
+        "name": "report_listing_status_1b030a2f",
+        "table": "ListingReport"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure index \"report_listing_status_1b030a2f\" does not exist",
+        "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
+        "params": [
+          "\"mytour\".\"report_listing_status_1b030a2f\""
+        ]
+      }
+    ],
+    "execute": [
+      {
+        "description": "create index \"report_listing_status_1b030a2f\"",
+        "sql": "CREATE INDEX \"report_listing_status_1b030a2f\" ON \"mytour\".\"ListingReport\" (\"listingId\", \"status\")",
+        "params": []
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify index \"report_listing_status_1b030a2f\" exists",
+        "sql": "SELECT (to_regclass($1)) IS NOT NULL AS \"result\"",
+        "params": [
+          "\"mytour\".\"report_listing_status_1b030a2f\""
+        ]
+      }
+    ]
+  },
+  {
+    "id": "index.ListingReport.report_reporter_aa245831",
+    "label": "Create index \"report_reporter_aa245831\" on \"ListingReport\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "mytour",
+        "objectType": "index",
+        "name": "report_reporter_aa245831",
+        "table": "ListingReport"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure index \"report_reporter_aa245831\" does not exist",
+        "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
+        "params": [
+          "\"mytour\".\"report_reporter_aa245831\""
+        ]
+      }
+    ],
+    "execute": [
+      {
+        "description": "create index \"report_reporter_aa245831\"",
+        "sql": "CREATE INDEX \"report_reporter_aa245831\" ON \"mytour\".\"ListingReport\" (\"reporterId\")",
+        "params": []
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify index \"report_reporter_aa245831\" exists",
+        "sql": "SELECT (to_regclass($1)) IS NOT NULL AS \"result\"",
+        "params": [
+          "\"mytour\".\"report_reporter_aa245831\""
+        ]
+      }
+    ]
+  },
+  {
+    "id": "index.Review.review_reviewee_recent_c43c7af7",
+    "label": "Create index \"review_reviewee_recent_c43c7af7\" on \"Review\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "mytour",
+        "objectType": "index",
+        "name": "review_reviewee_recent_c43c7af7",
+        "table": "Review"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure index \"review_reviewee_recent_c43c7af7\" does not exist",
+        "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
+        "params": [
+          "\"mytour\".\"review_reviewee_recent_c43c7af7\""
+        ]
+      }
+    ],
+    "execute": [
+      {
+        "description": "create index \"review_reviewee_recent_c43c7af7\"",
+        "sql": "CREATE INDEX \"review_reviewee_recent_c43c7af7\" ON \"mytour\".\"Review\" (\"revieweeId\", \"createdAt\")",
+        "params": []
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify index \"review_reviewee_recent_c43c7af7\" exists",
+        "sql": "SELECT (to_regclass($1)) IS NOT NULL AS \"result\"",
+        "params": [
+          "\"mytour\".\"review_reviewee_recent_c43c7af7\""
+        ]
+      }
+    ]
+  },
+  {
+    "id": "index.Session.Session_userId_idx_a489d58a",
+    "label": "Create index \"Session_userId_idx_a489d58a\" on \"Session\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "mytour",
+        "objectType": "index",
+        "name": "Session_userId_idx_a489d58a",
+        "table": "Session"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure index \"Session_userId_idx_a489d58a\" does not exist",
+        "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
+        "params": [
+          "\"mytour\".\"Session_userId_idx_a489d58a\""
+        ]
+      }
+    ],
+    "execute": [
+      {
+        "description": "create index \"Session_userId_idx_a489d58a\"",
+        "sql": "CREATE INDEX \"Session_userId_idx_a489d58a\" ON \"mytour\".\"Session\" (\"userId\")",
+        "params": []
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify index \"Session_userId_idx_a489d58a\" exists",
+        "sql": "SELECT (to_regclass($1)) IS NOT NULL AS \"result\"",
+        "params": [
+          "\"mytour\".\"Session_userId_idx_a489d58a\""
+        ]
+      }
+    ]
+  },
+  {
+    "id": "foreignKey.Account.Account_userId_fkey",
+    "label": "Add foreign key \"Account_userId_fkey\" on \"Account\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "mytour",
+        "objectType": "foreignKey",
+        "name": "Account_userId_fkey",
+        "table": "Account"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure FK \"Account_userId_fkey\" does not exist",
+        "sql": "SELECT NOT EXISTS (SELECT 1 AS \"one\" FROM \"pg_constraint\" AS \"c\" INNER JOIN \"pg_namespace\" AS \"n\" ON \"n\".\"oid\" = \"c\".\"connamespace\" WHERE (\"c\".\"conname\" = $1 AND \"n\".\"nspname\" = $2 AND \"c\".\"conrelid\" = to_regclass($3))) AS \"result\"",
+        "params": [
+          "Account_userId_fkey",
+          "mytour",
+          "\"mytour\".\"Account\""
+        ]
+      }
+    ],
+    "execute": [
+      {
+        "description": "add FK \"Account_userId_fkey\"",
+        "sql": "ALTER TABLE \"mytour\".\"Account\"\nADD CONSTRAINT \"Account_userId_fkey\"\nFOREIGN KEY (\"userId\")\nREFERENCES \"mytour\".\"User\" (\"id\")\nON DELETE CASCADE"
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify FK \"Account_userId_fkey\" exists",
+        "sql": "SELECT EXISTS (SELECT 1 AS \"one\" FROM \"pg_constraint\" AS \"c\" INNER JOIN \"pg_namespace\" AS \"n\" ON \"n\".\"oid\" = \"c\".\"connamespace\" WHERE (\"c\".\"conname\" = $1 AND \"n\".\"nspname\" = $2 AND \"c\".\"conrelid\" = to_regclass($3))) AS \"result\"",
+        "params": [
+          "Account_userId_fkey",
+          "mytour",
+          "\"mytour\".\"Account\""
+        ]
+      }
+    ]
+  },
+  {
+    "id": "foreignKey.AvailabilityBlock.AvailabilityBlock_listingId_fkey",
+    "label": "Add foreign key \"AvailabilityBlock_listingId_fkey\" on \"AvailabilityBlock\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "mytour",
+        "objectType": "foreignKey",
+        "name": "AvailabilityBlock_listingId_fkey",
+        "table": "AvailabilityBlock"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure FK \"AvailabilityBlock_listingId_fkey\" does not exist",
+        "sql": "SELECT NOT EXISTS (SELECT 1 AS \"one\" FROM \"pg_constraint\" AS \"c\" INNER JOIN \"pg_namespace\" AS \"n\" ON \"n\".\"oid\" = \"c\".\"connamespace\" WHERE (\"c\".\"conname\" = $1 AND \"n\".\"nspname\" = $2 AND \"c\".\"conrelid\" = to_regclass($3))) AS \"result\"",
+        "params": [
+          "AvailabilityBlock_listingId_fkey",
+          "mytour",
+          "\"mytour\".\"AvailabilityBlock\""
+        ]
+      }
+    ],
+    "execute": [
+      {
+        "description": "add FK \"AvailabilityBlock_listingId_fkey\"",
+        "sql": "ALTER TABLE \"mytour\".\"AvailabilityBlock\"\nADD CONSTRAINT \"AvailabilityBlock_listingId_fkey\"\nFOREIGN KEY (\"listingId\")\nREFERENCES \"mytour\".\"Listing\" (\"id\")\nON DELETE CASCADE"
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify FK \"AvailabilityBlock_listingId_fkey\" exists",
+        "sql": "SELECT EXISTS (SELECT 1 AS \"one\" FROM \"pg_constraint\" AS \"c\" INNER JOIN \"pg_namespace\" AS \"n\" ON \"n\".\"oid\" = \"c\".\"connamespace\" WHERE (\"c\".\"conname\" = $1 AND \"n\".\"nspname\" = $2 AND \"c\".\"conrelid\" = to_regclass($3))) AS \"result\"",
+        "params": [
+          "AvailabilityBlock_listingId_fkey",
+          "mytour",
+          "\"mytour\".\"AvailabilityBlock\""
+        ]
+      }
+    ]
+  },
+  {
+    "id": "foreignKey.Favorite.Favorite_userId_fkey",
+    "label": "Add foreign key \"Favorite_userId_fkey\" on \"Favorite\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "mytour",
+        "objectType": "foreignKey",
+        "name": "Favorite_userId_fkey",
+        "table": "Favorite"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure FK \"Favorite_userId_fkey\" does not exist",
+        "sql": "SELECT NOT EXISTS (SELECT 1 AS \"one\" FROM \"pg_constraint\" AS \"c\" INNER JOIN \"pg_namespace\" AS \"n\" ON \"n\".\"oid\" = \"c\".\"connamespace\" WHERE (\"c\".\"conname\" = $1 AND \"n\".\"nspname\" = $2 AND \"c\".\"conrelid\" = to_regclass($3))) AS \"result\"",
+        "params": [
+          "Favorite_userId_fkey",
+          "mytour",
+          "\"mytour\".\"Favorite\""
+        ]
+      }
+    ],
+    "execute": [
+      {
+        "description": "add FK \"Favorite_userId_fkey\"",
+        "sql": "ALTER TABLE \"mytour\".\"Favorite\"\nADD CONSTRAINT \"Favorite_userId_fkey\"\nFOREIGN KEY (\"userId\")\nREFERENCES \"mytour\".\"User\" (\"id\")\nON DELETE CASCADE"
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify FK \"Favorite_userId_fkey\" exists",
+        "sql": "SELECT EXISTS (SELECT 1 AS \"one\" FROM \"pg_constraint\" AS \"c\" INNER JOIN \"pg_namespace\" AS \"n\" ON \"n\".\"oid\" = \"c\".\"connamespace\" WHERE (\"c\".\"conname\" = $1 AND \"n\".\"nspname\" = $2 AND \"c\".\"conrelid\" = to_regclass($3))) AS \"result\"",
+        "params": [
+          "Favorite_userId_fkey",
+          "mytour",
+          "\"mytour\".\"Favorite\""
+        ]
+      }
+    ]
+  },
+  {
+    "id": "foreignKey.Favorite.Favorite_listingId_fkey",
+    "label": "Add foreign key \"Favorite_listingId_fkey\" on \"Favorite\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "mytour",
+        "objectType": "foreignKey",
+        "name": "Favorite_listingId_fkey",
+        "table": "Favorite"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure FK \"Favorite_listingId_fkey\" does not exist",
+        "sql": "SELECT NOT EXISTS (SELECT 1 AS \"one\" FROM \"pg_constraint\" AS \"c\" INNER JOIN \"pg_namespace\" AS \"n\" ON \"n\".\"oid\" = \"c\".\"connamespace\" WHERE (\"c\".\"conname\" = $1 AND \"n\".\"nspname\" = $2 AND \"c\".\"conrelid\" = to_regclass($3))) AS \"result\"",
+        "params": [
+          "Favorite_listingId_fkey",
+          "mytour",
+          "\"mytour\".\"Favorite\""
+        ]
+      }
+    ],
+    "execute": [
+      {
+        "description": "add FK \"Favorite_listingId_fkey\"",
+        "sql": "ALTER TABLE \"mytour\".\"Favorite\"\nADD CONSTRAINT \"Favorite_listingId_fkey\"\nFOREIGN KEY (\"listingId\")\nREFERENCES \"mytour\".\"Listing\" (\"id\")\nON DELETE CASCADE"
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify FK \"Favorite_listingId_fkey\" exists",
+        "sql": "SELECT EXISTS (SELECT 1 AS \"one\" FROM \"pg_constraint\" AS \"c\" INNER JOIN \"pg_namespace\" AS \"n\" ON \"n\".\"oid\" = \"c\".\"connamespace\" WHERE (\"c\".\"conname\" = $1 AND \"n\".\"nspname\" = $2 AND \"c\".\"conrelid\" = to_regclass($3))) AS \"result\"",
+        "params": [
+          "Favorite_listingId_fkey",
+          "mytour",
+          "\"mytour\".\"Favorite\""
+        ]
+      }
+    ]
+  },
+  {
+    "id": "foreignKey.ListingPhoto.ListingPhoto_listingId_fkey",
+    "label": "Add foreign key \"ListingPhoto_listingId_fkey\" on \"ListingPhoto\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "mytour",
+        "objectType": "foreignKey",
+        "name": "ListingPhoto_listingId_fkey",
+        "table": "ListingPhoto"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure FK \"ListingPhoto_listingId_fkey\" does not exist",
+        "sql": "SELECT NOT EXISTS (SELECT 1 AS \"one\" FROM \"pg_constraint\" AS \"c\" INNER JOIN \"pg_namespace\" AS \"n\" ON \"n\".\"oid\" = \"c\".\"connamespace\" WHERE (\"c\".\"conname\" = $1 AND \"n\".\"nspname\" = $2 AND \"c\".\"conrelid\" = to_regclass($3))) AS \"result\"",
+        "params": [
+          "ListingPhoto_listingId_fkey",
+          "mytour",
+          "\"mytour\".\"ListingPhoto\""
+        ]
+      }
+    ],
+    "execute": [
+      {
+        "description": "add FK \"ListingPhoto_listingId_fkey\"",
+        "sql": "ALTER TABLE \"mytour\".\"ListingPhoto\"\nADD CONSTRAINT \"ListingPhoto_listingId_fkey\"\nFOREIGN KEY (\"listingId\")\nREFERENCES \"mytour\".\"Listing\" (\"id\")\nON DELETE CASCADE"
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify FK \"ListingPhoto_listingId_fkey\" exists",
+        "sql": "SELECT EXISTS (SELECT 1 AS \"one\" FROM \"pg_constraint\" AS \"c\" INNER JOIN \"pg_namespace\" AS \"n\" ON \"n\".\"oid\" = \"c\".\"connamespace\" WHERE (\"c\".\"conname\" = $1 AND \"n\".\"nspname\" = $2 AND \"c\".\"conrelid\" = to_regclass($3))) AS \"result\"",
+        "params": [
+          "ListingPhoto_listingId_fkey",
+          "mytour",
+          "\"mytour\".\"ListingPhoto\""
+        ]
+      }
+    ]
+  },
+  {
+    "id": "foreignKey.Session.Session_userId_fkey",
+    "label": "Add foreign key \"Session_userId_fkey\" on \"Session\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "mytour",
+        "objectType": "foreignKey",
+        "name": "Session_userId_fkey",
+        "table": "Session"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure FK \"Session_userId_fkey\" does not exist",
+        "sql": "SELECT NOT EXISTS (SELECT 1 AS \"one\" FROM \"pg_constraint\" AS \"c\" INNER JOIN \"pg_namespace\" AS \"n\" ON \"n\".\"oid\" = \"c\".\"connamespace\" WHERE (\"c\".\"conname\" = $1 AND \"n\".\"nspname\" = $2 AND \"c\".\"conrelid\" = to_regclass($3))) AS \"result\"",
+        "params": [
+          "Session_userId_fkey",
+          "mytour",
+          "\"mytour\".\"Session\""
+        ]
+      }
+    ],
+    "execute": [
+      {
+        "description": "add FK \"Session_userId_fkey\"",
+        "sql": "ALTER TABLE \"mytour\".\"Session\"\nADD CONSTRAINT \"Session_userId_fkey\"\nFOREIGN KEY (\"userId\")\nREFERENCES \"mytour\".\"User\" (\"id\")\nON DELETE CASCADE"
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify FK \"Session_userId_fkey\" exists",
+        "sql": "SELECT EXISTS (SELECT 1 AS \"one\" FROM \"pg_constraint\" AS \"c\" INNER JOIN \"pg_namespace\" AS \"n\" ON \"n\".\"oid\" = \"c\".\"connamespace\" WHERE (\"c\".\"conname\" = $1 AND \"n\".\"nspname\" = $2 AND \"c\".\"conrelid\" = to_regclass($3))) AS \"result\"",
+        "params": [
+          "Session_userId_fkey",
+          "mytour",
+          "\"mytour\".\"Session\""
+        ]
+      }
+    ]
+  }
+]
