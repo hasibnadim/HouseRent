@@ -9,6 +9,7 @@ import {
   CircleCheck,
   House,
   MapPin,
+  PencilLine,
   Phone,
   Ruler,
   ShieldCheck,
@@ -19,6 +20,7 @@ import { initialsFor } from "@/lib/user";
 import { SiteFooter, SiteHeader } from "@/components/site-header";
 import { ListingCard, typeLabel } from "@/components/listing-card";
 import { getPublishedListing } from "@/lib/listings";
+import { BookingForm } from "./booking-form";
 
 export const instant = false;
 
@@ -58,8 +60,9 @@ async function PropertyContent({ id }: { id: string }) {
     notFound();
   }
 
-  const { listing, photos, ownerName, ownerPhone, ownerSince, similar } = data;
+  const { listing, photos, ownerName, ownerImage, ownerPhone, ownerSince, bookedRanges, similar } = data;
   const cover = photos[0]?.url ?? null;
+  const isOwnListing = !!session?.user?.id && session.user.id === String(listing.ownerId);
 
   return (
     <>
@@ -148,8 +151,8 @@ async function PropertyContent({ id }: { id: string }) {
             <dl className="property-def">
               <dt>Property type</dt>
               <dd>{typeLabel(listing.propertyType)}</dd>
-              <dt>Available from</dt>
-              <dd>{formatDate(listing.availableFrom)}</dd>
+                <dt>Available from</dt>
+                <dd>{listing.availableFrom ? formatDate(listing.availableFrom) : "Flexible — contact host"}</dd>
               <dt>Available to</dt>
               <dd>{listing.availableTo ? formatDate(listing.availableTo) : "Open-ended"}</dd>
               <dt>Advance / deposit</dt>
@@ -171,9 +174,19 @@ async function PropertyContent({ id }: { id: string }) {
           )}
 
           <section className="property-host">
-            <span className="property-host-avatar">{initialsFor(ownerName, "")}</span>
+            {ownerImage ? (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img className="property-host-photo" src={ownerImage} alt={`Photo of ${ownerName}`} />
+            ) : (
+              <span className="property-host-avatar">{initialsFor(ownerName, "")}</span>
+            )}
             <div>
-              <strong>Hosted by {ownerName}</strong>
+                <strong>
+                  Hosted by{" "}
+                  <Link className="book-title-link" href={`/users/${listing.ownerId}`}>
+                    {ownerName}
+                  </Link>
+                </strong>
               <span>
                 <ShieldCheck size={13} /> Verified host
                 {ownerSince ? ` · hosting since ${new Date(ownerSince).getFullYear()}` : ""}
@@ -188,17 +201,30 @@ async function PropertyContent({ id }: { id: string }) {
               ৳{listing.monthlyRent.toLocaleString()}
               <span>/month</span>
             </p>
-            <p className="property-available">
-              <CalendarDays size={14} />
-              Available from {formatDate(listing.availableFrom)}
-            </p>
-            {session ? (
+              <p className="property-available">
+                <CalendarDays size={14} />
+                {listing.availableFrom
+                  ? `Available from ${formatDate(listing.availableFrom)}`
+                  : "Available now — confirm dates with the host"}
+              </p>
+            {isOwnListing ? (
               <>
-                <button className="erp-btn" type="button" disabled title="Booking requests open soon">
-                  Request to book
-                </button>
+                <Link className="erp-btn" href={`/profile/hosting/${listing.id}/edit`}>
+                  <PencilLine size={15} />
+                  Edit your listing
+                </Link>
+                <p className="property-note">This is your listing — this is how guests see it.</p>
+              </>
+            ) : session ? (
+              <>
+                <BookingForm
+                  listingId={listing.id}
+                  monthlyRent={listing.monthlyRent}
+                  advanceAmount={listing.advanceAmount}
+                  bookedRanges={bookedRanges}
+                />
                 <p className="property-note">
-                  Online booking requests open soon. Meanwhile you can reach the host directly:
+                  Prefer to talk first? Reach the host directly:
                 </p>
                 {ownerPhone ? (
                   <a className="property-phone" href={`tel:${ownerPhone.replace(/\s+/g, "")}`}>

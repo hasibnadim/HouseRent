@@ -115,6 +115,15 @@ export async function getPublishedListing(id: string) {
 
   const owner = await db.orm.mytour.User.where({ id: listing.ownerId }).first();
 
+  const activeBookings = await db.orm.mytour.Booking.where({ listingId: listing.id }).all();
+  const bookedRanges = activeBookings
+    .filter((booking) => booking.status === "PENDING" || booking.status === "APPROVED")
+    .map((booking) => ({
+      checkIn: booking.checkIn.slice(0, 10),
+      checkOut: booking.checkOut.slice(0, 10),
+    }))
+    .sort((a, b) => (a.checkIn < b.checkIn ? -1 : 1));
+
   const similar = await db.orm.mytour.Listing.where((row) => row.status.eq("PUBLISHED"))
     .where((row) => row.city.eq(listing.city))
     .where((row) => row.id.neq(listing.id))
@@ -127,8 +136,10 @@ export async function getPublishedListing(id: string) {
     listing,
     photos: listing.photos,
     ownerName: owner?.name?.trim() || "Verified host",
+    ownerImage: owner?.image?.trim() || null,
     ownerPhone: owner?.phone ?? null,
     ownerSince: owner?.createdAt ?? null,
+    bookedRanges,
     similar: similar.filter((row) => row.id !== listing.id),
   };
 }

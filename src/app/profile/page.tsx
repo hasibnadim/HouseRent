@@ -124,7 +124,7 @@ async function ProfileOverviewContent() {
               <KeyRound size={16} /> Security <ArrowUpRight size={14} />
             </Link>
             <Link className="erp-quick-link" href="/profile/activity">
-              <CalendarCheck size={16} /> Bookings &amp; reviews <ArrowUpRight size={14} />
+              <CalendarCheck size={16} /> Bookings <ArrowUpRight size={14} />
             </Link>
           </div>
           <p className="erp-trust"><ShieldCheck size={14} /> Your details are private and only used to secure your account.</p>

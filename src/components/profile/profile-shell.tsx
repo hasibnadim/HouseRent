@@ -5,7 +5,6 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { signOut } from "next-auth/react";
 import {
-  Bell,
   Building2,
   CalendarCheck,
   ChevronRight,
@@ -52,7 +51,7 @@ function buildNavigation(user: CurrentUser): NavGroup[] {
     },
     {
       label: "Activity",
-      items: [{ label: "Bookings & reviews", href: "/profile/activity", icon: CalendarCheck }],
+      items: [{ label: "Bookings", href: "/profile/activity", icon: CalendarCheck }],
     },
   ];
 
@@ -160,11 +159,6 @@ export function ProfileShell({ user, children }: { user: CurrentUser; children: 
             <Search size={16} />
             <input aria-label="Search your account" placeholder="Search stays, bookings, messages" />
           </div>
-
-          <button className="erp-icon-btn" type="button" aria-label="Notifications">
-            <Bell size={18} />
-            <span className="erp-dot-badge" />
-          </button>
 
           <Link className="erp-me" href="/profile">
             <span className="erp-me-avatar">{initials}</span>

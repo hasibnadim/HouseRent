@@ -33,11 +33,11 @@ async function AdminContent() {
       <ProfilePageHeader
         eyebrow="Administration"
         title="Admin console"
-        description="Review listings, reports and platform activity. Tools will appear here as they become available."
+        description="Moderate listings, reports and platform activity. Tools will appear here as they become available."
       />
       <ProfileEmptyState
         icon={ShieldAlert}
-        title="Nothing to review"
+        title="Nothing to moderate"
         description="There are no open reports or pending items right now. New moderation tasks will surface here."
       />
     </>

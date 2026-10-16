@@ -21,8 +21,6 @@ export type ListingDefaults = {
   advanceAmount: string;
   serviceChargeNote: string;
   houseRules: string;
-  availableFrom: string;
-  availableTo: string;
   status: string;
   photoUrls: string;
 };
@@ -43,8 +41,6 @@ export const emptyListingDefaults: ListingDefaults = {
   advanceAmount: "",
   serviceChargeNote: "",
   houseRules: "",
-  availableFrom: "",
-  availableTo: "",
   status: "DRAFT",
   photoUrls: "",
 };
@@ -128,14 +124,6 @@ export function ListingForm({
         <label className="erp-field">
           <span>Bathrooms</span>
           <input name="bathrooms" defaultValue={defaults.bathrooms} inputMode="numeric" required />
-        </label>
-        <label className="erp-field">
-          <span>Available from <small>optional</small></span>
-          <input type="date" name="availableFrom" defaultValue={defaults.availableFrom} />
-        </label>
-        <label className="erp-field erp-form-full">
-          <span>Available to <small>optional</small></span>
-          <input type="date" name="availableTo" defaultValue={defaults.availableTo} />
         </label>
       </div>
 

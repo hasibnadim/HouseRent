@@ -50,8 +50,6 @@ async function EditListingContent({ params }: { params: Promise<{ id: string }> 
     advanceAmount: listing.advanceAmount == null ? "" : String(listing.advanceAmount),
     serviceChargeNote: listing.serviceChargeNote ?? "",
     houseRules: listing.houseRules ?? "",
-    availableFrom: listing.availableFrom?.slice(0, 10) ?? "",
-    availableTo: listing.availableTo?.slice(0, 10) ?? "",
     status: listing.status,
     photoUrls: listing.photos.map((photo) => photo.url).join("\n"),
   };

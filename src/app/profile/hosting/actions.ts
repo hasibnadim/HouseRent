@@ -28,8 +28,6 @@ type ListingData = {
   advanceAmount: number | null;
   serviceChargeNote: string | null;
   houseRules: string | null;
-  availableFrom: string | null;
-  availableTo: string | null;
   status: ListingStatus;
   photoUrls: string[];
 };
@@ -46,19 +44,6 @@ function parseOptionalIntField(raw: FormDataEntryValue | null, label: string, mi
   const text = String(raw ?? "").trim();
   if (!text) return null;
   return parseIntField(text, label, min, max);
-}
-
-function parseDateField(raw: FormDataEntryValue | null, label: string): string | null {
-  const text = String(raw ?? "").trim();
-  if (!text) return null;
-  if (!/^\d{4}-\d{2}-\d{2}$/.test(text)) {
-    throw new Error(`${label} must be a valid date.`);
-  }
-  const date = new Date(`${text}T00:00:00Z`);
-  if (Number.isNaN(date.getTime())) {
-    throw new Error(`${label} must be a valid date.`);
-  }
-  return date.toISOString();
 }
 
 function parsePhotoUrls(raw: FormDataEntryValue | null): string[] {
@@ -135,12 +120,6 @@ function parseListingForm(formData: FormData, allowStatuses: readonly ListingSta
   const monthlyRent = parseIntField(formData.get("monthlyRent"), "Monthly rent", 500, 10000000);
   const advanceAmount = parseOptionalIntField(formData.get("advanceAmount"), "Advance amount", 0, 100000000);
 
-  const availableFrom = parseDateField(formData.get("availableFrom"), "Available from");
-  const availableTo = parseDateField(formData.get("availableTo"), "Available to");
-  if (availableFrom && availableTo && availableFrom > availableTo) {
-    throw new Error("Available from must be on or before available to.");
-  }
-
   return {
     title,
     description,
@@ -157,8 +136,6 @@ function parseListingForm(formData: FormData, allowStatuses: readonly ListingSta
     advanceAmount,
     serviceChargeNote: serviceChargeRaw || null,
     houseRules: houseRulesRaw || null,
-    availableFrom,
-    availableTo,
     status: statusRaw as ListingStatus,
     photoUrls: parsePhotoUrls(formData.get("photoUrls")),
   };
@@ -185,7 +162,8 @@ export async function createListing(_prev: FormState, formData: FormData): Promi
   }
 
   const { photoUrls, ...fields } = data;
-  const listing = await db.orm.mytour.Listing.create({ ...fields, ownerId: me.id });
+  // Availability windows are derived from the booking schedule, never entered by hand.
+  const listing = await db.orm.mytour.Listing.create({ ...fields, ownerId: me.id, availableFrom: null, availableTo: null });
   await syncPhotos(listing.id, photoUrls);
 
   redirect("/profile/hosting");

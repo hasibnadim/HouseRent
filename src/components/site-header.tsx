@@ -1,10 +1,13 @@
 import Link from "next/link";
-import { ArrowUpRight, House, Search } from "lucide-react";
+import { ArrowUpRight, Calculator, House, Search } from "lucide-react";
 import { getServerSession } from "next-auth";
+import { connection } from "next/server";
 import { authOptions } from "@/lib/auth";
 import { initialsFor } from "@/lib/user";
 
 export async function SiteHeader() {
+  // Session Cookies/JWT touch crypto randomness: keep this out of prerender.
+  await connection();
   const session = await getServerSession(authOptions);
   const name = session?.user?.name?.trim() || "Account";
   const initials = session ? initialsFor(session.user.name ?? null, session.user.email ?? "") : "";
@@ -23,6 +26,10 @@ export async function SiteHeader() {
         <Link className="nav-find" href="/search">
           <Search size={14} />
           Find a stay
+        </Link>
+        <Link className="nav-estimator" href="/estimate" aria-label="Rent estimator">
+          <Calculator size={14} />
+          <span>Estimator</span>
         </Link>
       </nav>
       {session ? (
