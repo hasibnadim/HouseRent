@@ -1,0 +1,40 @@
+{
+  "modelVersion": "v1-mlr",
+  "trainedAt": "2026-10-17T05:42:08.745Z",
+  "features": [
+    "area",
+    "sizeSqft",
+    "bedrooms",
+    "bathrooms",
+    "propertyType",
+    "furnished",
+    "amenityCount"
+  ],
+  "weights": [
+    -1611.3332265490744,
+    10.488862083448169,
+    632.0231454406166,
+    -210.16719358072442,
+    -95.78979744319804,
+    210.31226543949742,
+    69.94909880753403,
+    38574.407184872776
+  ],
+  "intercept": true,
+  "trainRows": 8001,
+  "testRows": 8001,
+  "split": "50/50",
+  "metrics": {
+    "regression": {
+      "r2": 0.7269275432866922,
+      "mae": 7035.757233589562,
+      "rmse": 9673.116168104905
+    },
+    "classification": {
+      "accuracy": 0.7945256842894638,
+      "macroPrecision": 0.7959355917426555,
+      "macroRecall": 0.8120425047628509,
+      "macroF1": 0.7958902992834372
+    }
+  }
+}

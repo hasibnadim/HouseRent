@@ -146,7 +146,7 @@ export default async function Home() {
                 <a className="nav-find" href="/search">Find a stay</a>
                 <a className="nav-estimator" href="/estimate" aria-label="Rent estimator">
                   <Calculator size={14} />
-                  <span>Estimator</span>
+                  <span>AI Estimator</span>
                 </a>
               </nav>
               <a className="header-login" href="/login">Log in</a>
@@ -170,10 +170,10 @@ export default async function Home() {
       </section>
 
       <section className="search-section" aria-label="Search for a place to stay">
-        <form className="stay-search" action="#homes" method="get">
+        <form className="stay-search" action="/search" method="get">
           <label className="search-field location-field">
             <MapPin size={18} />
-            <span><span className="field-label">WHERE</span><input aria-label="Destination" name="destination" placeholder="Search destinations" /></span>
+            <span><span className="field-label">WHERE</span><input aria-label="Destination" name="area" placeholder="Search destinations" /></span>
           </label>
           <label className="search-field date-field">
             <CalendarDays size={18} />

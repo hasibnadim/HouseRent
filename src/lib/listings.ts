@@ -38,49 +38,53 @@ function likePattern(value: string): string {
 }
 
 export async function searchListings(filters: ListingFilters) {
-  let listings = db.orm.mytour.Listing.where((listing) => listing.status.eq("PUBLISHED"));
+  const base = () => {
+    let listings = db.orm.mytour.Listing.where((listing) => listing.status.eq("PUBLISHED"));
 
-  if (filters.q) {
-    const pattern = likePattern(filters.q);
-    listings = listings.where((listing) =>
-      or(
-        listing.title.ilike(pattern),
-        listing.description.ilike(pattern),
-        listing.area.ilike(pattern),
-        listing.city.ilike(pattern),
-      ),
-    );
-  }
-  if (filters.city) {
-    const pattern = likePattern(filters.city);
-    listings = listings.where((listing) => listing.city.ilike(pattern));
-  }
-  if (filters.area) {
-    const pattern = likePattern(filters.area);
-    listings = listings.where((listing) => listing.area.ilike(pattern));
-  }
-  if (filters.minRent != null) {
-    listings = listings.where((listing) => listing.monthlyRent.gte(filters.minRent as number));
-  }
-  if (filters.maxRent != null) {
-    listings = listings.where((listing) => listing.monthlyRent.lte(filters.maxRent as number));
-  }
-  if (filters.beds != null) {
-    listings = listings.where((listing) => listing.bedrooms.gte(filters.beds as number));
-  }
-  if (filters.baths != null) {
-    listings = listings.where((listing) => listing.bathrooms.gte(filters.baths as number));
-  }
-  if (filters.type) {
-    const type = filters.type;
-    listings = listings.where((listing) =>
-      listing.propertyType.eq(type as "APARTMENT" | "HOUSE" | "ROOM" | "VILLA" | "OTHER"),
-    );
-  }
-  if (filters.furnished) {
-    listings = listings.where((listing) => listing.furnished.eq(true));
-  }
+    if (filters.q) {
+      const pattern = likePattern(filters.q);
+      listings = listings.where((listing) =>
+        or(
+          listing.title.ilike(pattern),
+          listing.description.ilike(pattern),
+          listing.area.ilike(pattern),
+          listing.city.ilike(pattern),
+        ),
+      );
+    }
+    if (filters.city) {
+      const pattern = likePattern(filters.city);
+      listings = listings.where((listing) => listing.city.ilike(pattern));
+    }
+    if (filters.area) {
+      const pattern = likePattern(filters.area);
+      listings = listings.where((listing) => listing.area.ilike(pattern));
+    }
+    if (filters.minRent != null) {
+      listings = listings.where((listing) => listing.monthlyRent.gte(filters.minRent as number));
+    }
+    if (filters.maxRent != null) {
+      listings = listings.where((listing) => listing.monthlyRent.lte(filters.maxRent as number));
+    }
+    if (filters.beds != null) {
+      listings = listings.where((listing) => listing.bedrooms.gte(filters.beds as number));
+    }
+    if (filters.baths != null) {
+      listings = listings.where((listing) => listing.bathrooms.gte(filters.baths as number));
+    }
+    if (filters.type) {
+      const type = filters.type;
+      listings = listings.where((listing) =>
+        listing.propertyType.eq(type as "APARTMENT" | "HOUSE" | "ROOM" | "VILLA" | "OTHER"),
+      );
+    }
+    if (filters.furnished) {
+      listings = listings.where((listing) => listing.furnished.eq(true));
+    }
+    return listings;
+  };
 
+  let listings = base();
   if (filters.sort === "rent-asc") {
     listings = listings.orderBy((listing) => listing.monthlyRent.asc());
   } else if (filters.sort === "rent-desc") {
@@ -99,6 +103,7 @@ export async function searchListings(filters: ListingFilters) {
   return {
     rows: rows.slice(0, LISTING_PAGE_SIZE),
     hasNext: rows.length > LISTING_PAGE_SIZE,
+    totalPages: 0, // unknown without count query
   };
 }
 

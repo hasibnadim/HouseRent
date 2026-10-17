@@ -1,8 +1,10 @@
 import Link from "next/link";
 import { Suspense } from "react";
+import { connection } from "next/server";
 import { Building2, SearchX, SlidersHorizontal } from "lucide-react";
 import { SiteFooter, SiteHeader } from "@/components/site-header";
 import { ListingCard } from "@/components/listing-card";
+import { Pager } from "@/components/pager";
 import {
   LISTING_PAGE_SIZE,
   searchListings,
@@ -188,6 +190,7 @@ export default async function SearchPage({
 }
 
 async function SearchResults({ filters }: { filters: ListingFilters }) {
+  await connection();
   const { rows, hasNext } = await searchListings(filters);
   const from = rows.length === 0 ? 0 : (filters.page - 1) * LISTING_PAGE_SIZE + 1;
 

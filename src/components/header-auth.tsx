@@ -21,7 +21,7 @@ export async function HeaderAuth() {
         </Link>
         <Link className="nav-estimator" href="/estimate" aria-label="Rent estimator">
           <Calculator size={14} />
-          <span>Estimator</span>
+          <span>AI Estimator</span>
         </Link>
       </nav>
       {session ? (
