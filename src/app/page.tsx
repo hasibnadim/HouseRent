@@ -162,8 +162,6 @@ export default async function Home() {
         <div className="hero-copy">
           <span className="eyebrow hero-eyebrow"><span /> STAYS WITH A LITTLE MORE SOUL</span>
           <h1 id="hero-title">Find a place<br />to feel <em>at home.</em></h1>
-          <p>One-of-a-kind homes, hosted by people who care.<br className="desktop-break" /> Make room for somewhere new.</p>
-          <a className="hero-link" href="#homes">Explore stays <ArrowRight size={16} /></a>
         </div>
         <div className="photo-caption"><span>HANDPICKED STAYS</span><span>Made for living a little</span></div>
         <div className="hero-stamp" aria-hidden="true"><span>STAY AWHILE</span><House size={25} strokeWidth={1.5} /><span>FEEL AT HOME</span></div>
@@ -210,13 +208,13 @@ export default async function Home() {
         </div>
         <nav
           aria-label="Stay categories"
-          className="scrollbar-none mb-5 flex items-center gap-7 overflow-x-auto border-b border-[#e7e5dc]"
+          className="scrollbar-none mb-5 flex items-center gap-4 overflow-x-auto border-b border-[#e7e5dc]"
         >
           {categories.map(({ name, href, icon: Icon }) => (
             <a
               key={name}
               href={href}
-              className="flex min-h-[52px] shrink-0 items-center gap-2 text-[12px] font-semibold text-[#77827b] transition hover:text-[#153b3c]"
+              className="flex min-h-[52px] shrink-0 items-center gap-1 rounded-sm px-2 max-h-[62px] hover:bg-muted text-[12px] font-semibold text-[#77827b] transition hover:text-[#153b3c]"
             >
               <Icon size={18} strokeWidth={1.7} />
               <span>{name}</span>

@@ -35,13 +35,6 @@ export const contract = defineContract({ namespaces: [NAMESPACE] }, ({ field, mo
     member('CANCELLED'),
     member('COMPLETED'),
   );
-  const ReportStatus = enumType(
-    'ReportStatus',
-    { codecId: 'pg/text@1' },
-    member('OPEN'),
-    member('REVIEWED'),
-    member('DISMISSED'),
-  );
 
   const User = model('User', {
     namespace: NAMESPACE,
@@ -139,6 +132,7 @@ export const contract = defineContract({ namespaces: [NAMESPACE] }, ({ field, mo
       constraints.index([cols.city, cols.area], { name: 'listing_location' }),
       constraints.index([cols.status, cols.monthlyRent], { name: 'listing_browse' }),
       constraints.index([cols.ownerId], { name: 'listing_owner' }),
+      constraints.index([cols.ownerId, cols.updatedAt], { name: 'listing_owner_updated' }),
     ],
   }));
 
@@ -156,19 +150,6 @@ export const contract = defineContract({ namespaces: [NAMESPACE] }, ({ field, mo
     indexes: [constraints.index([cols.listingId, cols.sortOrder], { name: 'listing_photo_order' })],
   }));
 
-  const AvailabilityBlock = model('AvailabilityBlock', {
-    namespace: NAMESPACE,
-    fields: {
-      id: field.id.uuidv7String(),
-      listingId: field.uuidString(),
-      startsAt: field.temporal.timestamptzString(),
-      endsAt: field.temporal.timestamptzString(),
-      note: field.text().optional(),
-      createdAt: field.temporal.createdAtString(),
-    },
-  }).sql(({ cols, constraints }) => ({
-    indexes: [constraints.index([cols.listingId, cols.startsAt], { name: 'availability_listing_start' })],
-  }));
 
   const Booking = model('Booking', {
     namespace: NAMESPACE,
@@ -197,89 +178,23 @@ export const contract = defineContract({ namespaces: [NAMESPACE] }, ({ field, mo
     indexes: [
       constraints.index([cols.listingId, cols.status, cols.checkIn, cols.checkOut], { name: 'booking_listing_dates' }),
       constraints.index([cols.renterId, cols.status], { name: 'booking_renter_status' }),
+      constraints.index([cols.renterId, cols.createdAt], { name: 'booking_renter_created' }),
+      constraints.index([cols.listingId, cols.status], { name: 'booking_listing_status' }),
     ],
   }));
 
-  const Favorite = model('Favorite', {
-    namespace: NAMESPACE,
-    fields: {
-      id: field.id.uuidv7String(),
-      userId: field.uuidString(),
-      listingId: field.uuidString(),
-      createdAt: field.temporal.createdAtString(),
-    },
-  }).attributes(({ fields, constraints }) => ({
-    uniques: [constraints.unique([fields.userId, fields.listingId])],
-  }));
 
-  const Review = model('Review', {
-    namespace: NAMESPACE,
-    fields: {
-      id: field.id.uuidv7String(),
-      bookingId: field.uuidString(),
-      reviewerId: field.uuidString(),
-      revieweeId: field.uuidString(),
-      rating: field.int(),
-      comment: field.text().optional(),
-      createdAt: field.temporal.createdAtString(),
-      updatedAt: field.temporal.updatedAtString(),
-    },
-  }).attributes(({ fields, constraints }) => ({
-    uniques: [constraints.unique([fields.bookingId, fields.reviewerId])],
-  })).sql(({ cols, constraints }) => ({
-    indexes: [constraints.index([cols.revieweeId, cols.createdAt], { name: 'review_reviewee_recent' })],
-  }));
 
-  const ListingReport = model('ListingReport', {
-    namespace: NAMESPACE,
-    fields: {
-      id: field.id.uuidv7String(),
-      listingId: field.uuidString(),
-      reporterId: field.uuidString(),
-      reason: field.text(),
-      status: field.namedType(ReportStatus).default(ReportStatus.members.OPEN),
-      resolutionNote: field.text().optional(),
-      resolvedById: field.uuidString().optional(),
-      resolvedAt: field.temporal.timestamptzString().optional(),
-      createdAt: field.temporal.createdAtString(),
-      updatedAt: field.temporal.updatedAtString(),
-    },
-  }).sql(({ cols, constraints }) => ({
-    indexes: [
-      constraints.index([cols.listingId, cols.status], { name: 'report_listing_status' }),
-      constraints.index([cols.reporterId], { name: 'report_reporter' }),
-    ],
-  }));
 
-  const AuditLog = model('AuditLog', {
-    namespace: NAMESPACE,
-    fields: {
-      id: field.id.uuidv7String(),
-      actorId: field.uuidString(),
-      action: field.text(),
-      targetType: field.text(),
-      targetId: field.text(),
-      note: field.text().optional(),
-      createdAt: field.temporal.createdAtString(),
-    },
-  }).sql(({ cols, constraints }) => ({
-    indexes: [constraints.index([cols.actorId, cols.createdAt], { name: 'audit_actor_recent' })],
-  }));
 
   return {
-    enums: { UserRole, ListingType, ListingStatus, BookingStatus, ReportStatus },
+    enums: { UserRole, ListingType, ListingStatus, BookingStatus },
     models: {
       User: User.relations({
         accounts: rel.hasMany(Account, { by: 'userId' }),
         sessions: rel.hasMany(Session, { by: 'userId' }),
         listings: rel.hasMany(Listing, { by: 'ownerId' }),
         bookings: rel.hasMany(Booking, { by: 'renterId' }),
-        favorites: rel.hasMany(Favorite, { by: 'userId' }),
-        reviewsWritten: rel.hasMany(Review, { by: 'reviewerId' }),
-        reviewsReceived: rel.hasMany(Review, { by: 'revieweeId' }),
-        reports: rel.hasMany(ListingReport, { by: 'reporterId' }),
-        reportsResolved: rel.hasMany(ListingReport, { by: 'resolvedById' }),
-        auditLogs: rel.hasMany(AuditLog, { by: 'actorId' }),
       }),
       Account: Account.relations({
         user: rel.belongsTo(User, { from: 'userId', to: 'id' }).sql({ fk: { onDelete: 'cascade' } }),
@@ -291,38 +206,14 @@ export const contract = defineContract({ namespaces: [NAMESPACE] }, ({ field, mo
       Listing: Listing.relations({
         owner: rel.belongsTo(User, { from: 'ownerId', to: 'id' }),
         photos: rel.hasMany(ListingPhoto, { by: 'listingId' }),
-        availabilityBlocks: rel.hasMany(AvailabilityBlock, { by: 'listingId' }),
         bookings: rel.hasMany(Booking, { by: 'listingId' }),
-        favorites: rel.hasMany(Favorite, { by: 'listingId' }),
-        reports: rel.hasMany(ListingReport, { by: 'listingId' }),
       }),
       ListingPhoto: ListingPhoto.relations({
-        listing: rel.belongsTo(Listing, { from: 'listingId', to: 'id' }).sql({ fk: { onDelete: 'cascade' } }),
-      }),
-      AvailabilityBlock: AvailabilityBlock.relations({
         listing: rel.belongsTo(Listing, { from: 'listingId', to: 'id' }).sql({ fk: { onDelete: 'cascade' } }),
       }),
       Booking: Booking.relations({
         listing: rel.belongsTo(Listing, { from: 'listingId', to: 'id' }),
         renter: rel.belongsTo(User, { from: 'renterId', to: 'id' }),
-        reviews: rel.hasMany(Review, { by: 'bookingId' }),
-      }),
-      Favorite: Favorite.relations({
-        user: rel.belongsTo(User, { from: 'userId', to: 'id' }).sql({ fk: { onDelete: 'cascade' } }),
-        listing: rel.belongsTo(Listing, { from: 'listingId', to: 'id' }).sql({ fk: { onDelete: 'cascade' } }),
-      }),
-      Review: Review.relations({
-        booking: rel.belongsTo(Booking, { from: 'bookingId', to: 'id' }),
-        reviewer: rel.belongsTo(User, { from: 'reviewerId', to: 'id' }),
-        reviewee: rel.belongsTo(User, { from: 'revieweeId', to: 'id' }),
-      }),
-      ListingReport: ListingReport.relations({
-        listing: rel.belongsTo(Listing, { from: 'listingId', to: 'id' }),
-        reporter: rel.belongsTo(User, { from: 'reporterId', to: 'id' }),
-        resolvedBy: rel.belongsTo(User, { from: 'resolvedById', to: 'id', optional: true }),
-      }),
-      AuditLog: AuditLog.relations({
-        actor: rel.belongsTo(User, { from: 'actorId', to: 'id' }),
       }),
     },
   };

@@ -36,8 +36,7 @@ async function HostingContent({ searchParams }: { searchParams: Promise<Record<s
     );
   }
 
-  const counted = await db.orm.liveBnb.Listing.where({ ownerId: user.id }).select("id").all();
-  const total = counted.length;
+  const { total } = await db.orm.liveBnb.Listing.where({ ownerId: user.id }).aggregate((a) => ({ total: a.count() }));
   const totalPages = Math.max(1, Math.ceil(total / HOSTING_PAGE_SIZE));
   const currentPage = Math.min(page, totalPages);
 

@@ -8,20 +8,8 @@
       "model": "Account",
       "namespace": "liveBnb"
     },
-    "AuditLog": {
-      "model": "AuditLog",
-      "namespace": "liveBnb"
-    },
-    "AvailabilityBlock": {
-      "model": "AvailabilityBlock",
-      "namespace": "liveBnb"
-    },
     "Booking": {
       "model": "Booking",
-      "namespace": "liveBnb"
-    },
-    "Favorite": {
-      "model": "Favorite",
       "namespace": "liveBnb"
     },
     "Listing": {
@@ -30,14 +18,6 @@
     },
     "ListingPhoto": {
       "model": "ListingPhoto",
-      "namespace": "liveBnb"
-    },
-    "ListingReport": {
-      "model": "ListingReport",
-      "namespace": "liveBnb"
-    },
-    "Review": {
-      "model": "Review",
       "namespace": "liveBnb"
     },
     "Session": {
@@ -251,204 +231,6 @@
               "table": "Account"
             }
           },
-          "AuditLog": {
-            "fields": {
-              "action": {
-                "nullable": false,
-                "type": {
-                  "codecId": "pg/text@1",
-                  "kind": "scalar"
-                }
-              },
-              "actorId": {
-                "nullable": false,
-                "type": {
-                  "codecId": "sql/char@1",
-                  "kind": "scalar",
-                  "typeParams": {
-                    "length": 36
-                  }
-                }
-              },
-              "createdAt": {
-                "nullable": false,
-                "type": {
-                  "codecId": "pg/timestamptz-string@1",
-                  "kind": "scalar"
-                }
-              },
-              "id": {
-                "nullable": false,
-                "type": {
-                  "codecId": "sql/char@1",
-                  "kind": "scalar",
-                  "typeParams": {
-                    "length": 36
-                  }
-                }
-              },
-              "note": {
-                "nullable": true,
-                "type": {
-                  "codecId": "pg/text@1",
-                  "kind": "scalar"
-                }
-              },
-              "targetId": {
-                "nullable": false,
-                "type": {
-                  "codecId": "pg/text@1",
-                  "kind": "scalar"
-                }
-              },
-              "targetType": {
-                "nullable": false,
-                "type": {
-                  "codecId": "pg/text@1",
-                  "kind": "scalar"
-                }
-              }
-            },
-            "relations": {
-              "actor": {
-                "cardinality": "N:1",
-                "nullable": false,
-                "on": {
-                  "localFields": [
-                    "actorId"
-                  ],
-                  "targetFields": [
-                    "id"
-                  ]
-                },
-                "to": {
-                  "model": "User",
-                  "namespace": "liveBnb"
-                }
-              }
-            },
-            "storage": {
-              "fields": {
-                "action": {
-                  "column": "action"
-                },
-                "actorId": {
-                  "column": "actorId"
-                },
-                "createdAt": {
-                  "column": "createdAt"
-                },
-                "id": {
-                  "column": "id"
-                },
-                "note": {
-                  "column": "note"
-                },
-                "targetId": {
-                  "column": "targetId"
-                },
-                "targetType": {
-                  "column": "targetType"
-                }
-              },
-              "namespaceId": "liveBnb",
-              "table": "AuditLog"
-            }
-          },
-          "AvailabilityBlock": {
-            "fields": {
-              "createdAt": {
-                "nullable": false,
-                "type": {
-                  "codecId": "pg/timestamptz-string@1",
-                  "kind": "scalar"
-                }
-              },
-              "endsAt": {
-                "nullable": false,
-                "type": {
-                  "codecId": "pg/timestamptz-string@1",
-                  "kind": "scalar"
-                }
-              },
-              "id": {
-                "nullable": false,
-                "type": {
-                  "codecId": "sql/char@1",
-                  "kind": "scalar",
-                  "typeParams": {
-                    "length": 36
-                  }
-                }
-              },
-              "listingId": {
-                "nullable": false,
-                "type": {
-                  "codecId": "sql/char@1",
-                  "kind": "scalar",
-                  "typeParams": {
-                    "length": 36
-                  }
-                }
-              },
-              "note": {
-                "nullable": true,
-                "type": {
-                  "codecId": "pg/text@1",
-                  "kind": "scalar"
-                }
-              },
-              "startsAt": {
-                "nullable": false,
-                "type": {
-                  "codecId": "pg/timestamptz-string@1",
-                  "kind": "scalar"
-                }
-              }
-            },
-            "relations": {
-              "listing": {
-                "cardinality": "N:1",
-                "nullable": false,
-                "on": {
-                  "localFields": [
-                    "listingId"
-                  ],
-                  "targetFields": [
-                    "id"
-                  ]
-                },
-                "to": {
-                  "model": "Listing",
-                  "namespace": "liveBnb"
-                }
-              }
-            },
-            "storage": {
-              "fields": {
-                "createdAt": {
-                  "column": "createdAt"
-                },
-                "endsAt": {
-                  "column": "endsAt"
-                },
-                "id": {
-                  "column": "id"
-                },
-                "listingId": {
-                  "column": "listingId"
-                },
-                "note": {
-                  "column": "note"
-                },
-                "startsAt": {
-                  "column": "startsAt"
-                }
-              },
-              "namespaceId": "liveBnb",
-              "table": "AvailabilityBlock"
-            }
-          },
           "Booking": {
             "fields": {
               "advanceAmount": {
@@ -632,21 +414,6 @@
                   "model": "User",
                   "namespace": "liveBnb"
                 }
-              },
-              "reviews": {
-                "cardinality": "1:N",
-                "on": {
-                  "localFields": [
-                    "id"
-                  ],
-                  "targetFields": [
-                    "bookingId"
-                  ]
-                },
-                "to": {
-                  "model": "Review",
-                  "namespace": "liveBnb"
-                }
               }
             },
             "storage": {
@@ -711,99 +478,6 @@
               },
               "namespaceId": "liveBnb",
               "table": "Booking"
-            }
-          },
-          "Favorite": {
-            "fields": {
-              "createdAt": {
-                "nullable": false,
-                "type": {
-                  "codecId": "pg/timestamptz-string@1",
-                  "kind": "scalar"
-                }
-              },
-              "id": {
-                "nullable": false,
-                "type": {
-                  "codecId": "sql/char@1",
-                  "kind": "scalar",
-                  "typeParams": {
-                    "length": 36
-                  }
-                }
-              },
-              "listingId": {
-                "nullable": false,
-                "type": {
-                  "codecId": "sql/char@1",
-                  "kind": "scalar",
-                  "typeParams": {
-                    "length": 36
-                  }
-                }
-              },
-              "userId": {
-                "nullable": false,
-                "type": {
-                  "codecId": "sql/char@1",
-                  "kind": "scalar",
-                  "typeParams": {
-                    "length": 36
-                  }
-                }
-              }
-            },
-            "relations": {
-              "listing": {
-                "cardinality": "N:1",
-                "nullable": false,
-                "on": {
-                  "localFields": [
-                    "listingId"
-                  ],
-                  "targetFields": [
-                    "id"
-                  ]
-                },
-                "to": {
-                  "model": "Listing",
-                  "namespace": "liveBnb"
-                }
-              },
-              "user": {
-                "cardinality": "N:1",
-                "nullable": false,
-                "on": {
-                  "localFields": [
-                    "userId"
-                  ],
-                  "targetFields": [
-                    "id"
-                  ]
-                },
-                "to": {
-                  "model": "User",
-                  "namespace": "liveBnb"
-                }
-              }
-            },
-            "storage": {
-              "fields": {
-                "createdAt": {
-                  "column": "createdAt"
-                },
-                "id": {
-                  "column": "id"
-                },
-                "listingId": {
-                  "column": "listingId"
-                },
-                "userId": {
-                  "column": "userId"
-                }
-              },
-              "namespaceId": "liveBnb",
-              "table": "Favorite"
             }
           },
           "Listing": {
@@ -985,21 +659,6 @@
               }
             },
             "relations": {
-              "availabilityBlocks": {
-                "cardinality": "1:N",
-                "on": {
-                  "localFields": [
-                    "id"
-                  ],
-                  "targetFields": [
-                    "listingId"
-                  ]
-                },
-                "to": {
-                  "model": "AvailabilityBlock",
-                  "namespace": "liveBnb"
-                }
-              },
               "bookings": {
                 "cardinality": "1:N",
                 "on": {
@@ -1012,21 +671,6 @@
                 },
                 "to": {
                   "model": "Booking",
-                  "namespace": "liveBnb"
-                }
-              },
-              "favorites": {
-                "cardinality": "1:N",
-                "on": {
-                  "localFields": [
-                    "id"
-                  ],
-                  "targetFields": [
-                    "listingId"
-                  ]
-                },
-                "to": {
-                  "model": "Favorite",
                   "namespace": "liveBnb"
                 }
               },
@@ -1058,21 +702,6 @@
                 },
                 "to": {
                   "model": "ListingPhoto",
-                  "namespace": "liveBnb"
-                }
-              },
-              "reports": {
-                "cardinality": "1:N",
-                "on": {
-                  "localFields": [
-                    "id"
-                  ],
-                  "targetFields": [
-                    "listingId"
-                  ]
-                },
-                "to": {
-                  "model": "ListingReport",
                   "namespace": "liveBnb"
                 }
               }
@@ -1242,336 +871,6 @@
               },
               "namespaceId": "liveBnb",
               "table": "ListingPhoto"
-            }
-          },
-          "ListingReport": {
-            "fields": {
-              "createdAt": {
-                "nullable": false,
-                "type": {
-                  "codecId": "pg/timestamptz-string@1",
-                  "kind": "scalar"
-                }
-              },
-              "id": {
-                "nullable": false,
-                "type": {
-                  "codecId": "sql/char@1",
-                  "kind": "scalar",
-                  "typeParams": {
-                    "length": 36
-                  }
-                }
-              },
-              "listingId": {
-                "nullable": false,
-                "type": {
-                  "codecId": "sql/char@1",
-                  "kind": "scalar",
-                  "typeParams": {
-                    "length": 36
-                  }
-                }
-              },
-              "reason": {
-                "nullable": false,
-                "type": {
-                  "codecId": "pg/text@1",
-                  "kind": "scalar"
-                }
-              },
-              "reporterId": {
-                "nullable": false,
-                "type": {
-                  "codecId": "sql/char@1",
-                  "kind": "scalar",
-                  "typeParams": {
-                    "length": 36
-                  }
-                }
-              },
-              "resolutionNote": {
-                "nullable": true,
-                "type": {
-                  "codecId": "pg/text@1",
-                  "kind": "scalar"
-                }
-              },
-              "resolvedAt": {
-                "nullable": true,
-                "type": {
-                  "codecId": "pg/timestamptz-string@1",
-                  "kind": "scalar"
-                }
-              },
-              "resolvedById": {
-                "nullable": true,
-                "type": {
-                  "codecId": "sql/char@1",
-                  "kind": "scalar",
-                  "typeParams": {
-                    "length": 36
-                  }
-                }
-              },
-              "status": {
-                "nullable": false,
-                "type": {
-                  "codecId": "pg/text@1",
-                  "kind": "scalar"
-                },
-                "valueSet": {
-                  "entityKind": "enum",
-                  "entityName": "ReportStatus",
-                  "namespaceId": "public",
-                  "plane": "domain"
-                }
-              },
-              "updatedAt": {
-                "nullable": false,
-                "type": {
-                  "codecId": "pg/timestamptz-string@1",
-                  "kind": "scalar"
-                }
-              }
-            },
-            "relations": {
-              "listing": {
-                "cardinality": "N:1",
-                "nullable": false,
-                "on": {
-                  "localFields": [
-                    "listingId"
-                  ],
-                  "targetFields": [
-                    "id"
-                  ]
-                },
-                "to": {
-                  "model": "Listing",
-                  "namespace": "liveBnb"
-                }
-              },
-              "reporter": {
-                "cardinality": "N:1",
-                "nullable": false,
-                "on": {
-                  "localFields": [
-                    "reporterId"
-                  ],
-                  "targetFields": [
-                    "id"
-                  ]
-                },
-                "to": {
-                  "model": "User",
-                  "namespace": "liveBnb"
-                }
-              },
-              "resolvedBy": {
-                "cardinality": "N:1",
-                "nullable": true,
-                "on": {
-                  "localFields": [
-                    "resolvedById"
-                  ],
-                  "targetFields": [
-                    "id"
-                  ]
-                },
-                "to": {
-                  "model": "User",
-                  "namespace": "liveBnb"
-                }
-              }
-            },
-            "storage": {
-              "fields": {
-                "createdAt": {
-                  "column": "createdAt"
-                },
-                "id": {
-                  "column": "id"
-                },
-                "listingId": {
-                  "column": "listingId"
-                },
-                "reason": {
-                  "column": "reason"
-                },
-                "reporterId": {
-                  "column": "reporterId"
-                },
-                "resolutionNote": {
-                  "column": "resolutionNote"
-                },
-                "resolvedAt": {
-                  "column": "resolvedAt"
-                },
-                "resolvedById": {
-                  "column": "resolvedById"
-                },
-                "status": {
-                  "column": "status"
-                },
-                "updatedAt": {
-                  "column": "updatedAt"
-                }
-              },
-              "namespaceId": "liveBnb",
-              "table": "ListingReport"
-            }
-          },
-          "Review": {
-            "fields": {
-              "bookingId": {
-                "nullable": false,
-                "type": {
-                  "codecId": "sql/char@1",
-                  "kind": "scalar",
-                  "typeParams": {
-                    "length": 36
-                  }
-                }
-              },
-              "comment": {
-                "nullable": true,
-                "type": {
-                  "codecId": "pg/text@1",
-                  "kind": "scalar"
-                }
-              },
-              "createdAt": {
-                "nullable": false,
-                "type": {
-                  "codecId": "pg/timestamptz-string@1",
-                  "kind": "scalar"
-                }
-              },
-              "id": {
-                "nullable": false,
-                "type": {
-                  "codecId": "sql/char@1",
-                  "kind": "scalar",
-                  "typeParams": {
-                    "length": 36
-                  }
-                }
-              },
-              "rating": {
-                "nullable": false,
-                "type": {
-                  "codecId": "pg/int4@1",
-                  "kind": "scalar"
-                }
-              },
-              "revieweeId": {
-                "nullable": false,
-                "type": {
-                  "codecId": "sql/char@1",
-                  "kind": "scalar",
-                  "typeParams": {
-                    "length": 36
-                  }
-                }
-              },
-              "reviewerId": {
-                "nullable": false,
-                "type": {
-                  "codecId": "sql/char@1",
-                  "kind": "scalar",
-                  "typeParams": {
-                    "length": 36
-                  }
-                }
-              },
-              "updatedAt": {
-                "nullable": false,
-                "type": {
-                  "codecId": "pg/timestamptz-string@1",
-                  "kind": "scalar"
-                }
-              }
-            },
-            "relations": {
-              "booking": {
-                "cardinality": "N:1",
-                "nullable": false,
-                "on": {
-                  "localFields": [
-                    "bookingId"
-                  ],
-                  "targetFields": [
-                    "id"
-                  ]
-                },
-                "to": {
-                  "model": "Booking",
-                  "namespace": "liveBnb"
-                }
-              },
-              "reviewee": {
-                "cardinality": "N:1",
-                "nullable": false,
-                "on": {
-                  "localFields": [
-                    "revieweeId"
-                  ],
-                  "targetFields": [
-                    "id"
-                  ]
-                },
-                "to": {
-                  "model": "User",
-                  "namespace": "liveBnb"
-                }
-              },
-              "reviewer": {
-                "cardinality": "N:1",
-                "nullable": false,
-                "on": {
-                  "localFields": [
-                    "reviewerId"
-                  ],
-                  "targetFields": [
-                    "id"
-                  ]
-                },
-                "to": {
-                  "model": "User",
-                  "namespace": "liveBnb"
-                }
-              }
-            },
-            "storage": {
-              "fields": {
-                "bookingId": {
-                  "column": "bookingId"
-                },
-                "comment": {
-                  "column": "comment"
-                },
-                "createdAt": {
-                  "column": "createdAt"
-                },
-                "id": {
-                  "column": "id"
-                },
-                "rating": {
-                  "column": "rating"
-                },
-                "revieweeId": {
-                  "column": "revieweeId"
-                },
-                "reviewerId": {
-                  "column": "reviewerId"
-                },
-                "updatedAt": {
-                  "column": "updatedAt"
-                }
-              },
-              "namespaceId": "liveBnb",
-              "table": "Review"
             }
           },
           "Session": {
@@ -1770,21 +1069,6 @@
                   "namespace": "liveBnb"
                 }
               },
-              "auditLogs": {
-                "cardinality": "1:N",
-                "on": {
-                  "localFields": [
-                    "id"
-                  ],
-                  "targetFields": [
-                    "actorId"
-                  ]
-                },
-                "to": {
-                  "model": "AuditLog",
-                  "namespace": "liveBnb"
-                }
-              },
               "bookings": {
                 "cardinality": "1:N",
                 "on": {
@@ -1800,21 +1084,6 @@
                   "namespace": "liveBnb"
                 }
               },
-              "favorites": {
-                "cardinality": "1:N",
-                "on": {
-                  "localFields": [
-                    "id"
-                  ],
-                  "targetFields": [
-                    "userId"
-                  ]
-                },
-                "to": {
-                  "model": "Favorite",
-                  "namespace": "liveBnb"
-                }
-              },
               "listings": {
                 "cardinality": "1:N",
                 "on": {
@@ -1827,66 +1096,6 @@
                 },
                 "to": {
                   "model": "Listing",
-                  "namespace": "liveBnb"
-                }
-              },
-              "reports": {
-                "cardinality": "1:N",
-                "on": {
-                  "localFields": [
-                    "id"
-                  ],
-                  "targetFields": [
-                    "reporterId"
-                  ]
-                },
-                "to": {
-                  "model": "ListingReport",
-                  "namespace": "liveBnb"
-                }
-              },
-              "reportsResolved": {
-                "cardinality": "1:N",
-                "on": {
-                  "localFields": [
-                    "id"
-                  ],
-                  "targetFields": [
-                    "resolvedById"
-                  ]
-                },
-                "to": {
-                  "model": "ListingReport",
-                  "namespace": "liveBnb"
-                }
-              },
-              "reviewsReceived": {
-                "cardinality": "1:N",
-                "on": {
-                  "localFields": [
-                    "id"
-                  ],
-                  "targetFields": [
-                    "revieweeId"
-                  ]
-                },
-                "to": {
-                  "model": "Review",
-                  "namespace": "liveBnb"
-                }
-              },
-              "reviewsWritten": {
-                "cardinality": "1:N",
-                "on": {
-                  "localFields": [
-                    "id"
-                  ],
-                  "targetFields": [
-                    "reviewerId"
-                  ]
-                },
-                "to": {
-                  "model": "Review",
                   "namespace": "liveBnb"
                 }
               },
@@ -2078,23 +1287,6 @@
               }
             ]
           },
-          "ReportStatus": {
-            "codecId": "pg/text@1",
-            "members": [
-              {
-                "name": "OPEN",
-                "value": "OPEN"
-              },
-              {
-                "name": "REVIEWED",
-                "value": "REVIEWED"
-              },
-              {
-                "name": "DISMISSED",
-                "value": "DISMISSED"
-              }
-            ]
-          },
           "UserRole": {
             "codecId": "pg/text@1",
             "members": [
@@ -2253,156 +1445,6 @@
                 }
               ]
             },
-            "AuditLog": {
-              "columns": {
-                "action": {
-                  "codecId": "pg/text@1",
-                  "dataType": "pg/text",
-                  "nullable": false
-                },
-                "actorId": {
-                  "codecId": "sql/char@1",
-                  "dataType": "pg/char",
-                  "nullable": false,
-                  "typeParams": {
-                    "length": 36
-                  }
-                },
-                "createdAt": {
-                  "codecId": "pg/timestamptz-string@1",
-                  "dataType": "pg/timestamptz",
-                  "nullable": false
-                },
-                "id": {
-                  "codecId": "sql/char@1",
-                  "dataType": "pg/char",
-                  "nullable": false,
-                  "typeParams": {
-                    "length": 36
-                  }
-                },
-                "note": {
-                  "codecId": "pg/text@1",
-                  "dataType": "pg/text",
-                  "nullable": true
-                },
-                "targetId": {
-                  "codecId": "pg/text@1",
-                  "dataType": "pg/text",
-                  "nullable": false
-                },
-                "targetType": {
-                  "codecId": "pg/text@1",
-                  "dataType": "pg/text",
-                  "nullable": false
-                }
-              },
-              "foreignKeys": [],
-              "indexes": [
-                {
-                  "columns": [
-                    "actorId",
-                    "createdAt"
-                  ],
-                  "name": "audit_actor_recent_0e9f1adf",
-                  "prefix": "audit_actor_recent",
-                  "unique": false
-                }
-              ],
-              "primaryKey": {
-                "columns": [
-                  "id"
-                ]
-              },
-              "uniques": []
-            },
-            "AvailabilityBlock": {
-              "columns": {
-                "createdAt": {
-                  "codecId": "pg/timestamptz-string@1",
-                  "dataType": "pg/timestamptz",
-                  "nullable": false
-                },
-                "endsAt": {
-                  "codecId": "pg/timestamptz-string@1",
-                  "dataType": "pg/timestamptz",
-                  "nullable": false
-                },
-                "id": {
-                  "codecId": "sql/char@1",
-                  "dataType": "pg/char",
-                  "nullable": false,
-                  "typeParams": {
-                    "length": 36
-                  }
-                },
-                "listingId": {
-                  "codecId": "sql/char@1",
-                  "dataType": "pg/char",
-                  "nullable": false,
-                  "typeParams": {
-                    "length": 36
-                  }
-                },
-                "note": {
-                  "codecId": "pg/text@1",
-                  "dataType": "pg/text",
-                  "nullable": true
-                },
-                "startsAt": {
-                  "codecId": "pg/timestamptz-string@1",
-                  "dataType": "pg/timestamptz",
-                  "nullable": false
-                }
-              },
-              "foreignKeys": [
-                {
-                  "index": {
-                    "name": "AvailabilityBlock_listingId_idx_953decda"
-                  },
-                  "onDelete": "cascade",
-                  "source": {
-                    "columns": [
-                      "listingId"
-                    ],
-                    "namespaceId": "liveBnb",
-                    "tableName": "AvailabilityBlock"
-                  },
-                  "target": {
-                    "columns": [
-                      "id"
-                    ],
-                    "namespaceId": "liveBnb",
-                    "tableName": "Listing"
-                  }
-                }
-              ],
-              "indexes": [
-                {
-                  "columns": [
-                    "listingId"
-                  ],
-                  "name": "AvailabilityBlock_listingId_idx_953decda",
-                  "prefix": "AvailabilityBlock_listingId_idx",
-                  "unique": false
-                },
-                {
-                  "columns": [
-                    "listingId",
-                    "startsAt"
-                  ],
-                  "name": "availability_listing_start_7b8c2bae",
-                  "prefix": "availability_listing_start",
-                  "unique": false
-                }
-              ],
-              "primaryKey": {
-                "columns": [
-                  "id"
-                ]
-              },
-              "uniques": []
-            },
             "Booking": {
               "checks": [
                 {
@@ -2554,6 +1596,24 @@
                 },
                 {
                   "columns": [
+                    "listingId",
+                    "status"
+                  ],
+                  "name": "booking_listing_status_1b030a2f",
+                  "prefix": "booking_listing_status",
+                  "unique": false
+                },
+                {
+                  "columns": [
+                    "renterId",
+                    "createdAt"
+                  ],
+                  "name": "booking_renter_created_63c3c59b",
+                  "prefix": "booking_renter_created",
+                  "unique": false
+                },
+                {
+                  "columns": [
                     "renterId",
                     "status"
                   ],
@@ -2568,112 +1628,6 @@
                 ]
               },
               "uniques": []
-            },
-            "Favorite": {
-              "columns": {
-                "createdAt": {
-                  "codecId": "pg/timestamptz-string@1",
-                  "dataType": "pg/timestamptz",
-                  "nullable": false
-                },
-                "id": {
-                  "codecId": "sql/char@1",
-                  "dataType": "pg/char",
-                  "nullable": false,
-                  "typeParams": {
-                    "length": 36
-                  }
-                },
-                "listingId": {
-                  "codecId": "sql/char@1",
-                  "dataType": "pg/char",
-                  "nullable": false,
-                  "typeParams": {
-                    "length": 36
-                  }
-                },
-                "userId": {
-                  "codecId": "sql/char@1",
-                  "dataType": "pg/char",
-                  "nullable": false,
-                  "typeParams": {
-                    "length": 36
-                  }
-                }
-              },
-              "foreignKeys": [
-                {
-                  "index": {
-                    "name": "Favorite_userId_idx_a489d58a"
-                  },
-                  "onDelete": "cascade",
-                  "source": {
-                    "columns": [
-                      "userId"
-                    ],
-                    "namespaceId": "liveBnb",
-                    "tableName": "Favorite"
-                  },
-                  "target": {
-                    "columns": [
-                      "id"
-                    ],
-                    "namespaceId": "liveBnb",
-                    "tableName": "User"
-                  }
-                },
-                {
-                  "index": {
-                    "name": "Favorite_listingId_idx_953decda"
-                  },
-                  "onDelete": "cascade",
-                  "source": {
-                    "columns": [
-                      "listingId"
-                    ],
-                    "namespaceId": "liveBnb",
-                    "tableName": "Favorite"
-                  },
-                  "target": {
-                    "columns": [
-                      "id"
-                    ],
-                    "namespaceId": "liveBnb",
-                    "tableName": "Listing"
-                  }
-                }
-              ],
-              "indexes": [
-                {
-                  "columns": [
-                    "listingId"
-                  ],
-                  "name": "Favorite_listingId_idx_953decda",
-                  "prefix": "Favorite_listingId_idx",
-                  "unique": false
-                },
-                {
-                  "columns": [
-                    "userId"
-                  ],
-                  "name": "Favorite_userId_idx_a489d58a",
-                  "prefix": "Favorite_userId_idx",
-                  "unique": false
-                }
-              ],
-              "primaryKey": {
-                "columns": [
-                  "id"
-                ]
-              },
-              "uniques": [
-                {
-                  "columns": [
-                    "userId",
-                    "listingId"
-                  ]
-                }
-              ]
             },
             "Listing": {
               "checks": [
@@ -2861,6 +1815,15 @@
                   "name": "listing_owner_e2d0c1ef",
                   "prefix": "listing_owner",
                   "unique": false
+                },
+                {
+                  "columns": [
+                    "ownerId",
+                    "updatedAt"
+                  ],
+                  "name": "listing_owner_updated_f0929af1",
+                  "prefix": "listing_owner_updated",
+                  "unique": false
                 }
               ],
               "primaryKey": {
@@ -2960,196 +1923,6 @@
                 ]
               },
               "uniques": []
-            },
-            "ListingReport": {
-              "checks": [
-                {
-                  "expression": "\"status\" IN ('OPEN', 'REVIEWED', 'DISMISSED')",
-                  "name": "ListingReport_status_check_029bb120",
-                  "prefix": "ListingReport_status_check"
-                }
-              ],
-              "columns": {
-                "createdAt": {
-                  "codecId": "pg/timestamptz-string@1",
-                  "dataType": "pg/timestamptz",
-                  "nullable": false
-                },
-                "id": {
-                  "codecId": "sql/char@1",
-                  "dataType": "pg/char",
-                  "nullable": false,
-                  "typeParams": {
-                    "length": 36
-                  }
-                },
-                "listingId": {
-                  "codecId": "sql/char@1",
-                  "dataType": "pg/char",
-                  "nullable": false,
-                  "typeParams": {
-                    "length": 36
-                  }
-                },
-                "reason": {
-                  "codecId": "pg/text@1",
-                  "dataType": "pg/text",
-                  "nullable": false
-                },
-                "reporterId": {
-                  "codecId": "sql/char@1",
-                  "dataType": "pg/char",
-                  "nullable": false,
-                  "typeParams": {
-                    "length": 36
-                  }
-                },
-                "resolutionNote": {
-                  "codecId": "pg/text@1",
-                  "dataType": "pg/text",
-                  "nullable": true
-                },
-                "resolvedAt": {
-                  "codecId": "pg/timestamptz-string@1",
-                  "dataType": "pg/timestamptz",
-                  "nullable": true
-                },
-                "resolvedById": {
-                  "codecId": "sql/char@1",
-                  "dataType": "pg/char",
-                  "nullable": true,
-                  "typeParams": {
-                    "length": 36
-                  }
-                },
-                "status": {
-                  "codecId": "pg/text@1",
-                  "dataType": "pg/text",
-                  "default": {
-                    "kind": "literal",
-                    "value": "OPEN"
-                  },
-                  "nullable": false,
-                  "valueSet": {
-                    "entityKind": "valueSet",
-                    "entityName": "ReportStatus",
-                    "namespaceId": "public",
-                    "plane": "storage"
-                  }
-                },
-                "updatedAt": {
-                  "codecId": "pg/timestamptz-string@1",
-                  "dataType": "pg/timestamptz",
-                  "nullable": false
-                }
-              },
-              "foreignKeys": [],
-              "indexes": [
-                {
-                  "columns": [
-                    "listingId",
-                    "status"
-                  ],
-                  "name": "report_listing_status_1b030a2f",
-                  "prefix": "report_listing_status",
-                  "unique": false
-                },
-                {
-                  "columns": [
-                    "reporterId"
-                  ],
-                  "name": "report_reporter_aa245831",
-                  "prefix": "report_reporter",
-                  "unique": false
-                }
-              ],
-              "primaryKey": {
-                "columns": [
-                  "id"
-                ]
-              },
-              "uniques": []
-            },
-            "Review": {
-              "columns": {
-                "bookingId": {
-                  "codecId": "sql/char@1",
-                  "dataType": "pg/char",
-                  "nullable": false,
-                  "typeParams": {
-                    "length": 36
-                  }
-                },
-                "comment": {
-                  "codecId": "pg/text@1",
-                  "dataType": "pg/text",
-                  "nullable": true
-                },
-                "createdAt": {
-                  "codecId": "pg/timestamptz-string@1",
-                  "dataType": "pg/timestamptz",
-                  "nullable": false
-                },
-                "id": {
-                  "codecId": "sql/char@1",
-                  "dataType": "pg/char",
-                  "nullable": false,
-                  "typeParams": {
-                    "length": 36
-                  }
-                },
-                "rating": {
-                  "codecId": "pg/int4@1",
-                  "dataType": "pg/int4",
-                  "nullable": false
-                },
-                "revieweeId": {
-                  "codecId": "sql/char@1",
-                  "dataType": "pg/char",
-                  "nullable": false,
-                  "typeParams": {
-                    "length": 36
-                  }
-                },
-                "reviewerId": {
-                  "codecId": "sql/char@1",
-                  "dataType": "pg/char",
-                  "nullable": false,
-                  "typeParams": {
-                    "length": 36
-                  }
-                },
-                "updatedAt": {
-                  "codecId": "pg/timestamptz-string@1",
-                  "dataType": "pg/timestamptz",
-                  "nullable": false
-                }
-              },
-              "foreignKeys": [],
-              "indexes": [
-                {
-                  "columns": [
-                    "revieweeId",
-                    "createdAt"
-                  ],
-                  "name": "review_reviewee_recent_c43c7af7",
-                  "prefix": "review_reviewee_recent",
-                  "unique": false
-                }
-              ],
-              "primaryKey": {
-                "columns": [
-                  "id"
-                ]
-              },
-              "uniques": [
-                {
-                  "columns": [
-                    "bookingId",
-                    "reviewerId"
-                  ]
-                }
-              ]
             },
             "Session": {
               "columns": {
@@ -3421,14 +2194,6 @@
                 "OTHER"
               ]
             },
-            "ReportStatus": {
-              "kind": "valueSet",
-              "values": [
-                "OPEN",
-                "REVIEWED",
-                "DISMISSED"
-              ]
-            },
             "UserRole": {
               "kind": "valueSet",
               "values": [
@@ -3442,10 +2207,10 @@
         "kind": "postgres-schema"
       }
     },
-    "storageHash": "1e0d04de4cb1b4588f91d6e44640d8e9c59bc6ff22cb1e4085b6bd49da231e49"
+    "storageHash": "f1d50e8d632142575872dd8c6b94e9155ff6f7c86471a71548d17eb1dbe0cc52"
   },
   "execution": {
-    "executionHash": "26019ffd50e359a9c226ce2513c027502871b129fc10af73463604d91efd9e17",
+    "executionHash": "01be83fee261f867d402df66000435ab440e2fd5a9583acc4d7d4aa8fd67829f",
     "mutations": {
       "defaults": [
         {
@@ -3491,50 +2256,6 @@
             "kind": "generator"
           },
           "ref": {
-            "entry": "AuditLog",
-            "field": "createdAt",
-            "namespace": "liveBnb"
-          }
-        },
-        {
-          "onCreate": {
-            "id": "uuidv7",
-            "kind": "generator"
-          },
-          "ref": {
-            "entry": "AuditLog",
-            "field": "id",
-            "namespace": "liveBnb"
-          }
-        },
-        {
-          "onCreate": {
-            "id": "timestampNow",
-            "kind": "generator"
-          },
-          "ref": {
-            "entry": "AvailabilityBlock",
-            "field": "createdAt",
-            "namespace": "liveBnb"
-          }
-        },
-        {
-          "onCreate": {
-            "id": "uuidv7",
-            "kind": "generator"
-          },
-          "ref": {
-            "entry": "AvailabilityBlock",
-            "field": "id",
-            "namespace": "liveBnb"
-          }
-        },
-        {
-          "onCreate": {
-            "id": "timestampNow",
-            "kind": "generator"
-          },
-          "ref": {
             "entry": "Booking",
             "field": "createdAt",
             "namespace": "liveBnb"
@@ -3563,28 +2284,6 @@
           "ref": {
             "entry": "Booking",
             "field": "updatedAt",
-            "namespace": "liveBnb"
-          }
-        },
-        {
-          "onCreate": {
-            "id": "timestampNow",
-            "kind": "generator"
-          },
-          "ref": {
-            "entry": "Favorite",
-            "field": "createdAt",
-            "namespace": "liveBnb"
-          }
-        },
-        {
-          "onCreate": {
-            "id": "uuidv7",
-            "kind": "generator"
-          },
-          "ref": {
-            "entry": "Favorite",
-            "field": "id",
             "namespace": "liveBnb"
           }
         },
@@ -3644,80 +2343,6 @@
           "ref": {
             "entry": "ListingPhoto",
             "field": "id",
-            "namespace": "liveBnb"
-          }
-        },
-        {
-          "onCreate": {
-            "id": "timestampNow",
-            "kind": "generator"
-          },
-          "ref": {
-            "entry": "ListingReport",
-            "field": "createdAt",
-            "namespace": "liveBnb"
-          }
-        },
-        {
-          "onCreate": {
-            "id": "uuidv7",
-            "kind": "generator"
-          },
-          "ref": {
-            "entry": "ListingReport",
-            "field": "id",
-            "namespace": "liveBnb"
-          }
-        },
-        {
-          "onCreate": {
-            "id": "timestampNow",
-            "kind": "generator"
-          },
-          "onUpdate": {
-            "id": "timestampNow",
-            "kind": "generator"
-          },
-          "ref": {
-            "entry": "ListingReport",
-            "field": "updatedAt",
-            "namespace": "liveBnb"
-          }
-        },
-        {
-          "onCreate": {
-            "id": "timestampNow",
-            "kind": "generator"
-          },
-          "ref": {
-            "entry": "Review",
-            "field": "createdAt",
-            "namespace": "liveBnb"
-          }
-        },
-        {
-          "onCreate": {
-            "id": "uuidv7",
-            "kind": "generator"
-          },
-          "ref": {
-            "entry": "Review",
-            "field": "id",
-            "namespace": "liveBnb"
-          }
-        },
-        {
-          "onCreate": {
-            "id": "timestampNow",
-            "kind": "generator"
-          },
-          "onUpdate": {
-            "id": "timestampNow",
-            "kind": "generator"
-          },
-          "ref": {
-            "entry": "Review",
-            "field": "updatedAt",
             "namespace": "liveBnb"
           }
         },

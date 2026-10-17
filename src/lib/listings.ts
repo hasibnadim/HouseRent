@@ -92,6 +92,8 @@ export async function searchListings(filters: ListingFilters) {
   } else {
     listings = listings.orderBy((listing) => listing.createdAt.desc());
   }
+  const { total } = await listings.aggregate((a) => ({ total: a.count() }));
+
 
   const offset = (filters.page - 1) * LISTING_PAGE_SIZE;
   const rows = await listings
@@ -99,11 +101,10 @@ export async function searchListings(filters: ListingFilters) {
     .limit(LISTING_PAGE_SIZE + 1)
     .offset(offset)
     .all();
-
   return {
     rows: rows.slice(0, LISTING_PAGE_SIZE),
     hasNext: rows.length > LISTING_PAGE_SIZE,
-    totalPages: 0, // unknown without count query
+    totalPages: total ? Math.ceil(total / LISTING_PAGE_SIZE) : 1,
   };
 }
 
@@ -120,9 +121,11 @@ export async function getPublishedListing(id: string) {
 
   const owner = await db.orm.liveBnb.User.where({ id: listing.ownerId }).first();
 
-  const activeBookings = await db.orm.liveBnb.Booking.where({ listingId: listing.id }).all();
+  const activeBookings = await db.orm.liveBnb.Booking
+    .where({ listingId: listing.id })
+    .where((b) => b.status.in(["PENDING", "APPROVED"]))
+    .all();
   const bookedRanges = activeBookings
-    .filter((booking) => booking.status === "PENDING" || booking.status === "APPROVED")
     .map((booking) => ({
       checkIn: booking.checkIn.slice(0, 10),
       checkOut: booking.checkOut.slice(0, 10),

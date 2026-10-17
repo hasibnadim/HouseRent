@@ -18,9 +18,9 @@ import type {
 } from '@prisma/orm-postgres/contract/types';
 
 export type StorageHash =
-  StorageHashBase<'1e0d04de4cb1b4588f91d6e44640d8e9c59bc6ff22cb1e4085b6bd49da231e49'>;
+  StorageHashBase<'f1d50e8d632142575872dd8c6b94e9155ff6f7c86471a71548d17eb1dbe0cc52'>;
 export type ExecutionHash =
-  ExecutionHashBase<'26019ffd50e359a9c226ce2513c027502871b129fc10af73463604d91efd9e17'>;
+  ExecutionHashBase<'01be83fee261f867d402df66000435ab440e2fd5a9583acc4d7d4aa8fd67829f'>;
 export type ProfileHash =
   ProfileHashBase<'3916f444a8a17ad749191acf9e08dad97d1a327b88c2f1d45d12f240296aa8b2'>;
 
@@ -252,23 +252,6 @@ export type FieldOutputTypes = {
       readonly updatedAt: CodecTypes['pg/timestamptz-string@1']['output'];
       readonly userId: Char<36>;
     };
-    readonly AuditLog: {
-      readonly action: CodecTypes['pg/text@1']['output'];
-      readonly actorId: Char<36>;
-      readonly createdAt: CodecTypes['pg/timestamptz-string@1']['output'];
-      readonly id: Char<36>;
-      readonly note: CodecTypes['pg/text@1']['output'] | null;
-      readonly targetId: CodecTypes['pg/text@1']['output'];
-      readonly targetType: CodecTypes['pg/text@1']['output'];
-    };
-    readonly AvailabilityBlock: {
-      readonly createdAt: CodecTypes['pg/timestamptz-string@1']['output'];
-      readonly endsAt: CodecTypes['pg/timestamptz-string@1']['output'];
-      readonly id: Char<36>;
-      readonly listingId: Char<36>;
-      readonly note: CodecTypes['pg/text@1']['output'] | null;
-      readonly startsAt: CodecTypes['pg/timestamptz-string@1']['output'];
-    };
     readonly Booking: {
       readonly advanceAmount: CodecTypes['pg/int4@1']['output'];
       readonly approvedAt: CodecTypes['pg/timestamptz-string@1']['output'] | null;
@@ -289,12 +272,6 @@ export type FieldOutputTypes = {
       readonly status: 'PENDING' | 'APPROVED' | 'DECLINED' | 'CANCELLED' | 'COMPLETED';
       readonly totalAmount: CodecTypes['pg/int4@1']['output'];
       readonly updatedAt: CodecTypes['pg/timestamptz-string@1']['output'];
-    };
-    readonly Favorite: {
-      readonly createdAt: CodecTypes['pg/timestamptz-string@1']['output'];
-      readonly id: Char<36>;
-      readonly listingId: Char<36>;
-      readonly userId: Char<36>;
     };
     readonly Listing: {
       readonly addressNote: CodecTypes['pg/text@1']['output'] | null;
@@ -327,28 +304,6 @@ export type FieldOutputTypes = {
       readonly listingId: Char<36>;
       readonly sortOrder: CodecTypes['pg/int4@1']['output'];
       readonly url: CodecTypes['pg/text@1']['output'];
-    };
-    readonly ListingReport: {
-      readonly createdAt: CodecTypes['pg/timestamptz-string@1']['output'];
-      readonly id: Char<36>;
-      readonly listingId: Char<36>;
-      readonly reason: CodecTypes['pg/text@1']['output'];
-      readonly reporterId: Char<36>;
-      readonly resolutionNote: CodecTypes['pg/text@1']['output'] | null;
-      readonly resolvedAt: CodecTypes['pg/timestamptz-string@1']['output'] | null;
-      readonly resolvedById: Char<36> | null;
-      readonly status: 'OPEN' | 'REVIEWED' | 'DISMISSED';
-      readonly updatedAt: CodecTypes['pg/timestamptz-string@1']['output'];
-    };
-    readonly Review: {
-      readonly bookingId: Char<36>;
-      readonly comment: CodecTypes['pg/text@1']['output'] | null;
-      readonly createdAt: CodecTypes['pg/timestamptz-string@1']['output'];
-      readonly id: Char<36>;
-      readonly rating: CodecTypes['pg/int4@1']['output'];
-      readonly revieweeId: Char<36>;
-      readonly reviewerId: Char<36>;
-      readonly updatedAt: CodecTypes['pg/timestamptz-string@1']['output'];
     };
     readonly Session: {
       readonly createdAt: CodecTypes['pg/timestamptz-string@1']['output'];
@@ -400,23 +355,6 @@ export type FieldInputTypes = {
       readonly updatedAt: CodecTypes['pg/timestamptz-string@1']['input'];
       readonly userId: CodecTypes['sql/char@1']['input'];
     };
-    readonly AuditLog: {
-      readonly action: CodecTypes['pg/text@1']['input'];
-      readonly actorId: CodecTypes['sql/char@1']['input'];
-      readonly createdAt: CodecTypes['pg/timestamptz-string@1']['input'];
-      readonly id: CodecTypes['sql/char@1']['input'];
-      readonly note: CodecTypes['pg/text@1']['input'] | null;
-      readonly targetId: CodecTypes['pg/text@1']['input'];
-      readonly targetType: CodecTypes['pg/text@1']['input'];
-    };
-    readonly AvailabilityBlock: {
-      readonly createdAt: CodecTypes['pg/timestamptz-string@1']['input'];
-      readonly endsAt: CodecTypes['pg/timestamptz-string@1']['input'];
-      readonly id: CodecTypes['sql/char@1']['input'];
-      readonly listingId: CodecTypes['sql/char@1']['input'];
-      readonly note: CodecTypes['pg/text@1']['input'] | null;
-      readonly startsAt: CodecTypes['pg/timestamptz-string@1']['input'];
-    };
     readonly Booking: {
       readonly advanceAmount: CodecTypes['pg/int4@1']['input'];
       readonly approvedAt: CodecTypes['pg/timestamptz-string@1']['input'] | null;
@@ -437,12 +375,6 @@ export type FieldInputTypes = {
       readonly status: 'PENDING' | 'APPROVED' | 'DECLINED' | 'CANCELLED' | 'COMPLETED';
       readonly totalAmount: CodecTypes['pg/int4@1']['input'];
       readonly updatedAt: CodecTypes['pg/timestamptz-string@1']['input'];
-    };
-    readonly Favorite: {
-      readonly createdAt: CodecTypes['pg/timestamptz-string@1']['input'];
-      readonly id: CodecTypes['sql/char@1']['input'];
-      readonly listingId: CodecTypes['sql/char@1']['input'];
-      readonly userId: CodecTypes['sql/char@1']['input'];
     };
     readonly Listing: {
       readonly addressNote: CodecTypes['pg/text@1']['input'] | null;
@@ -475,28 +407,6 @@ export type FieldInputTypes = {
       readonly listingId: CodecTypes['sql/char@1']['input'];
       readonly sortOrder: CodecTypes['pg/int4@1']['input'];
       readonly url: CodecTypes['pg/text@1']['input'];
-    };
-    readonly ListingReport: {
-      readonly createdAt: CodecTypes['pg/timestamptz-string@1']['input'];
-      readonly id: CodecTypes['sql/char@1']['input'];
-      readonly listingId: CodecTypes['sql/char@1']['input'];
-      readonly reason: CodecTypes['pg/text@1']['input'];
-      readonly reporterId: CodecTypes['sql/char@1']['input'];
-      readonly resolutionNote: CodecTypes['pg/text@1']['input'] | null;
-      readonly resolvedAt: CodecTypes['pg/timestamptz-string@1']['input'] | null;
-      readonly resolvedById: CodecTypes['sql/char@1']['input'] | null;
-      readonly status: 'OPEN' | 'REVIEWED' | 'DISMISSED';
-      readonly updatedAt: CodecTypes['pg/timestamptz-string@1']['input'];
-    };
-    readonly Review: {
-      readonly bookingId: CodecTypes['sql/char@1']['input'];
-      readonly comment: CodecTypes['pg/text@1']['input'] | null;
-      readonly createdAt: CodecTypes['pg/timestamptz-string@1']['input'];
-      readonly id: CodecTypes['sql/char@1']['input'];
-      readonly rating: CodecTypes['pg/int4@1']['input'];
-      readonly revieweeId: CodecTypes['sql/char@1']['input'];
-      readonly reviewerId: CodecTypes['sql/char@1']['input'];
-      readonly updatedAt: CodecTypes['pg/timestamptz-string@1']['input'];
     };
     readonly Session: {
       readonly createdAt: CodecTypes['pg/timestamptz-string@1']['input'];
@@ -548,23 +458,6 @@ export type StorageColumnTypes = {
       readonly updatedAt: CodecTypes['pg/timestamptz-string@1']['output'];
       readonly userId: Char<36>;
     };
-    readonly AuditLog: {
-      readonly action: CodecTypes['pg/text@1']['output'];
-      readonly actorId: Char<36>;
-      readonly createdAt: CodecTypes['pg/timestamptz-string@1']['output'];
-      readonly id: Char<36>;
-      readonly note: CodecTypes['pg/text@1']['output'] | null;
-      readonly targetId: CodecTypes['pg/text@1']['output'];
-      readonly targetType: CodecTypes['pg/text@1']['output'];
-    };
-    readonly AvailabilityBlock: {
-      readonly createdAt: CodecTypes['pg/timestamptz-string@1']['output'];
-      readonly endsAt: CodecTypes['pg/timestamptz-string@1']['output'];
-      readonly id: Char<36>;
-      readonly listingId: Char<36>;
-      readonly note: CodecTypes['pg/text@1']['output'] | null;
-      readonly startsAt: CodecTypes['pg/timestamptz-string@1']['output'];
-    };
     readonly Booking: {
       readonly advanceAmount: CodecTypes['pg/int4@1']['output'];
       readonly approvedAt: CodecTypes['pg/timestamptz-string@1']['output'] | null;
@@ -585,12 +478,6 @@ export type StorageColumnTypes = {
       readonly status: 'PENDING' | 'APPROVED' | 'DECLINED' | 'CANCELLED' | 'COMPLETED';
       readonly totalAmount: CodecTypes['pg/int4@1']['output'];
       readonly updatedAt: CodecTypes['pg/timestamptz-string@1']['output'];
-    };
-    readonly Favorite: {
-      readonly createdAt: CodecTypes['pg/timestamptz-string@1']['output'];
-      readonly id: Char<36>;
-      readonly listingId: Char<36>;
-      readonly userId: Char<36>;
     };
     readonly Listing: {
       readonly addressNote: CodecTypes['pg/text@1']['output'] | null;
@@ -623,28 +510,6 @@ export type StorageColumnTypes = {
       readonly listingId: Char<36>;
       readonly sortOrder: CodecTypes['pg/int4@1']['output'];
       readonly url: CodecTypes['pg/text@1']['output'];
-    };
-    readonly ListingReport: {
-      readonly createdAt: CodecTypes['pg/timestamptz-string@1']['output'];
-      readonly id: Char<36>;
-      readonly listingId: Char<36>;
-      readonly reason: CodecTypes['pg/text@1']['output'];
-      readonly reporterId: Char<36>;
-      readonly resolutionNote: CodecTypes['pg/text@1']['output'] | null;
-      readonly resolvedAt: CodecTypes['pg/timestamptz-string@1']['output'] | null;
-      readonly resolvedById: Char<36> | null;
-      readonly status: 'OPEN' | 'REVIEWED' | 'DISMISSED';
-      readonly updatedAt: CodecTypes['pg/timestamptz-string@1']['output'];
-    };
-    readonly Review: {
-      readonly bookingId: Char<36>;
-      readonly comment: CodecTypes['pg/text@1']['output'] | null;
-      readonly createdAt: CodecTypes['pg/timestamptz-string@1']['output'];
-      readonly id: Char<36>;
-      readonly rating: CodecTypes['pg/int4@1']['output'];
-      readonly revieweeId: Char<36>;
-      readonly reviewerId: Char<36>;
-      readonly updatedAt: CodecTypes['pg/timestamptz-string@1']['output'];
     };
     readonly Session: {
       readonly createdAt: CodecTypes['pg/timestamptz-string@1']['output'];
@@ -696,23 +561,6 @@ export type StorageColumnInputTypes = {
       readonly updatedAt: CodecTypes['pg/timestamptz-string@1']['input'];
       readonly userId: CodecTypes['sql/char@1']['input'];
     };
-    readonly AuditLog: {
-      readonly action: CodecTypes['pg/text@1']['input'];
-      readonly actorId: CodecTypes['sql/char@1']['input'];
-      readonly createdAt: CodecTypes['pg/timestamptz-string@1']['input'];
-      readonly id: CodecTypes['sql/char@1']['input'];
-      readonly note: CodecTypes['pg/text@1']['input'] | null;
-      readonly targetId: CodecTypes['pg/text@1']['input'];
-      readonly targetType: CodecTypes['pg/text@1']['input'];
-    };
-    readonly AvailabilityBlock: {
-      readonly createdAt: CodecTypes['pg/timestamptz-string@1']['input'];
-      readonly endsAt: CodecTypes['pg/timestamptz-string@1']['input'];
-      readonly id: CodecTypes['sql/char@1']['input'];
-      readonly listingId: CodecTypes['sql/char@1']['input'];
-      readonly note: CodecTypes['pg/text@1']['input'] | null;
-      readonly startsAt: CodecTypes['pg/timestamptz-string@1']['input'];
-    };
     readonly Booking: {
       readonly advanceAmount: CodecTypes['pg/int4@1']['input'];
       readonly approvedAt: CodecTypes['pg/timestamptz-string@1']['input'] | null;
@@ -733,12 +581,6 @@ export type StorageColumnInputTypes = {
       readonly status: 'PENDING' | 'APPROVED' | 'DECLINED' | 'CANCELLED' | 'COMPLETED';
       readonly totalAmount: CodecTypes['pg/int4@1']['input'];
       readonly updatedAt: CodecTypes['pg/timestamptz-string@1']['input'];
-    };
-    readonly Favorite: {
-      readonly createdAt: CodecTypes['pg/timestamptz-string@1']['input'];
-      readonly id: CodecTypes['sql/char@1']['input'];
-      readonly listingId: CodecTypes['sql/char@1']['input'];
-      readonly userId: CodecTypes['sql/char@1']['input'];
     };
     readonly Listing: {
       readonly addressNote: CodecTypes['pg/text@1']['input'] | null;
@@ -771,28 +613,6 @@ export type StorageColumnInputTypes = {
       readonly listingId: CodecTypes['sql/char@1']['input'];
       readonly sortOrder: CodecTypes['pg/int4@1']['input'];
       readonly url: CodecTypes['pg/text@1']['input'];
-    };
-    readonly ListingReport: {
-      readonly createdAt: CodecTypes['pg/timestamptz-string@1']['input'];
-      readonly id: CodecTypes['sql/char@1']['input'];
-      readonly listingId: CodecTypes['sql/char@1']['input'];
-      readonly reason: CodecTypes['pg/text@1']['input'];
-      readonly reporterId: CodecTypes['sql/char@1']['input'];
-      readonly resolutionNote: CodecTypes['pg/text@1']['input'] | null;
-      readonly resolvedAt: CodecTypes['pg/timestamptz-string@1']['input'] | null;
-      readonly resolvedById: CodecTypes['sql/char@1']['input'] | null;
-      readonly status: 'OPEN' | 'REVIEWED' | 'DISMISSED';
-      readonly updatedAt: CodecTypes['pg/timestamptz-string@1']['input'];
-    };
-    readonly Review: {
-      readonly bookingId: CodecTypes['sql/char@1']['input'];
-      readonly comment: CodecTypes['pg/text@1']['input'] | null;
-      readonly createdAt: CodecTypes['pg/timestamptz-string@1']['input'];
-      readonly id: CodecTypes['sql/char@1']['input'];
-      readonly rating: CodecTypes['pg/int4@1']['input'];
-      readonly revieweeId: CodecTypes['sql/char@1']['input'];
-      readonly reviewerId: CodecTypes['sql/char@1']['input'];
-      readonly updatedAt: CodecTypes['pg/timestamptz-string@1']['input'];
     };
     readonly Session: {
       readonly createdAt: CodecTypes['pg/timestamptz-string@1']['input'];
@@ -846,27 +666,6 @@ export namespace Models {
     user: liveBnb_User;
     readonly [RelationKeys]?: 'user';
   };
-  export type liveBnb_AuditLog = {
-    action: CodecTypes['pg/text@1']['output'];
-    actorId: Char<36>;
-    createdAt: CodecTypes['pg/timestamptz-string@1']['output'];
-    id: Char<36>;
-    note: CodecTypes['pg/text@1']['output'] | null;
-    targetId: CodecTypes['pg/text@1']['output'];
-    targetType: CodecTypes['pg/text@1']['output'];
-    actor: liveBnb_User;
-    readonly [RelationKeys]?: 'actor';
-  };
-  export type liveBnb_AvailabilityBlock = {
-    createdAt: CodecTypes['pg/timestamptz-string@1']['output'];
-    endsAt: CodecTypes['pg/timestamptz-string@1']['output'];
-    id: Char<36>;
-    listingId: Char<36>;
-    note: CodecTypes['pg/text@1']['output'] | null;
-    startsAt: CodecTypes['pg/timestamptz-string@1']['output'];
-    listing: liveBnb_Listing;
-    readonly [RelationKeys]?: 'listing';
-  };
   export type liveBnb_Booking = {
     advanceAmount: CodecTypes['pg/int4@1']['output'];
     approvedAt: CodecTypes['pg/timestamptz-string@1']['output'] | null;
@@ -889,17 +688,7 @@ export namespace Models {
     updatedAt: CodecTypes['pg/timestamptz-string@1']['output'];
     listing: liveBnb_Listing;
     renter: liveBnb_User;
-    reviews: liveBnb_Review[];
-    readonly [RelationKeys]?: 'listing' | 'renter' | 'reviews';
-  };
-  export type liveBnb_Favorite = {
-    createdAt: CodecTypes['pg/timestamptz-string@1']['output'];
-    id: Char<36>;
-    listingId: Char<36>;
-    userId: Char<36>;
-    listing: liveBnb_Listing;
-    user: liveBnb_User;
-    readonly [RelationKeys]?: 'listing' | 'user';
+    readonly [RelationKeys]?: 'listing' | 'renter';
   };
   export type liveBnb_Listing = {
     addressNote: CodecTypes['pg/text@1']['output'] | null;
@@ -924,14 +713,10 @@ export namespace Models {
     status: 'DRAFT' | 'PUBLISHED' | 'UNPUBLISHED' | 'ARCHIVED';
     title: CodecTypes['pg/text@1']['output'];
     updatedAt: CodecTypes['pg/timestamptz-string@1']['output'];
-    availabilityBlocks: liveBnb_AvailabilityBlock[];
     bookings: liveBnb_Booking[];
-    favorites: liveBnb_Favorite[];
     owner: liveBnb_User;
     photos: liveBnb_ListingPhoto[];
-    reports: liveBnb_ListingReport[];
-    readonly [RelationKeys]?:
-      'availabilityBlocks' | 'bookings' | 'favorites' | 'owner' | 'photos' | 'reports';
+    readonly [RelationKeys]?: 'bookings' | 'owner' | 'photos';
   };
   export type liveBnb_ListingPhoto = {
     caption: CodecTypes['pg/text@1']['output'] | null;
@@ -942,36 +727,6 @@ export namespace Models {
     url: CodecTypes['pg/text@1']['output'];
     listing: liveBnb_Listing;
     readonly [RelationKeys]?: 'listing';
-  };
-  export type liveBnb_ListingReport = {
-    createdAt: CodecTypes['pg/timestamptz-string@1']['output'];
-    id: Char<36>;
-    listingId: Char<36>;
-    reason: CodecTypes['pg/text@1']['output'];
-    reporterId: Char<36>;
-    resolutionNote: CodecTypes['pg/text@1']['output'] | null;
-    resolvedAt: CodecTypes['pg/timestamptz-string@1']['output'] | null;
-    resolvedById: Char<36> | null;
-    status: 'OPEN' | 'REVIEWED' | 'DISMISSED';
-    updatedAt: CodecTypes['pg/timestamptz-string@1']['output'];
-    listing: liveBnb_Listing;
-    reporter: liveBnb_User;
-    resolvedBy: liveBnb_User | null;
-    readonly [RelationKeys]?: 'listing' | 'reporter' | 'resolvedBy';
-  };
-  export type liveBnb_Review = {
-    bookingId: Char<36>;
-    comment: CodecTypes['pg/text@1']['output'] | null;
-    createdAt: CodecTypes['pg/timestamptz-string@1']['output'];
-    id: Char<36>;
-    rating: CodecTypes['pg/int4@1']['output'];
-    revieweeId: Char<36>;
-    reviewerId: Char<36>;
-    updatedAt: CodecTypes['pg/timestamptz-string@1']['output'];
-    booking: liveBnb_Booking;
-    reviewee: liveBnb_User;
-    reviewer: liveBnb_User;
-    readonly [RelationKeys]?: 'booking' | 'reviewee' | 'reviewer';
   };
   export type liveBnb_Session = {
     createdAt: CodecTypes['pg/timestamptz-string@1']['output'];
@@ -996,26 +751,10 @@ export namespace Models {
     role: 'RENTER' | 'OWNER';
     updatedAt: CodecTypes['pg/timestamptz-string@1']['output'];
     accounts: liveBnb_Account[];
-    auditLogs: liveBnb_AuditLog[];
     bookings: liveBnb_Booking[];
-    favorites: liveBnb_Favorite[];
     listings: liveBnb_Listing[];
-    reports: liveBnb_ListingReport[];
-    reportsResolved: liveBnb_ListingReport[];
-    reviewsReceived: liveBnb_Review[];
-    reviewsWritten: liveBnb_Review[];
     sessions: liveBnb_Session[];
-    readonly [RelationKeys]?:
-      | 'accounts'
-      | 'auditLogs'
-      | 'bookings'
-      | 'favorites'
-      | 'listings'
-      | 'reports'
-      | 'reportsResolved'
-      | 'reviewsReceived'
-      | 'reviewsWritten'
-      | 'sessions';
+    readonly [RelationKeys]?: 'accounts' | 'bookings' | 'listings' | 'sessions';
   };
   export type liveBnb_VerificationToken = {
     expires: CodecTypes['pg/timestamptz-string@1']['output'];
@@ -1029,14 +768,9 @@ export namespace Models {
 export declare const models: {
   liveBnb: {
     Account: Models.liveBnb_Account;
-    AuditLog: Models.liveBnb_AuditLog;
-    AvailabilityBlock: Models.liveBnb_AvailabilityBlock;
     Booking: Models.liveBnb_Booking;
-    Favorite: Models.liveBnb_Favorite;
     Listing: Models.liveBnb_Listing;
     ListingPhoto: Models.liveBnb_ListingPhoto;
-    ListingReport: Models.liveBnb_ListingReport;
-    Review: Models.liveBnb_Review;
     Session: Models.liveBnb_Session;
     User: Models.liveBnb_User;
     VerificationToken: Models.liveBnb_VerificationToken;
@@ -1188,137 +922,6 @@ type ContractBase = Omit<
                 },
               ];
             };
-            readonly AuditLog: {
-              columns: {
-                readonly action: {
-                  readonly dataType: 'pg/text';
-                  readonly codecId: 'pg/text@1';
-                  readonly nullable: false;
-                  readonly many: false;
-                };
-                readonly actorId: {
-                  readonly dataType: 'pg/char';
-                  readonly codecId: 'sql/char@1';
-                  readonly nullable: false;
-                  readonly typeParams: { readonly length: 36 };
-                  readonly many: false;
-                };
-                readonly createdAt: {
-                  readonly dataType: 'pg/timestamptz';
-                  readonly codecId: 'pg/timestamptz-string@1';
-                  readonly nullable: false;
-                  readonly many: false;
-                };
-                readonly id: {
-                  readonly dataType: 'pg/char';
-                  readonly codecId: 'sql/char@1';
-                  readonly nullable: false;
-                  readonly typeParams: { readonly length: 36 };
-                  readonly many: false;
-                };
-                readonly note: {
-                  readonly dataType: 'pg/text';
-                  readonly codecId: 'pg/text@1';
-                  readonly nullable: true;
-                  readonly many: false;
-                };
-                readonly targetId: {
-                  readonly dataType: 'pg/text';
-                  readonly codecId: 'pg/text@1';
-                  readonly nullable: false;
-                  readonly many: false;
-                };
-                readonly targetType: {
-                  readonly dataType: 'pg/text';
-                  readonly codecId: 'pg/text@1';
-                  readonly nullable: false;
-                  readonly many: false;
-                };
-              };
-              primaryKey: { readonly columns: readonly ['id'] };
-              uniques: readonly [];
-              indexes: readonly [
-                {
-                  readonly name: 'audit_actor_recent_0e9f1adf';
-                  readonly prefix: 'audit_actor_recent';
-                  readonly columns: readonly ['actorId', 'createdAt'];
-                  readonly unique: false;
-                },
-              ];
-              foreignKeys: readonly [];
-            };
-            readonly AvailabilityBlock: {
-              columns: {
-                readonly createdAt: {
-                  readonly dataType: 'pg/timestamptz';
-                  readonly codecId: 'pg/timestamptz-string@1';
-                  readonly nullable: false;
-                  readonly many: false;
-                };
-                readonly endsAt: {
-                  readonly dataType: 'pg/timestamptz';
-                  readonly codecId: 'pg/timestamptz-string@1';
-                  readonly nullable: false;
-                  readonly many: false;
-                };
-                readonly id: {
-                  readonly dataType: 'pg/char';
-                  readonly codecId: 'sql/char@1';
-                  readonly nullable: false;
-                  readonly typeParams: { readonly length: 36 };
-                  readonly many: false;
-                };
-                readonly listingId: {
-                  readonly dataType: 'pg/char';
-                  readonly codecId: 'sql/char@1';
-                  readonly nullable: false;
-                  readonly typeParams: { readonly length: 36 };
-                  readonly many: false;
-                };
-                readonly note: {
-                  readonly dataType: 'pg/text';
-                  readonly codecId: 'pg/text@1';
-                  readonly nullable: true;
-                  readonly many: false;
-                };
-                readonly startsAt: {
-                  readonly dataType: 'pg/timestamptz';
-                  readonly codecId: 'pg/timestamptz-string@1';
-                  readonly nullable: false;
-                  readonly many: false;
-                };
-              };
-              primaryKey: { readonly columns: readonly ['id'] };
-              uniques: readonly [];
-              indexes: readonly [
-                {
-                  readonly name: 'AvailabilityBlock_listingId_idx_953decda';
-                  readonly prefix: 'AvailabilityBlock_listingId_idx';
-                  readonly columns: readonly ['listingId'];
-                  readonly unique: false;
-                },
-                {
-                  readonly name: 'availability_listing_start_7b8c2bae';
-                  readonly prefix: 'availability_listing_start';
-                  readonly columns: readonly ['listingId', 'startsAt'];
-                  readonly unique: false;
-                },
-              ];
-              foreignKeys: readonly [
-                {
-                  readonly source: {
-                    readonly namespaceId: 'liveBnb' & NamespaceId;
-                    readonly tableName: 'AvailabilityBlock';
-                    readonly columns: readonly ['listingId'];
-                  };
-                  readonly target: {
-                    readonly namespaceId: 'liveBnb' & NamespaceId;
-                    readonly tableName: 'Listing';
-                    readonly columns: readonly ['id'];
-                  };
-                },
-              ];
-            };
             readonly Booking: {
               columns: {
                 readonly advanceAmount: {
@@ -1465,6 +1068,18 @@ type ContractBase = Omit<
                   readonly unique: false;
                 },
                 {
+                  readonly name: 'booking_listing_status_1b030a2f';
+                  readonly prefix: 'booking_listing_status';
+                  readonly columns: readonly ['listingId', 'status'];
+                  readonly unique: false;
+                },
+                {
+                  readonly name: 'booking_renter_created_63c3c59b';
+                  readonly prefix: 'booking_renter_created';
+                  readonly columns: readonly ['renterId', 'createdAt'];
+                  readonly unique: false;
+                },
+                {
                   readonly name: 'booking_renter_status_9a7f078e';
                   readonly prefix: 'booking_renter_status';
                   readonly columns: readonly ['renterId', 'status'];
@@ -1472,79 +1087,6 @@ type ContractBase = Omit<
                 },
               ];
               foreignKeys: readonly [];
-            };
-            readonly Favorite: {
-              columns: {
-                readonly createdAt: {
-                  readonly dataType: 'pg/timestamptz';
-                  readonly codecId: 'pg/timestamptz-string@1';
-                  readonly nullable: false;
-                  readonly many: false;
-                };
-                readonly id: {
-                  readonly dataType: 'pg/char';
-                  readonly codecId: 'sql/char@1';
-                  readonly nullable: false;
-                  readonly typeParams: { readonly length: 36 };
-                  readonly many: false;
-                };
-                readonly listingId: {
-                  readonly dataType: 'pg/char';
-                  readonly codecId: 'sql/char@1';
-                  readonly nullable: false;
-                  readonly typeParams: { readonly length: 36 };
-                  readonly many: false;
-                };
-                readonly userId: {
-                  readonly dataType: 'pg/char';
-                  readonly codecId: 'sql/char@1';
-                  readonly nullable: false;
-                  readonly typeParams: { readonly length: 36 };
-                  readonly many: false;
-                };
-              };
-              primaryKey: { readonly columns: readonly ['id'] };
-              uniques: readonly [{ readonly columns: readonly ['userId', 'listingId'] }];
-              indexes: readonly [
-                {
-                  readonly name: 'Favorite_listingId_idx_953decda';
-                  readonly prefix: 'Favorite_listingId_idx';
-                  readonly columns: readonly ['listingId'];
-                  readonly unique: false;
-                },
-                {
-                  readonly name: 'Favorite_userId_idx_a489d58a';
-                  readonly prefix: 'Favorite_userId_idx';
-                  readonly columns: readonly ['userId'];
-                  readonly unique: false;
-                },
-              ];
-              foreignKeys: readonly [
-                {
-                  readonly source: {
-                    readonly namespaceId: 'liveBnb' & NamespaceId;
-                    readonly tableName: 'Favorite';
-                    readonly columns: readonly ['userId'];
-                  };
-                  readonly target: {
-                    readonly namespaceId: 'liveBnb' & NamespaceId;
-                    readonly tableName: 'User';
-                    readonly columns: readonly ['id'];
-                  };
-                },
-                {
-                  readonly source: {
-                    readonly namespaceId: 'liveBnb' & NamespaceId;
-                    readonly tableName: 'Favorite';
-                    readonly columns: readonly ['listingId'];
-                  };
-                  readonly target: {
-                    readonly namespaceId: 'liveBnb' & NamespaceId;
-                    readonly tableName: 'Listing';
-                    readonly columns: readonly ['id'];
-                  };
-                },
-              ];
             };
             readonly Listing: {
               columns: {
@@ -1712,6 +1254,12 @@ type ContractBase = Omit<
                   readonly columns: readonly ['ownerId'];
                   readonly unique: false;
                 },
+                {
+                  readonly name: 'listing_owner_updated_f0929af1';
+                  readonly prefix: 'listing_owner_updated';
+                  readonly columns: readonly ['ownerId', 'updatedAt'];
+                  readonly unique: false;
+                },
               ];
               foreignKeys: readonly [];
             };
@@ -1790,162 +1338,6 @@ type ContractBase = Omit<
                   };
                 },
               ];
-            };
-            readonly ListingReport: {
-              columns: {
-                readonly createdAt: {
-                  readonly dataType: 'pg/timestamptz';
-                  readonly codecId: 'pg/timestamptz-string@1';
-                  readonly nullable: false;
-                  readonly many: false;
-                };
-                readonly id: {
-                  readonly dataType: 'pg/char';
-                  readonly codecId: 'sql/char@1';
-                  readonly nullable: false;
-                  readonly typeParams: { readonly length: 36 };
-                  readonly many: false;
-                };
-                readonly listingId: {
-                  readonly dataType: 'pg/char';
-                  readonly codecId: 'sql/char@1';
-                  readonly nullable: false;
-                  readonly typeParams: { readonly length: 36 };
-                  readonly many: false;
-                };
-                readonly reason: {
-                  readonly dataType: 'pg/text';
-                  readonly codecId: 'pg/text@1';
-                  readonly nullable: false;
-                  readonly many: false;
-                };
-                readonly reporterId: {
-                  readonly dataType: 'pg/char';
-                  readonly codecId: 'sql/char@1';
-                  readonly nullable: false;
-                  readonly typeParams: { readonly length: 36 };
-                  readonly many: false;
-                };
-                readonly resolutionNote: {
-                  readonly dataType: 'pg/text';
-                  readonly codecId: 'pg/text@1';
-                  readonly nullable: true;
-                  readonly many: false;
-                };
-                readonly resolvedAt: {
-                  readonly dataType: 'pg/timestamptz';
-                  readonly codecId: 'pg/timestamptz-string@1';
-                  readonly nullable: true;
-                  readonly many: false;
-                };
-                readonly resolvedById: {
-                  readonly dataType: 'pg/char';
-                  readonly codecId: 'sql/char@1';
-                  readonly nullable: true;
-                  readonly typeParams: { readonly length: 36 };
-                  readonly many: false;
-                };
-                readonly status: {
-                  readonly dataType: 'pg/text';
-                  readonly codecId: 'pg/text@1';
-                  readonly nullable: false;
-                  readonly default: {
-                    readonly kind: 'literal';
-                    readonly value: DefaultLiteralValue<'pg/text@1', 'OPEN'>;
-                  };
-                  readonly many: false;
-                };
-                readonly updatedAt: {
-                  readonly dataType: 'pg/timestamptz';
-                  readonly codecId: 'pg/timestamptz-string@1';
-                  readonly nullable: false;
-                  readonly many: false;
-                };
-              };
-              primaryKey: { readonly columns: readonly ['id'] };
-              uniques: readonly [];
-              indexes: readonly [
-                {
-                  readonly name: 'report_listing_status_1b030a2f';
-                  readonly prefix: 'report_listing_status';
-                  readonly columns: readonly ['listingId', 'status'];
-                  readonly unique: false;
-                },
-                {
-                  readonly name: 'report_reporter_aa245831';
-                  readonly prefix: 'report_reporter';
-                  readonly columns: readonly ['reporterId'];
-                  readonly unique: false;
-                },
-              ];
-              foreignKeys: readonly [];
-            };
-            readonly Review: {
-              columns: {
-                readonly bookingId: {
-                  readonly dataType: 'pg/char';
-                  readonly codecId: 'sql/char@1';
-                  readonly nullable: false;
-                  readonly typeParams: { readonly length: 36 };
-                  readonly many: false;
-                };
-                readonly comment: {
-                  readonly dataType: 'pg/text';
-                  readonly codecId: 'pg/text@1';
-                  readonly nullable: true;
-                  readonly many: false;
-                };
-                readonly createdAt: {
-                  readonly dataType: 'pg/timestamptz';
-                  readonly codecId: 'pg/timestamptz-string@1';
-                  readonly nullable: false;
-                  readonly many: false;
-                };
-                readonly id: {
-                  readonly dataType: 'pg/char';
-                  readonly codecId: 'sql/char@1';
-                  readonly nullable: false;
-                  readonly typeParams: { readonly length: 36 };
-                  readonly many: false;
-                };
-                readonly rating: {
-                  readonly dataType: 'pg/int4';
-                  readonly codecId: 'pg/int4@1';
-                  readonly nullable: false;
-                  readonly many: false;
-                };
-                readonly revieweeId: {
-                  readonly dataType: 'pg/char';
-                  readonly codecId: 'sql/char@1';
-                  readonly nullable: false;
-                  readonly typeParams: { readonly length: 36 };
-                  readonly many: false;
-                };
-                readonly reviewerId: {
-                  readonly dataType: 'pg/char';
-                  readonly codecId: 'sql/char@1';
-                  readonly nullable: false;
-                  readonly typeParams: { readonly length: 36 };
-                  readonly many: false;
-                };
-                readonly updatedAt: {
-                  readonly dataType: 'pg/timestamptz';
-                  readonly codecId: 'pg/timestamptz-string@1';
-                  readonly nullable: false;
-                  readonly many: false;
-                };
-              };
-              primaryKey: { readonly columns: readonly ['id'] };
-              uniques: readonly [{ readonly columns: readonly ['bookingId', 'reviewerId'] }];
-              indexes: readonly [
-                {
-                  readonly name: 'review_reviewee_recent_c43c7af7';
-                  readonly prefix: 'review_reviewee_recent';
-                  readonly columns: readonly ['revieweeId', 'createdAt'];
-                  readonly unique: false;
-                },
-              ];
-              foreignKeys: readonly [];
             };
             readonly Session: {
               columns: {
@@ -2163,10 +1555,6 @@ type ContractBase = Omit<
               readonly kind: 'valueSet';
               readonly values: readonly ['APARTMENT', 'HOUSE', 'ROOM', 'VILLA', 'OTHER'];
             };
-            readonly ReportStatus: {
-              readonly kind: 'valueSet';
-              readonly values: readonly ['OPEN', 'REVIEWED', 'DISMISSED'];
-            };
             readonly UserRole: {
               readonly kind: 'valueSet';
               readonly values: readonly ['RENTER', 'OWNER'];
@@ -2183,23 +1571,12 @@ type ContractBase = Omit<
   readonly targetFamily: 'sql';
   readonly roots: {
     readonly Account: { readonly namespace: 'liveBnb' & NamespaceId; readonly model: 'Account' };
-    readonly AuditLog: { readonly namespace: 'liveBnb' & NamespaceId; readonly model: 'AuditLog' };
-    readonly AvailabilityBlock: {
-      readonly namespace: 'liveBnb' & NamespaceId;
-      readonly model: 'AvailabilityBlock';
-    };
     readonly Booking: { readonly namespace: 'liveBnb' & NamespaceId; readonly model: 'Booking' };
-    readonly Favorite: { readonly namespace: 'liveBnb' & NamespaceId; readonly model: 'Favorite' };
     readonly Listing: { readonly namespace: 'liveBnb' & NamespaceId; readonly model: 'Listing' };
     readonly ListingPhoto: {
       readonly namespace: 'liveBnb' & NamespaceId;
       readonly model: 'ListingPhoto';
     };
-    readonly ListingReport: {
-      readonly namespace: 'liveBnb' & NamespaceId;
-      readonly model: 'ListingReport';
-    };
-    readonly Review: { readonly namespace: 'liveBnb' & NamespaceId; readonly model: 'Review' };
     readonly Session: { readonly namespace: 'liveBnb' & NamespaceId; readonly model: 'Session' };
     readonly User: { readonly namespace: 'liveBnb' & NamespaceId; readonly model: 'User' };
     readonly VerificationToken: {
@@ -2326,147 +1703,6 @@ type ContractBase = Omit<
                 readonly type: { readonly column: 'type' };
                 readonly updatedAt: { readonly column: 'updatedAt' };
                 readonly userId: { readonly column: 'userId' };
-              };
-            };
-          };
-          readonly AuditLog: {
-            readonly fields: {
-              readonly action: {
-                readonly nullable: false;
-                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/text@1' };
-              };
-              readonly actorId: {
-                readonly nullable: false;
-                readonly type: {
-                  readonly kind: 'scalar';
-                  readonly codecId: 'sql/char@1';
-                  readonly typeParams: { readonly length: 36 };
-                };
-              };
-              readonly createdAt: {
-                readonly nullable: false;
-                readonly type: {
-                  readonly kind: 'scalar';
-                  readonly codecId: 'pg/timestamptz-string@1';
-                };
-              };
-              readonly id: {
-                readonly nullable: false;
-                readonly type: {
-                  readonly kind: 'scalar';
-                  readonly codecId: 'sql/char@1';
-                  readonly typeParams: { readonly length: 36 };
-                };
-              };
-              readonly note: {
-                readonly nullable: true;
-                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/text@1' };
-              };
-              readonly targetId: {
-                readonly nullable: false;
-                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/text@1' };
-              };
-              readonly targetType: {
-                readonly nullable: false;
-                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/text@1' };
-              };
-            };
-            readonly relations: {
-              readonly actor: {
-                readonly to: {
-                  readonly namespace: 'liveBnb' & NamespaceId;
-                  readonly model: 'User';
-                };
-                readonly cardinality: 'N:1';
-                readonly nullable: false;
-                readonly on: {
-                  readonly localFields: readonly ['actorId'];
-                  readonly targetFields: readonly ['id'];
-                };
-              };
-            };
-            readonly storage: {
-              readonly table: 'AuditLog';
-              readonly namespaceId: 'liveBnb';
-              readonly fields: {
-                readonly action: { readonly column: 'action' };
-                readonly actorId: { readonly column: 'actorId' };
-                readonly createdAt: { readonly column: 'createdAt' };
-                readonly id: { readonly column: 'id' };
-                readonly note: { readonly column: 'note' };
-                readonly targetId: { readonly column: 'targetId' };
-                readonly targetType: { readonly column: 'targetType' };
-              };
-            };
-          };
-          readonly AvailabilityBlock: {
-            readonly fields: {
-              readonly createdAt: {
-                readonly nullable: false;
-                readonly type: {
-                  readonly kind: 'scalar';
-                  readonly codecId: 'pg/timestamptz-string@1';
-                };
-              };
-              readonly endsAt: {
-                readonly nullable: false;
-                readonly type: {
-                  readonly kind: 'scalar';
-                  readonly codecId: 'pg/timestamptz-string@1';
-                };
-              };
-              readonly id: {
-                readonly nullable: false;
-                readonly type: {
-                  readonly kind: 'scalar';
-                  readonly codecId: 'sql/char@1';
-                  readonly typeParams: { readonly length: 36 };
-                };
-              };
-              readonly listingId: {
-                readonly nullable: false;
-                readonly type: {
-                  readonly kind: 'scalar';
-                  readonly codecId: 'sql/char@1';
-                  readonly typeParams: { readonly length: 36 };
-                };
-              };
-              readonly note: {
-                readonly nullable: true;
-                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/text@1' };
-              };
-              readonly startsAt: {
-                readonly nullable: false;
-                readonly type: {
-                  readonly kind: 'scalar';
-                  readonly codecId: 'pg/timestamptz-string@1';
-                };
-              };
-            };
-            readonly relations: {
-              readonly listing: {
-                readonly to: {
-                  readonly namespace: 'liveBnb' & NamespaceId;
-                  readonly model: 'Listing';
-                };
-                readonly cardinality: 'N:1';
-                readonly nullable: false;
-                readonly on: {
-                  readonly localFields: readonly ['listingId'];
-                  readonly targetFields: readonly ['id'];
-                };
-              };
-            };
-            readonly storage: {
-              readonly table: 'AvailabilityBlock';
-              readonly namespaceId: 'liveBnb';
-              readonly fields: {
-                readonly createdAt: { readonly column: 'createdAt' };
-                readonly endsAt: { readonly column: 'endsAt' };
-                readonly id: { readonly column: 'id' };
-                readonly listingId: { readonly column: 'listingId' };
-                readonly note: { readonly column: 'note' };
-                readonly startsAt: { readonly column: 'startsAt' };
               };
             };
           };
@@ -2610,17 +1846,6 @@ type ContractBase = Omit<
                   readonly targetFields: readonly ['id'];
                 };
               };
-              readonly reviews: {
-                readonly to: {
-                  readonly namespace: 'liveBnb' & NamespaceId;
-                  readonly model: 'Review';
-                };
-                readonly cardinality: '1:N';
-                readonly on: {
-                  readonly localFields: readonly ['id'];
-                  readonly targetFields: readonly ['bookingId'];
-                };
-              };
             };
             readonly storage: {
               readonly table: 'Booking';
@@ -2645,77 +1870,6 @@ type ContractBase = Omit<
                 readonly status: { readonly column: 'status' };
                 readonly totalAmount: { readonly column: 'totalAmount' };
                 readonly updatedAt: { readonly column: 'updatedAt' };
-              };
-            };
-          };
-          readonly Favorite: {
-            readonly fields: {
-              readonly createdAt: {
-                readonly nullable: false;
-                readonly type: {
-                  readonly kind: 'scalar';
-                  readonly codecId: 'pg/timestamptz-string@1';
-                };
-              };
-              readonly id: {
-                readonly nullable: false;
-                readonly type: {
-                  readonly kind: 'scalar';
-                  readonly codecId: 'sql/char@1';
-                  readonly typeParams: { readonly length: 36 };
-                };
-              };
-              readonly listingId: {
-                readonly nullable: false;
-                readonly type: {
-                  readonly kind: 'scalar';
-                  readonly codecId: 'sql/char@1';
-                  readonly typeParams: { readonly length: 36 };
-                };
-              };
-              readonly userId: {
-                readonly nullable: false;
-                readonly type: {
-                  readonly kind: 'scalar';
-                  readonly codecId: 'sql/char@1';
-                  readonly typeParams: { readonly length: 36 };
-                };
-              };
-            };
-            readonly relations: {
-              readonly listing: {
-                readonly to: {
-                  readonly namespace: 'liveBnb' & NamespaceId;
-                  readonly model: 'Listing';
-                };
-                readonly cardinality: 'N:1';
-                readonly nullable: false;
-                readonly on: {
-                  readonly localFields: readonly ['listingId'];
-                  readonly targetFields: readonly ['id'];
-                };
-              };
-              readonly user: {
-                readonly to: {
-                  readonly namespace: 'liveBnb' & NamespaceId;
-                  readonly model: 'User';
-                };
-                readonly cardinality: 'N:1';
-                readonly nullable: false;
-                readonly on: {
-                  readonly localFields: readonly ['userId'];
-                  readonly targetFields: readonly ['id'];
-                };
-              };
-            };
-            readonly storage: {
-              readonly table: 'Favorite';
-              readonly namespaceId: 'liveBnb';
-              readonly fields: {
-                readonly createdAt: { readonly column: 'createdAt' };
-                readonly id: { readonly column: 'id' };
-                readonly listingId: { readonly column: 'listingId' };
-                readonly userId: { readonly column: 'userId' };
               };
             };
           };
@@ -2832,32 +1986,10 @@ type ContractBase = Omit<
               };
             };
             readonly relations: {
-              readonly availabilityBlocks: {
-                readonly to: {
-                  readonly namespace: 'liveBnb' & NamespaceId;
-                  readonly model: 'AvailabilityBlock';
-                };
-                readonly cardinality: '1:N';
-                readonly on: {
-                  readonly localFields: readonly ['id'];
-                  readonly targetFields: readonly ['listingId'];
-                };
-              };
               readonly bookings: {
                 readonly to: {
                   readonly namespace: 'liveBnb' & NamespaceId;
                   readonly model: 'Booking';
-                };
-                readonly cardinality: '1:N';
-                readonly on: {
-                  readonly localFields: readonly ['id'];
-                  readonly targetFields: readonly ['listingId'];
-                };
-              };
-              readonly favorites: {
-                readonly to: {
-                  readonly namespace: 'liveBnb' & NamespaceId;
-                  readonly model: 'Favorite';
                 };
                 readonly cardinality: '1:N';
                 readonly on: {
@@ -2881,17 +2013,6 @@ type ContractBase = Omit<
                 readonly to: {
                   readonly namespace: 'liveBnb' & NamespaceId;
                   readonly model: 'ListingPhoto';
-                };
-                readonly cardinality: '1:N';
-                readonly on: {
-                  readonly localFields: readonly ['id'];
-                  readonly targetFields: readonly ['listingId'];
-                };
-              };
-              readonly reports: {
-                readonly to: {
-                  readonly namespace: 'liveBnb' & NamespaceId;
-                  readonly model: 'ListingReport';
                 };
                 readonly cardinality: '1:N';
                 readonly on: {
@@ -2991,239 +2112,6 @@ type ContractBase = Omit<
                 readonly listingId: { readonly column: 'listingId' };
                 readonly sortOrder: { readonly column: 'sortOrder' };
                 readonly url: { readonly column: 'url' };
-              };
-            };
-          };
-          readonly ListingReport: {
-            readonly fields: {
-              readonly createdAt: {
-                readonly nullable: false;
-                readonly type: {
-                  readonly kind: 'scalar';
-                  readonly codecId: 'pg/timestamptz-string@1';
-                };
-              };
-              readonly id: {
-                readonly nullable: false;
-                readonly type: {
-                  readonly kind: 'scalar';
-                  readonly codecId: 'sql/char@1';
-                  readonly typeParams: { readonly length: 36 };
-                };
-              };
-              readonly listingId: {
-                readonly nullable: false;
-                readonly type: {
-                  readonly kind: 'scalar';
-                  readonly codecId: 'sql/char@1';
-                  readonly typeParams: { readonly length: 36 };
-                };
-              };
-              readonly reason: {
-                readonly nullable: false;
-                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/text@1' };
-              };
-              readonly reporterId: {
-                readonly nullable: false;
-                readonly type: {
-                  readonly kind: 'scalar';
-                  readonly codecId: 'sql/char@1';
-                  readonly typeParams: { readonly length: 36 };
-                };
-              };
-              readonly resolutionNote: {
-                readonly nullable: true;
-                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/text@1' };
-              };
-              readonly resolvedAt: {
-                readonly nullable: true;
-                readonly type: {
-                  readonly kind: 'scalar';
-                  readonly codecId: 'pg/timestamptz-string@1';
-                };
-              };
-              readonly resolvedById: {
-                readonly nullable: true;
-                readonly type: {
-                  readonly kind: 'scalar';
-                  readonly codecId: 'sql/char@1';
-                  readonly typeParams: { readonly length: 36 };
-                };
-              };
-              readonly status: {
-                readonly nullable: false;
-                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/text@1' };
-              };
-              readonly updatedAt: {
-                readonly nullable: false;
-                readonly type: {
-                  readonly kind: 'scalar';
-                  readonly codecId: 'pg/timestamptz-string@1';
-                };
-              };
-            };
-            readonly relations: {
-              readonly listing: {
-                readonly to: {
-                  readonly namespace: 'liveBnb' & NamespaceId;
-                  readonly model: 'Listing';
-                };
-                readonly cardinality: 'N:1';
-                readonly nullable: false;
-                readonly on: {
-                  readonly localFields: readonly ['listingId'];
-                  readonly targetFields: readonly ['id'];
-                };
-              };
-              readonly reporter: {
-                readonly to: {
-                  readonly namespace: 'liveBnb' & NamespaceId;
-                  readonly model: 'User';
-                };
-                readonly cardinality: 'N:1';
-                readonly nullable: false;
-                readonly on: {
-                  readonly localFields: readonly ['reporterId'];
-                  readonly targetFields: readonly ['id'];
-                };
-              };
-              readonly resolvedBy: {
-                readonly to: {
-                  readonly namespace: 'liveBnb' & NamespaceId;
-                  readonly model: 'User';
-                };
-                readonly cardinality: 'N:1';
-                readonly nullable: true;
-                readonly on: {
-                  readonly localFields: readonly ['resolvedById'];
-                  readonly targetFields: readonly ['id'];
-                };
-              };
-            };
-            readonly storage: {
-              readonly table: 'ListingReport';
-              readonly namespaceId: 'liveBnb';
-              readonly fields: {
-                readonly createdAt: { readonly column: 'createdAt' };
-                readonly id: { readonly column: 'id' };
-                readonly listingId: { readonly column: 'listingId' };
-                readonly reason: { readonly column: 'reason' };
-                readonly reporterId: { readonly column: 'reporterId' };
-                readonly resolutionNote: { readonly column: 'resolutionNote' };
-                readonly resolvedAt: { readonly column: 'resolvedAt' };
-                readonly resolvedById: { readonly column: 'resolvedById' };
-                readonly status: { readonly column: 'status' };
-                readonly updatedAt: { readonly column: 'updatedAt' };
-              };
-            };
-          };
-          readonly Review: {
-            readonly fields: {
-              readonly bookingId: {
-                readonly nullable: false;
-                readonly type: {
-                  readonly kind: 'scalar';
-                  readonly codecId: 'sql/char@1';
-                  readonly typeParams: { readonly length: 36 };
-                };
-              };
-              readonly comment: {
-                readonly nullable: true;
-                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/text@1' };
-              };
-              readonly createdAt: {
-                readonly nullable: false;
-                readonly type: {
-                  readonly kind: 'scalar';
-                  readonly codecId: 'pg/timestamptz-string@1';
-                };
-              };
-              readonly id: {
-                readonly nullable: false;
-                readonly type: {
-                  readonly kind: 'scalar';
-                  readonly codecId: 'sql/char@1';
-                  readonly typeParams: { readonly length: 36 };
-                };
-              };
-              readonly rating: {
-                readonly nullable: false;
-                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/int4@1' };
-              };
-              readonly revieweeId: {
-                readonly nullable: false;
-                readonly type: {
-                  readonly kind: 'scalar';
-                  readonly codecId: 'sql/char@1';
-                  readonly typeParams: { readonly length: 36 };
-                };
-              };
-              readonly reviewerId: {
-                readonly nullable: false;
-                readonly type: {
-                  readonly kind: 'scalar';
-                  readonly codecId: 'sql/char@1';
-                  readonly typeParams: { readonly length: 36 };
-                };
-              };
-              readonly updatedAt: {
-                readonly nullable: false;
-                readonly type: {
-                  readonly kind: 'scalar';
-                  readonly codecId: 'pg/timestamptz-string@1';
-                };
-              };
-            };
-            readonly relations: {
-              readonly booking: {
-                readonly to: {
-                  readonly namespace: 'liveBnb' & NamespaceId;
-                  readonly model: 'Booking';
-                };
-                readonly cardinality: 'N:1';
-                readonly nullable: false;
-                readonly on: {
-                  readonly localFields: readonly ['bookingId'];
-                  readonly targetFields: readonly ['id'];
-                };
-              };
-              readonly reviewee: {
-                readonly to: {
-                  readonly namespace: 'liveBnb' & NamespaceId;
-                  readonly model: 'User';
-                };
-                readonly cardinality: 'N:1';
-                readonly nullable: false;
-                readonly on: {
-                  readonly localFields: readonly ['revieweeId'];
-                  readonly targetFields: readonly ['id'];
-                };
-              };
-              readonly reviewer: {
-                readonly to: {
-                  readonly namespace: 'liveBnb' & NamespaceId;
-                  readonly model: 'User';
-                };
-                readonly cardinality: 'N:1';
-                readonly nullable: false;
-                readonly on: {
-                  readonly localFields: readonly ['reviewerId'];
-                  readonly targetFields: readonly ['id'];
-                };
-              };
-            };
-            readonly storage: {
-              readonly table: 'Review';
-              readonly namespaceId: 'liveBnb';
-              readonly fields: {
-                readonly bookingId: { readonly column: 'bookingId' };
-                readonly comment: { readonly column: 'comment' };
-                readonly createdAt: { readonly column: 'createdAt' };
-                readonly id: { readonly column: 'id' };
-                readonly rating: { readonly column: 'rating' };
-                readonly revieweeId: { readonly column: 'revieweeId' };
-                readonly reviewerId: { readonly column: 'reviewerId' };
-                readonly updatedAt: { readonly column: 'updatedAt' };
               };
             };
           };
@@ -3366,17 +2254,6 @@ type ContractBase = Omit<
                   readonly targetFields: readonly ['userId'];
                 };
               };
-              readonly auditLogs: {
-                readonly to: {
-                  readonly namespace: 'liveBnb' & NamespaceId;
-                  readonly model: 'AuditLog';
-                };
-                readonly cardinality: '1:N';
-                readonly on: {
-                  readonly localFields: readonly ['id'];
-                  readonly targetFields: readonly ['actorId'];
-                };
-              };
               readonly bookings: {
                 readonly to: {
                   readonly namespace: 'liveBnb' & NamespaceId;
@@ -3388,17 +2265,6 @@ type ContractBase = Omit<
                   readonly targetFields: readonly ['renterId'];
                 };
               };
-              readonly favorites: {
-                readonly to: {
-                  readonly namespace: 'liveBnb' & NamespaceId;
-                  readonly model: 'Favorite';
-                };
-                readonly cardinality: '1:N';
-                readonly on: {
-                  readonly localFields: readonly ['id'];
-                  readonly targetFields: readonly ['userId'];
-                };
-              };
               readonly listings: {
                 readonly to: {
                   readonly namespace: 'liveBnb' & NamespaceId;
@@ -3408,50 +2274,6 @@ type ContractBase = Omit<
                 readonly on: {
                   readonly localFields: readonly ['id'];
                   readonly targetFields: readonly ['ownerId'];
-                };
-              };
-              readonly reports: {
-                readonly to: {
-                  readonly namespace: 'liveBnb' & NamespaceId;
-                  readonly model: 'ListingReport';
-                };
-                readonly cardinality: '1:N';
-                readonly on: {
-                  readonly localFields: readonly ['id'];
-                  readonly targetFields: readonly ['reporterId'];
-                };
-              };
-              readonly reportsResolved: {
-                readonly to: {
-                  readonly namespace: 'liveBnb' & NamespaceId;
-                  readonly model: 'ListingReport';
-                };
-                readonly cardinality: '1:N';
-                readonly on: {
-                  readonly localFields: readonly ['id'];
-                  readonly targetFields: readonly ['resolvedById'];
-                };
-              };
-              readonly reviewsReceived: {
-                readonly to: {
-                  readonly namespace: 'liveBnb' & NamespaceId;
-                  readonly model: 'Review';
-                };
-                readonly cardinality: '1:N';
-                readonly on: {
-                  readonly localFields: readonly ['id'];
-                  readonly targetFields: readonly ['revieweeId'];
-                };
-              };
-              readonly reviewsWritten: {
-                readonly to: {
-                  readonly namespace: 'liveBnb' & NamespaceId;
-                  readonly model: 'Review';
-                };
-                readonly cardinality: '1:N';
-                readonly on: {
-                  readonly localFields: readonly ['id'];
-                  readonly targetFields: readonly ['reviewerId'];
                 };
               };
               readonly sessions: {
@@ -3557,14 +2379,6 @@ type ContractBase = Omit<
               { readonly name: 'OTHER'; readonly value: 'OTHER' },
             ];
           };
-          readonly ReportStatus: {
-            readonly codecId: 'pg/text@1';
-            readonly members: readonly [
-              { readonly name: 'OPEN'; readonly value: 'OPEN' },
-              { readonly name: 'REVIEWED'; readonly value: 'REVIEWED' },
-              { readonly name: 'DISMISSED'; readonly value: 'DISMISSED' },
-            ];
-          };
           readonly UserRole: {
             readonly codecId: 'pg/text@1';
             readonly members: readonly [
@@ -3593,11 +2407,6 @@ type ContractBase = Omit<
             { readonly name: 'ROOM'; readonly value: 'ROOM' },
             { readonly name: 'VILLA'; readonly value: 'VILLA' },
             { readonly name: 'OTHER'; readonly value: 'OTHER' },
-          ];
-          readonly ReportStatus: readonly [
-            { readonly name: 'OPEN'; readonly value: 'OPEN' },
-            { readonly name: 'REVIEWED'; readonly value: 'REVIEWED' },
-            { readonly name: 'DISMISSED'; readonly value: 'DISMISSED' },
           ];
           readonly UserRole: readonly [
             { readonly name: 'RENTER'; readonly value: 'RENTER' },
@@ -3667,38 +2476,6 @@ type ContractBase = Omit<
         {
           readonly onCreate: { readonly id: 'timestampNow'; readonly kind: 'generator' };
           readonly ref: {
-            readonly entry: 'AuditLog';
-            readonly field: 'createdAt';
-            readonly namespace: 'liveBnb';
-          };
-        },
-        {
-          readonly onCreate: { readonly id: 'uuidv7'; readonly kind: 'generator' };
-          readonly ref: {
-            readonly entry: 'AuditLog';
-            readonly field: 'id';
-            readonly namespace: 'liveBnb';
-          };
-        },
-        {
-          readonly onCreate: { readonly id: 'timestampNow'; readonly kind: 'generator' };
-          readonly ref: {
-            readonly entry: 'AvailabilityBlock';
-            readonly field: 'createdAt';
-            readonly namespace: 'liveBnb';
-          };
-        },
-        {
-          readonly onCreate: { readonly id: 'uuidv7'; readonly kind: 'generator' };
-          readonly ref: {
-            readonly entry: 'AvailabilityBlock';
-            readonly field: 'id';
-            readonly namespace: 'liveBnb';
-          };
-        },
-        {
-          readonly onCreate: { readonly id: 'timestampNow'; readonly kind: 'generator' };
-          readonly ref: {
             readonly entry: 'Booking';
             readonly field: 'createdAt';
             readonly namespace: 'liveBnb';
@@ -3718,22 +2495,6 @@ type ContractBase = Omit<
           readonly ref: {
             readonly entry: 'Booking';
             readonly field: 'updatedAt';
-            readonly namespace: 'liveBnb';
-          };
-        },
-        {
-          readonly onCreate: { readonly id: 'timestampNow'; readonly kind: 'generator' };
-          readonly ref: {
-            readonly entry: 'Favorite';
-            readonly field: 'createdAt';
-            readonly namespace: 'liveBnb';
-          };
-        },
-        {
-          readonly onCreate: { readonly id: 'uuidv7'; readonly kind: 'generator' };
-          readonly ref: {
-            readonly entry: 'Favorite';
-            readonly field: 'id';
             readonly namespace: 'liveBnb';
           };
         },
@@ -3775,56 +2536,6 @@ type ContractBase = Omit<
           readonly ref: {
             readonly entry: 'ListingPhoto';
             readonly field: 'id';
-            readonly namespace: 'liveBnb';
-          };
-        },
-        {
-          readonly onCreate: { readonly id: 'timestampNow'; readonly kind: 'generator' };
-          readonly ref: {
-            readonly entry: 'ListingReport';
-            readonly field: 'createdAt';
-            readonly namespace: 'liveBnb';
-          };
-        },
-        {
-          readonly onCreate: { readonly id: 'uuidv7'; readonly kind: 'generator' };
-          readonly ref: {
-            readonly entry: 'ListingReport';
-            readonly field: 'id';
-            readonly namespace: 'liveBnb';
-          };
-        },
-        {
-          readonly onCreate: { readonly id: 'timestampNow'; readonly kind: 'generator' };
-          readonly onUpdate: { readonly id: 'timestampNow'; readonly kind: 'generator' };
-          readonly ref: {
-            readonly entry: 'ListingReport';
-            readonly field: 'updatedAt';
-            readonly namespace: 'liveBnb';
-          };
-        },
-        {
-          readonly onCreate: { readonly id: 'timestampNow'; readonly kind: 'generator' };
-          readonly ref: {
-            readonly entry: 'Review';
-            readonly field: 'createdAt';
-            readonly namespace: 'liveBnb';
-          };
-        },
-        {
-          readonly onCreate: { readonly id: 'uuidv7'; readonly kind: 'generator' };
-          readonly ref: {
-            readonly entry: 'Review';
-            readonly field: 'id';
-            readonly namespace: 'liveBnb';
-          };
-        },
-        {
-          readonly onCreate: { readonly id: 'timestampNow'; readonly kind: 'generator' };
-          readonly onUpdate: { readonly id: 'timestampNow'; readonly kind: 'generator' };
-          readonly ref: {
-            readonly entry: 'Review';
-            readonly field: 'updatedAt';
             readonly namespace: 'liveBnb';
           };
         },

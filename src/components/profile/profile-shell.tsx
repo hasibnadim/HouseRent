@@ -155,12 +155,7 @@ export function ProfileShell({ user, children }: { user: CurrentUser; children: 
             <h1>{activeItem?.label ?? "Overview"}</h1>
           </div>
 
-          <div className="erp-topsearch">
-            <Search size={16} />
-            <input aria-label="Search your account" placeholder="Search stays, bookings, messages" />
-          </div>
-
-          <Link className="erp-me" href="/profile">
+          <Link className="erp-me ml-auto" href="/profile">
             <span className="erp-me-avatar">{initials}</span>
             <span className="erp-me-name">{user.name ?? "Account"}</span>
           </Link>

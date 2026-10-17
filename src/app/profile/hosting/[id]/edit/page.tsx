@@ -3,6 +3,7 @@ import { Trash2 } from "lucide-react";
 import { ProfilePageHeader, ProfileRequestBoundary } from "@/components/profile/ui";
 import { getCurrentUser } from "@/lib/session";
 import { db } from "@/prisma/db";
+import type { Char } from "@prisma/orm-postgres/target/codec-types";
 import { updateListing } from "@/app/profile/hosting/actions";
 import { ListingForm, type ListingDefaults } from "@/app/profile/hosting/listing-form";
 import { DeleteListingForm } from "@/app/profile/hosting/delete-listing-form";
@@ -25,12 +26,11 @@ async function EditListingContent({ params }: { params: Promise<{ id: string }> 
     notFound();
   }
 
-  const listings = await db.orm.liveBnb.Listing.where({ ownerId: user.id })
+  const listing = await db.orm.liveBnb.Listing.where({ id: id as Char<36> })
     .include("photos", (photos) => photos.orderBy((photo) => photo.sortOrder.asc()))
-    .all();
-  const listing = listings.find((row) => row.id === id);
+    .first();
 
-  if (!listing) {
+  if (!listing || listing.ownerId !== user.id) {
     notFound();
   }
 

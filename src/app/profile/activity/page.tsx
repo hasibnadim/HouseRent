@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ArrowRight, BedDouble, Building2, CalendarCheck, Inbox, MapPin, Phone } from "lucide-react";
 import { ProfileEmptyState, ProfilePageHeader, ProfileRequestBoundary } from "@/components/profile/ui";
+import { Pager } from "@/components/pager";
 import { getCurrentUser } from "@/lib/session";
 import { initialsFor } from "@/lib/user";
 import { db } from "@/prisma/db";
@@ -8,10 +9,12 @@ import { CancelBookingButton, RespondToBookingForm } from "./booking-actions";
 
 export const instant = false;
 
-export default function ActivityPage() {
+const ACTIVITY_PAGE_SIZE = 20;
+
+export default function ActivityPage({ searchParams }: { searchParams: Promise<Record<string, string | string[] | undefined>> }) {
   return (
     <ProfileRequestBoundary>
-      <ActivityContent />
+      <ActivityContent searchParams={searchParams} />
     </ProfileRequestBoundary>
   );
 }
@@ -44,26 +47,43 @@ function statusLabel(status: string): string {
   return status.charAt(0) + status.slice(1).toLowerCase();
 }
 
-async function ActivityContent() {
+async function ActivityContent({ searchParams }: { searchParams: Promise<Record<string, string | string[] | undefined>> }) {
   const me = await getCurrentUser();
+  const params = await searchParams;
+  const rawPage = Array.isArray(params.page) ? params.page[0] : params.page;
+  const page = Math.min(Math.max(Number.parseInt(rawPage ?? "", 10) || 1, 1), 10000);
 
-  const myBookings = await db.orm.liveBnb.Booking.where({ renterId: me.id })
+  // Renter's own bookings — uses booking_renter_created index (renterId, createdAt)
+  const renterBookings = await db.orm.liveBnb.Booking.where({ renterId: me.id })
     .orderBy((booking) => booking.createdAt.desc())
+    .limit(ACTIVITY_PAGE_SIZE + 1)
+    .offset((page - 1) * ACTIVITY_PAGE_SIZE)
     .all();
+  const myBookings = renterBookings.slice(0, ACTIVITY_PAGE_SIZE);
+  const hasMoreRenter = renterBookings.length > ACTIVITY_PAGE_SIZE;
 
+  // Owner's incoming bookings — use SQL JOIN to avoid loading all 16k listings
   let incoming: typeof myBookings = [];
   if (me.role === "OWNER") {
-    const mine = await db.orm.liveBnb.Listing.where({ ownerId: me.id }).all();
-    const ids = mine.map((listing) => listing.id);
-    if (ids.length > 0) {
-      incoming = await db.orm.liveBnb.Booking.where((booking) => booking.listingId.in(ids))
-        .orderBy((booking) => booking.createdAt.desc())
-        .all();
-    }
+    // Fetch recent bookings, then filter by owner in JS to avoid loading 16k listings.
+    // Batch-fetch the listings for these bookings to avoid N+1.
+    const recentBookings = await db.orm.liveBnb.Booking
+      .orderBy((b) => b.createdAt.desc())
+      .limit(200)
+      .all();
+    const listingIds = [...new Set(recentBookings.map((b) => b.listingId))];
+    const listingsForCheck =
+      listingIds.length > 0
+        ? await db.orm.liveBnb.Listing.where((l) => l.id.in(listingIds)).all()
+        : [];
+    const listingOwnerMap = new Map(listingsForCheck.map((l) => [l.id, l.ownerId]));
+    incoming = recentBookings.filter((b) => listingOwnerMap.get(b.listingId) === me.id);
   }
+  const hasMoreIncoming = incoming.length > ACTIVITY_PAGE_SIZE;
+  const incomingTrimmed = incoming.slice(0, ACTIVITY_PAGE_SIZE);
 
-  const listingIds = [...new Set([...myBookings, ...incoming].map((booking) => booking.listingId))];
-  const renterIds = [...new Set(incoming.map((booking) => booking.renterId))];
+  const listingIds = [...new Set([...myBookings, ...incomingTrimmed].map((booking) => booking.listingId))];
+  const renterIds = [...new Set(incomingTrimmed.map((booking) => booking.renterId))];
 
   const listings =
     listingIds.length > 0
@@ -78,7 +98,7 @@ async function ActivityContent() {
   const renterById = new Map(renters.map((renter) => [renter.id, renter]));
   const today = todayISO();
 
-  const pendingIncoming = incoming.filter((booking) => booking.status === "PENDING");
+  const pendingIncoming = incomingTrimmed.filter((booking) => booking.status === "PENDING");
 
   return (
     <>
@@ -94,78 +114,86 @@ async function ActivityContent() {
             <Inbox size={15} /> Requests on your listings
             {pendingIncoming.length > 0 && <span className="erp-badge">{pendingIncoming.length} pending</span>}
           </h3>
-          {incoming.length === 0 ? (
+          {incomingTrimmed.length === 0 ? (
             <p className="erp-muted">No booking requests yet. They will appear here when renters book your homes.</p>
           ) : (
-            <div className="erp-list">
-              {incoming.map((booking) => {
-                const listing = listingById.get(booking.listingId);
-                const renter = renterById.get(booking.renterId);
-                const renterName = renter?.name?.trim() || "Renter";
-                const cover = listing?.photos[0]?.url ?? null;
-                const nights = nightsBetween(booking.checkIn, booking.checkOut);
-                return (
-                  <article className="erp-card book-row" key={booking.id}>
-                    {cover ? (
-                      // eslint-disable-next-line @next/next/no-img-element
-                      <img className="book-cover" src={cover} alt="" loading="lazy" />
-                    ) : (
-                      <span className="book-cover book-cover-empty" aria-hidden="true">
-                        <Building2 size={22} />
-                      </span>
-                    )}
-                    <div className="book-main">
-                      <div className="book-top">
-                        <strong>{listing?.title ?? "Deleted listing"}</strong>
-                        <span className={`book-status book-status-${booking.status}`}>
-                          {statusLabel(booking.status)}
+            <>
+              <div className="erp-list">
+                {incomingTrimmed.map((booking) => {
+                  const listing = listingById.get(booking.listingId);
+                  const renter = renterById.get(booking.renterId);
+                  const renterName = renter?.name?.trim() || "Renter";
+                  const cover = listing?.photos[0]?.url ?? null;
+                  const nights = nightsBetween(booking.checkIn, booking.checkOut);
+                  return (
+                    <article className="erp-card book-row" key={booking.id}>
+                      {cover ? (
+                        // eslint-disable-next-line @next/next/no-img-element
+                        <img className="book-cover" src={cover} alt="" loading="lazy" />
+                      ) : (
+                        <span className="book-cover book-cover-empty" aria-hidden="true">
+                          <Building2 size={22} />
                         </span>
-                      </div>
-                      <p className="book-person">
-                        <span className="book-mini-avatar">{initialsFor(renter?.name ?? null, "")}</span>
-                        {renter ? (
-                          <Link className="book-person-link" href={`/users/${renter.id}`}>
-                            {renterName}
-                          </Link>
-                        ) : (
-                          renterName
-                        )}
-                        {renter?.phone && (
-                          <a className="book-phone" href={`tel:${renter.phone.replace(/\s+/g, "")}`}>
-                            <Phone size={12} /> {renter.phone}
-                          </a>
-                        )}
-                      </p>
-                      <ul className="book-facts">
-                        <li>
-                          <span>Check-in</span>
-                          <strong>{formatDay(booking.checkIn)}</strong>
-                        </li>
-                        <li>
-                          <span>Check-out</span>
-                          <strong>{formatDay(booking.checkOut)}</strong>
-                        </li>
-                        <li>
-                          <span>Stay</span>
-                          <strong>
-                            {nights} night{nights === 1 ? "" : "s"}
-                          </strong>
-                        </li>
-                        <li>
-                          <span>Total</span>
-                          <strong>৳{booking.totalAmount.toLocaleString()}</strong>
-                        </li>
-                      </ul>
-                      {booking.renterNote && <p className="book-note">“{booking.renterNote}”</p>}
-                      {booking.status === "PENDING" && <RespondToBookingForm bookingId={booking.id} />}
-                      {booking.status === "DECLINED" && booking.declineReason && (
-                        <p className="erp-muted">Declined: {booking.declineReason}</p>
                       )}
-                    </div>
-                  </article>
-                );
-              })}
-            </div>
+                      <div className="book-main">
+                        <div className="book-top">
+                          <strong>{listing?.title ?? "Deleted listing"}</strong>
+                          <span className={`book-status book-status-${booking.status}`}>
+                            {statusLabel(booking.status)}
+                          </span>
+                        </div>
+                        <p className="book-person">
+                          <span className="book-mini-avatar">{initialsFor(renter?.name ?? null, "")}</span>
+                          {renter ? (
+                            <Link className="book-person-link" href={`/users/${renter.id}`}>
+                              {renterName}
+                            </Link>
+                          ) : (
+                            renterName
+                          )}
+                          {renter?.phone && (
+                            <a className="book-phone" href={`tel:${renter.phone.replace(/\s+/g, "")}`}>
+                              <Phone size={12} /> {renter.phone}
+                            </a>
+                          )}
+                        </p>
+                        <ul className="book-facts">
+                          <li>
+                            <span>Check-in</span>
+                            <strong>{formatDay(booking.checkIn)}</strong>
+                          </li>
+                          <li>
+                            <span>Check-out</span>
+                            <strong>{formatDay(booking.checkOut)}</strong>
+                          </li>
+                          <li>
+                            <span>Stay</span>
+                            <strong>
+                              {nights} night{nights === 1 ? "" : "s"}
+                            </strong>
+                          </li>
+                          <li>
+                            <span>Total</span>
+                            <strong>৳{booking.totalAmount.toLocaleString()}</strong>
+                          </li>
+                        </ul>
+                        {booking.renterNote && <p className="book-note">“{booking.renterNote}”</p>}
+                        {booking.status === "PENDING" && <RespondToBookingForm bookingId={booking.id} />}
+                        {booking.status === "DECLINED" && booking.declineReason && (
+                          <p className="erp-muted">Declined: {booking.declineReason}</p>
+                        )}
+                      </div>
+                    </article>
+                  );
+                })}
+              </div>
+              <Pager
+                page={page}
+                totalPages={hasMoreIncoming ? page + 1 : page}
+                hrefFor={(next) => `/profile/activity?page=${next}`}
+                label="Incoming booking pages"
+              />
+            </>
           )}
         </section>
       )}
@@ -186,96 +214,104 @@ async function ActivityContent() {
             }
           />
         ) : (
-          <div className="erp-list">
-            {myBookings.map((booking) => {
-              const listing = listingById.get(booking.listingId);
-              const cover = listing?.photos[0]?.url ?? null;
-              const nights = nightsBetween(booking.checkIn, booking.checkOut);
-              const perDay = Math.max(1, Math.round(booking.monthlyRentSnapshot / 30));
-              const cancellable =
-                (booking.status === "PENDING" || booking.status === "APPROVED") &&
-                booking.checkIn.slice(0, 10) > today;
-              return (
-                <article className="erp-card book-row" key={booking.id}>
-                  {cover ? (
-                    // eslint-disable-next-line @next/next/no-img-element
-                    <img className="book-cover" src={cover} alt="" loading="lazy" />
-                  ) : (
-                    <span className="book-cover book-cover-empty" aria-hidden="true">
-                      <Building2 size={22} />
-                    </span>
-                  )}
-                  <div className="book-main">
-                    <div className="book-top">
-                      <strong>
-                        {listing ? (
-                          <Link className="book-title-link" href={`/property/${listing.id}`}>
-                            {listing.title}
-                          </Link>
-                        ) : (
-                          "Deleted listing"
-                        )}
-                      </strong>
-                      <span className={`book-status book-status-${booking.status}`}>
-                        {statusLabel(booking.status)}
+          <>
+            <div className="erp-list">
+              {myBookings.map((booking) => {
+                const listing = listingById.get(booking.listingId);
+                const cover = listing?.photos[0]?.url ?? null;
+                const nights = nightsBetween(booking.checkIn, booking.checkOut);
+                const perDay = Math.max(1, Math.round(booking.monthlyRentSnapshot / 30));
+                const cancellable =
+                  (booking.status === "PENDING" || booking.status === "APPROVED") &&
+                  booking.checkIn.slice(0, 10) > today;
+                return (
+                  <article className="erp-card book-row" key={booking.id}>
+                    {cover ? (
+                      // eslint-disable-next-line @next/next/no-img-element
+                      <img className="book-cover" src={cover} alt="" loading="lazy" />
+                    ) : (
+                      <span className="book-cover book-cover-empty" aria-hidden="true">
+                        <Building2 size={22} />
                       </span>
-                    </div>
-                    {listing && (
-                      <p className="book-loc">
-                        <MapPin size={13} />
-                        {listing.area}, {listing.city}
-                        <span className="book-loc-sep">·</span>
-                        <BedDouble size={13} />
-                        {listing.bedrooms} {listing.bedrooms === 1 ? "Bed" : "Beds"}
-                      </p>
                     )}
-                    <ul className="book-facts">
-                      <li>
-                        <span>Check-in</span>
-                        <strong>{formatDay(booking.checkIn)}</strong>
-                      </li>
-                      <li>
-                        <span>Check-out</span>
-                        <strong>{formatDay(booking.checkOut)}</strong>
-                      </li>
-                      <li>
-                        <span>Stay</span>
+                    <div className="book-main">
+                      <div className="book-top">
                         <strong>
-                          {nights} night{nights === 1 ? "" : "s"}
+                          {listing ? (
+                            <Link className="book-title-link" href={`/property/${listing.id}`}>
+                              {listing.title}
+                            </Link>
+                          ) : (
+                            "Deleted listing"
+                          )}
                         </strong>
-                      </li>
-                      <li>
-                        <span>Rate</span>
-                        <strong>৳{perDay.toLocaleString()}/day</strong>
-                      </li>
-                      <li>
-                        <span>Total</span>
-                        <strong>৳{booking.totalAmount.toLocaleString()}</strong>
-                      </li>
-                      {(booking.advanceAmount ?? 0) > 0 && (
+                        <span className={`book-status book-status-${booking.status}`}>
+                          {statusLabel(booking.status)}
+                        </span>
+                      </div>
+                      {listing && (
+                        <p className="book-loc">
+                          <MapPin size={13} />
+                          {listing.area}, {listing.city}
+                          <span className="book-loc-sep">·</span>
+                          <BedDouble size={13} />
+                          {listing.bedrooms} {listing.bedrooms === 1 ? "Bed" : "Beds"}
+                        </p>
+                      )}
+                      <ul className="book-facts">
                         <li>
-                          <span>Advance</span>
-                          <strong>৳{(booking.advanceAmount ?? 0).toLocaleString()}</strong>
+                          <span>Check-in</span>
+                          <strong>{formatDay(booking.checkIn)}</strong>
                         </li>
+                        <li>
+                          <span>Check-out</span>
+                          <strong>{formatDay(booking.checkOut)}</strong>
+                        </li>
+                        <li>
+                          <span>Stay</span>
+                          <strong>
+                            {nights} night{nights === 1 ? "" : "s"}
+                          </strong>
+                        </li>
+                        <li>
+                          <span>Rate</span>
+                          <strong>৳{perDay.toLocaleString()}/day</strong>
+                        </li>
+                        <li>
+                          <span>Total</span>
+                          <strong>৳{booking.totalAmount.toLocaleString()}</strong>
+                        </li>
+                        {(booking.advanceAmount ?? 0) > 0 && (
+                          <li>
+                            <span>Advance</span>
+                            <strong>৳{(booking.advanceAmount ?? 0).toLocaleString()}</strong>
+                          </li>
+                        )}
+                      </ul>
+                      <p className="book-requested">
+                        Requested {formatDateTime(booking.createdAt)}
+                        {booking.status === "APPROVED" && booking.approvedAt && (
+                          <> · Approved {formatDateTime(booking.approvedAt)}</>
+                        )}
+                      </p>
+                      {booking.status === "DECLINED" && booking.declineReason && (
+                        <p className="erp-muted">Host&apos;s reason: {booking.declineReason}</p>
                       )}
-                    </ul>
-                    <p className="book-requested">
-                      Requested {formatDateTime(booking.createdAt)}
-                      {booking.status === "APPROVED" && booking.approvedAt && (
-                        <> · Approved {formatDateTime(booking.approvedAt)}</>
+                      {cancellable && (
+                        <CancelBookingButton bookingId={booking.id} title={listing?.title ?? "this stay"} />
                       )}
-                    </p>
-                    {booking.status === "DECLINED" && booking.declineReason && (
-                      <p className="erp-muted">Host&apos;s reason: {booking.declineReason}</p>
-                    )}
-                    {cancellable && (
-                      <CancelBookingButton bookingId={booking.id} title={listing?.title ?? "this stay"} />
-                    )}
-                  </div>
-                </article>
-              );
-            })}
-          </div>
+                    </div>
+                  </article>
+                );
+              })}
+            </div>
+            <Pager
+              page={page}
+              totalPages={hasMoreRenter ? page + 1 : page}
+              hrefFor={(next) => `/profile/activity?page=${next}`}
+              label="Trip pages"
+            />
+          </>
         )}
       </section>
 

@@ -1,0 +1,304 @@
+[
+  {
+    "id": "dropTable.AuditLog",
+    "label": "Drop table \"AuditLog\"",
+    "operationClass": "destructive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "liveBnb",
+        "objectType": "table",
+        "name": "AuditLog"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure table \"AuditLog\" exists",
+        "sql": "SELECT (to_regclass($1)) IS NOT NULL AS \"result\"",
+        "params": [
+          "\"liveBnb\".\"AuditLog\""
+        ]
+      }
+    ],
+    "execute": [
+      {
+        "description": "drop table \"AuditLog\"",
+        "sql": "DROP TABLE \"liveBnb\".\"AuditLog\""
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify table \"AuditLog\" does not exist",
+        "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
+        "params": [
+          "\"liveBnb\".\"AuditLog\""
+        ]
+      }
+    ]
+  },
+  {
+    "id": "dropTable.AvailabilityBlock",
+    "label": "Drop table \"AvailabilityBlock\"",
+    "operationClass": "destructive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "liveBnb",
+        "objectType": "table",
+        "name": "AvailabilityBlock"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure table \"AvailabilityBlock\" exists",
+        "sql": "SELECT (to_regclass($1)) IS NOT NULL AS \"result\"",
+        "params": [
+          "\"liveBnb\".\"AvailabilityBlock\""
+        ]
+      }
+    ],
+    "execute": [
+      {
+        "description": "drop table \"AvailabilityBlock\"",
+        "sql": "DROP TABLE \"liveBnb\".\"AvailabilityBlock\""
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify table \"AvailabilityBlock\" does not exist",
+        "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
+        "params": [
+          "\"liveBnb\".\"AvailabilityBlock\""
+        ]
+      }
+    ]
+  },
+  {
+    "id": "dropTable.Favorite",
+    "label": "Drop table \"Favorite\"",
+    "operationClass": "destructive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "liveBnb",
+        "objectType": "table",
+        "name": "Favorite"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure table \"Favorite\" exists",
+        "sql": "SELECT (to_regclass($1)) IS NOT NULL AS \"result\"",
+        "params": [
+          "\"liveBnb\".\"Favorite\""
+        ]
+      }
+    ],
+    "execute": [
+      {
+        "description": "drop table \"Favorite\"",
+        "sql": "DROP TABLE \"liveBnb\".\"Favorite\""
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify table \"Favorite\" does not exist",
+        "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
+        "params": [
+          "\"liveBnb\".\"Favorite\""
+        ]
+      }
+    ]
+  },
+  {
+    "id": "dropTable.ListingReport",
+    "label": "Drop table \"ListingReport\"",
+    "operationClass": "destructive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "liveBnb",
+        "objectType": "table",
+        "name": "ListingReport"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure table \"ListingReport\" exists",
+        "sql": "SELECT (to_regclass($1)) IS NOT NULL AS \"result\"",
+        "params": [
+          "\"liveBnb\".\"ListingReport\""
+        ]
+      }
+    ],
+    "execute": [
+      {
+        "description": "drop table \"ListingReport\"",
+        "sql": "DROP TABLE \"liveBnb\".\"ListingReport\""
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify table \"ListingReport\" does not exist",
+        "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
+        "params": [
+          "\"liveBnb\".\"ListingReport\""
+        ]
+      }
+    ]
+  },
+  {
+    "id": "dropTable.Review",
+    "label": "Drop table \"Review\"",
+    "operationClass": "destructive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "liveBnb",
+        "objectType": "table",
+        "name": "Review"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure table \"Review\" exists",
+        "sql": "SELECT (to_regclass($1)) IS NOT NULL AS \"result\"",
+        "params": [
+          "\"liveBnb\".\"Review\""
+        ]
+      }
+    ],
+    "execute": [
+      {
+        "description": "drop table \"Review\"",
+        "sql": "DROP TABLE \"liveBnb\".\"Review\""
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify table \"Review\" does not exist",
+        "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
+        "params": [
+          "\"liveBnb\".\"Review\""
+        ]
+      }
+    ]
+  },
+  {
+    "id": "index.Booking.booking_listing_status_1b030a2f",
+    "label": "Create index \"booking_listing_status_1b030a2f\" on \"Booking\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "liveBnb",
+        "objectType": "index",
+        "name": "booking_listing_status_1b030a2f",
+        "table": "Booking"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure index \"booking_listing_status_1b030a2f\" does not exist",
+        "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
+        "params": [
+          "\"liveBnb\".\"booking_listing_status_1b030a2f\""
+        ]
+      }
+    ],
+    "execute": [
+      {
+        "description": "create index \"booking_listing_status_1b030a2f\"",
+        "sql": "CREATE INDEX \"booking_listing_status_1b030a2f\" ON \"liveBnb\".\"Booking\" (\"listingId\", \"status\")",
+        "params": []
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify index \"booking_listing_status_1b030a2f\" exists",
+        "sql": "SELECT (to_regclass($1)) IS NOT NULL AS \"result\"",
+        "params": [
+          "\"liveBnb\".\"booking_listing_status_1b030a2f\""
+        ]
+      }
+    ]
+  },
+  {
+    "id": "index.Booking.booking_renter_created_63c3c59b",
+    "label": "Create index \"booking_renter_created_63c3c59b\" on \"Booking\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "liveBnb",
+        "objectType": "index",
+        "name": "booking_renter_created_63c3c59b",
+        "table": "Booking"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure index \"booking_renter_created_63c3c59b\" does not exist",
+        "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
+        "params": [
+          "\"liveBnb\".\"booking_renter_created_63c3c59b\""
+        ]
+      }
+    ],
+    "execute": [
+      {
+        "description": "create index \"booking_renter_created_63c3c59b\"",
+        "sql": "CREATE INDEX \"booking_renter_created_63c3c59b\" ON \"liveBnb\".\"Booking\" (\"renterId\", \"createdAt\")",
+        "params": []
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify index \"booking_renter_created_63c3c59b\" exists",
+        "sql": "SELECT (to_regclass($1)) IS NOT NULL AS \"result\"",
+        "params": [
+          "\"liveBnb\".\"booking_renter_created_63c3c59b\""
+        ]
+      }
+    ]
+  },
+  {
+    "id": "index.Listing.listing_owner_updated_f0929af1",
+    "label": "Create index \"listing_owner_updated_f0929af1\" on \"Listing\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "liveBnb",
+        "objectType": "index",
+        "name": "listing_owner_updated_f0929af1",
+        "table": "Listing"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure index \"listing_owner_updated_f0929af1\" does not exist",
+        "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
+        "params": [
+          "\"liveBnb\".\"listing_owner_updated_f0929af1\""
+        ]
+      }
+    ],
+    "execute": [
+      {
+        "description": "create index \"listing_owner_updated_f0929af1\"",
+        "sql": "CREATE INDEX \"listing_owner_updated_f0929af1\" ON \"liveBnb\".\"Listing\" (\"ownerId\", \"updatedAt\")",
+        "params": []
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify index \"listing_owner_updated_f0929af1\" exists",
+        "sql": "SELECT (to_regclass($1)) IS NOT NULL AS \"result\"",
+        "params": [
+          "\"liveBnb\".\"listing_owner_updated_f0929af1\""
+        ]
+      }
+    ]
+  }
+]

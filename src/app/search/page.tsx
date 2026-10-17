@@ -3,8 +3,7 @@ import { Suspense } from "react";
 import { connection } from "next/server";
 import { Building2, SearchX, SlidersHorizontal } from "lucide-react";
 import { SiteFooter, SiteHeader } from "@/components/site-header";
-import { ListingCard } from "@/components/listing-card";
-import { Pager } from "@/components/pager";
+import { ListingCard } from "@/components/listing-card"; 
 import {
   LISTING_PAGE_SIZE,
   searchListings,
@@ -191,7 +190,7 @@ export default async function SearchPage({
 
 async function SearchResults({ filters }: { filters: ListingFilters }) {
   await connection();
-  const { rows, hasNext } = await searchListings(filters);
+  const { rows, hasNext, totalPages } = await searchListings(filters);
   const from = rows.length === 0 ? 0 : (filters.page - 1) * LISTING_PAGE_SIZE + 1;
 
   return (
@@ -225,7 +224,7 @@ async function SearchResults({ filters }: { filters: ListingFilters }) {
             ) : (
               <span />
             )}
-            <span className="browse-page-note">Page {filters.page}</span>
+            <span className="browse-page-note">Page {filters.page} of {totalPages}</span>
             {hasNext ? (
               <Link className="erp-btn erp-btn-ghost" href={toHref(filters, { page: filters.page + 1 })}>
                 Next →
