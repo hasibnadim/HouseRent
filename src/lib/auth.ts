@@ -20,7 +20,7 @@ export const authOptions: NextAuthOptions = {
 
         if (!email || !password) return null;
 
-        const user = await db.orm.mytour.User.where({ email }).first();
+        const user = await db.orm.liveBnb.User.where({ email }).first();
         if (!user?.passwordHash || user.isSuspended) return null;
 
         const isValidPassword = await compare(password, user.passwordHash);

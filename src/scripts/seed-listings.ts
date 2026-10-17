@@ -101,15 +101,15 @@ function sampleAmenities(): string[] {
 }
 
 async function ensureOwner() {
-  const existing = await db.orm.mytour.User.where({ email: OWNER_EMAIL }).first();
+  const existing = await db.orm.liveBnb.User.where({ email: OWNER_EMAIL }).first();
   if (existing) {
     if (existing.role !== "OWNER") {
-      await db.orm.mytour.User.where({ email: OWNER_EMAIL }).update({ role: "OWNER" });
+      await db.orm.liveBnb.User.where({ email: OWNER_EMAIL }).update({ role: "OWNER" });
     }
     return { id: existing.id, created: false, password: null as string | null };
   }
   const password = randomBytes(9).toString("base64url");
-  const created = await db.orm.mytour.User.create({
+  const created = await db.orm.liveBnb.User.create({
     name: "Nadim Owner",
     email: OWNER_EMAIL,
     passwordHash: await hash(password, 12),
@@ -136,7 +136,7 @@ async function seedOne(ownerId: string, index: number) {
   const photoOffset = Math.floor(rand() * PHOTOS.length);
   const urls = Array.from({ length: photoCount }, (_, i) => PHOTOS[(photoOffset + i * 3) % PHOTOS.length]!);
 
-  const listing = await db.orm.mytour.Listing.create({
+  const listing = await db.orm.liveBnb.Listing.create({
     ownerId: ownerId as never,
     title: `${adjective} ${bedrooms}-bed ${typeLabel} in ${place.area}`,
     description:
@@ -162,7 +162,7 @@ async function seedOne(ownerId: string, index: number) {
   });
 
   for (const [sortOrder, url] of urls.entries()) {
-    await db.orm.mytour.ListingPhoto.create({ listingId: listing.id, url, sortOrder });
+    await db.orm.liveBnb.ListingPhoto.create({ listingId: listing.id, url, sortOrder });
   }
 }
 
@@ -173,7 +173,7 @@ async function main() {
     console.log(`Demo password (change it after first login): ${owner.password}`);
   }
 
-  const existing = await db.orm.mytour.Listing.where({ ownerId: owner.id }).select("id").all();
+  const existing = await db.orm.liveBnb.Listing.where({ ownerId: owner.id }).select("id").all();
   console.log(`Existing listings by owner: ${existing.length}`);
   if (existing.length >= TARGET_COUNT) {
     console.log("Target already reached — nothing to seed.");
@@ -199,7 +199,7 @@ async function main() {
     if (failed > 50) throw new Error("Too many failures — aborting.");
   }
 
-  const sample = await db.orm.mytour.Listing.where({ ownerId: owner.id })
+  const sample = await db.orm.liveBnb.Listing.where({ ownerId: owner.id })
     .orderBy((listing) => listing.createdAt.desc())
     .limit(1)
     .all();

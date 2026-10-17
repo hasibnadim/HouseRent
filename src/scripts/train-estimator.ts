@@ -158,7 +158,7 @@ function toVector(r: Row): number[] {
 
 async function main() {
   console.log("Fetching listings from database...");
-  const listings = await db.orm.mytour.Listing.select(
+  const listings = await db.orm.liveBnb.Listing.select(
     "area", "sizeSqft", "bedrooms", "bathrooms", "propertyType", "furnished", "amenities", "monthlyRent",
   ).all();
 

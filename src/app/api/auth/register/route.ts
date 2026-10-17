@@ -41,20 +41,20 @@ export async function POST(request: Request) {
   }
 
   try {
-    const existingUser = await db.orm.mytour.User.where({ email }).first();
+    const existingUser = await db.orm.liveBnb.User.where({ email }).first();
     if (existingUser) {
       return NextResponse.json({ error: "An account with this email already exists." }, { status: 409 });
     }
 
     if (phone) {
-      const existingPhone = await db.orm.mytour.User.where({ phone }).first();
+      const existingPhone = await db.orm.liveBnb.User.where({ phone }).first();
       if (existingPhone) {
         return NextResponse.json({ error: "An account with this phone number already exists." }, { status: 409 });
       }
     }
 
     const passwordHash = await hash(password, 12);
-    await db.orm.mytour.User.create({
+    await db.orm.liveBnb.User.create({
       name,
       email,
       passwordHash,

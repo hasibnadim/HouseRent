@@ -36,12 +36,12 @@ async function HostingContent({ searchParams }: { searchParams: Promise<Record<s
     );
   }
 
-  const counted = await db.orm.mytour.Listing.where({ ownerId: user.id }).select("id").all();
+  const counted = await db.orm.liveBnb.Listing.where({ ownerId: user.id }).select("id").all();
   const total = counted.length;
   const totalPages = Math.max(1, Math.ceil(total / HOSTING_PAGE_SIZE));
   const currentPage = Math.min(page, totalPages);
 
-  const fullListings = await db.orm.mytour.Listing.where({ ownerId: user.id })
+  const fullListings = await db.orm.liveBnb.Listing.where({ ownerId: user.id })
     .include("photos", (photos) => photos.orderBy((photo) => photo.sortOrder.asc()).limit(1))
     .orderBy((listing) => listing.updatedAt.desc())
     .limit(HOSTING_PAGE_SIZE)

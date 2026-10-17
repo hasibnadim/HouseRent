@@ -17,14 +17,14 @@ export default async function UserProfilePage({ params }: { params: Promise<{ id
     redirect("/login");
   }
 
-  const user = await db.orm.mytour.User.where({ id: id as Char<36> }).first();
+  const user = await db.orm.liveBnb.User.where({ id: id as Char<36> }).first();
   if (!user || user.isSuspended) {
     notFound();
   }
 
   const [listings, bookings] = await Promise.all([
-    db.orm.mytour.Listing.where({ ownerId: user.id }).select("id").all(),
-    db.orm.mytour.Booking.where({ renterId: user.id }).select("id").all(),
+    db.orm.liveBnb.Listing.where({ ownerId: user.id }).select("id").all(),
+    db.orm.liveBnb.Booking.where({ renterId: user.id }).select("id").all(),
   ]);
 
   const isSelf = session.user.id === String(user.id);

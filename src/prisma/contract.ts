@@ -1,6 +1,8 @@
 import { defineContract, enumType, member } from '@prisma/orm-postgres/contract-builder';
 
-export const contract = defineContract({ namespaces: ['mytour'] }, ({ field, model, rel }) => {
+const NAMESPACE = 'liveBnb';
+
+export const contract = defineContract({ namespaces: [NAMESPACE] }, ({ field, model, rel }) => {
   const UserRole = enumType(
     'UserRole',
     { codecId: 'pg/text@1' },
@@ -42,7 +44,7 @@ export const contract = defineContract({ namespaces: ['mytour'] }, ({ field, mod
   );
 
   const User = model('User', {
-    namespace: 'mytour',
+    namespace: NAMESPACE,
     fields: {
       id: field.id.uuidv7String(),
       name: field.text().optional(),
@@ -60,7 +62,7 @@ export const contract = defineContract({ namespaces: ['mytour'] }, ({ field, mod
   });
 
   const Account = model('Account', {
-    namespace: 'mytour',
+    namespace: NAMESPACE,
     fields: {
       id: field.id.uuidv7String(),
       userId: field.uuidString(),
@@ -84,7 +86,7 @@ export const contract = defineContract({ namespaces: ['mytour'] }, ({ field, mod
   }));
 
   const Session = model('Session', {
-    namespace: 'mytour',
+    namespace: NAMESPACE,
     fields: {
       id: field.id.uuidv7String(),
       sessionToken: field.text().unique(),
@@ -95,7 +97,7 @@ export const contract = defineContract({ namespaces: ['mytour'] }, ({ field, mod
   });
 
   const VerificationToken = model('VerificationToken', {
-    namespace: 'mytour',
+    namespace: NAMESPACE,
     fields: {
       id: field.id.uuidv7String(),
       identifier: field.text(),
@@ -107,7 +109,7 @@ export const contract = defineContract({ namespaces: ['mytour'] }, ({ field, mod
   }));
 
   const Listing = model('Listing', {
-    namespace: 'mytour',
+    namespace: NAMESPACE,
     fields: {
       id: field.id.uuidv7String(),
       ownerId: field.uuidString(),
@@ -141,7 +143,7 @@ export const contract = defineContract({ namespaces: ['mytour'] }, ({ field, mod
   }));
 
   const ListingPhoto = model('ListingPhoto', {
-    namespace: 'mytour',
+    namespace: NAMESPACE,
     fields: {
       id: field.id.uuidv7String(),
       listingId: field.uuidString(),
@@ -155,7 +157,7 @@ export const contract = defineContract({ namespaces: ['mytour'] }, ({ field, mod
   }));
 
   const AvailabilityBlock = model('AvailabilityBlock', {
-    namespace: 'mytour',
+    namespace: NAMESPACE,
     fields: {
       id: field.id.uuidv7String(),
       listingId: field.uuidString(),
@@ -169,7 +171,7 @@ export const contract = defineContract({ namespaces: ['mytour'] }, ({ field, mod
   }));
 
   const Booking = model('Booking', {
-    namespace: 'mytour',
+    namespace: NAMESPACE,
     fields: {
       id: field.id.uuidv7String(),
       listingId: field.uuidString(),
@@ -199,7 +201,7 @@ export const contract = defineContract({ namespaces: ['mytour'] }, ({ field, mod
   }));
 
   const Favorite = model('Favorite', {
-    namespace: 'mytour',
+    namespace: NAMESPACE,
     fields: {
       id: field.id.uuidv7String(),
       userId: field.uuidString(),
@@ -211,7 +213,7 @@ export const contract = defineContract({ namespaces: ['mytour'] }, ({ field, mod
   }));
 
   const Review = model('Review', {
-    namespace: 'mytour',
+    namespace: NAMESPACE,
     fields: {
       id: field.id.uuidv7String(),
       bookingId: field.uuidString(),
@@ -229,7 +231,7 @@ export const contract = defineContract({ namespaces: ['mytour'] }, ({ field, mod
   }));
 
   const ListingReport = model('ListingReport', {
-    namespace: 'mytour',
+    namespace: NAMESPACE,
     fields: {
       id: field.id.uuidv7String(),
       listingId: field.uuidString(),
@@ -250,7 +252,7 @@ export const contract = defineContract({ namespaces: ['mytour'] }, ({ field, mod
   }));
 
   const AuditLog = model('AuditLog', {
-    namespace: 'mytour',
+    namespace: NAMESPACE,
     fields: {
       id: field.id.uuidv7String(),
       actorId: field.uuidString(),

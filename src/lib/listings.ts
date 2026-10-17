@@ -39,7 +39,7 @@ function likePattern(value: string): string {
 
 export async function searchListings(filters: ListingFilters) {
   const base = () => {
-    let listings = db.orm.mytour.Listing.where((listing) => listing.status.eq("PUBLISHED"));
+    let listings = db.orm.liveBnb.Listing.where((listing) => listing.status.eq("PUBLISHED"));
 
     if (filters.q) {
       const pattern = likePattern(filters.q);
@@ -110,7 +110,7 @@ export async function searchListings(filters: ListingFilters) {
 export type SearchListing = Awaited<ReturnType<typeof searchListings>>["rows"][number];
 
 export async function getPublishedListing(id: string) {
-  const listing = await db.orm.mytour.Listing.where({ id: id as Char<36> })
+  const listing = await db.orm.liveBnb.Listing.where({ id: id as Char<36> })
     .include("photos", (photos) => photos.orderBy((photo) => photo.sortOrder.asc()))
     .first();
 
@@ -118,9 +118,9 @@ export async function getPublishedListing(id: string) {
     return null;
   }
 
-  const owner = await db.orm.mytour.User.where({ id: listing.ownerId }).first();
+  const owner = await db.orm.liveBnb.User.where({ id: listing.ownerId }).first();
 
-  const activeBookings = await db.orm.mytour.Booking.where({ listingId: listing.id }).all();
+  const activeBookings = await db.orm.liveBnb.Booking.where({ listingId: listing.id }).all();
   const bookedRanges = activeBookings
     .filter((booking) => booking.status === "PENDING" || booking.status === "APPROVED")
     .map((booking) => ({
@@ -129,7 +129,7 @@ export async function getPublishedListing(id: string) {
     }))
     .sort((a, b) => (a.checkIn < b.checkIn ? -1 : 1));
 
-  const similar = await db.orm.mytour.Listing.where((row) => row.status.eq("PUBLISHED"))
+  const similar = await db.orm.liveBnb.Listing.where((row) => row.status.eq("PUBLISHED"))
     .where((row) => row.city.eq(listing.city))
     .where((row) => row.id.neq(listing.id))
     .include("photos", (photos) => photos.orderBy((photo) => photo.sortOrder.asc()).limit(1))

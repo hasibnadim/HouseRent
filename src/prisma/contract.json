@@ -6,56 +6,56 @@
   "roots": {
     "Account": {
       "model": "Account",
-      "namespace": "mytour"
+      "namespace": "liveBnb"
     },
     "AuditLog": {
       "model": "AuditLog",
-      "namespace": "mytour"
+      "namespace": "liveBnb"
     },
     "AvailabilityBlock": {
       "model": "AvailabilityBlock",
-      "namespace": "mytour"
+      "namespace": "liveBnb"
     },
     "Booking": {
       "model": "Booking",
-      "namespace": "mytour"
+      "namespace": "liveBnb"
     },
     "Favorite": {
       "model": "Favorite",
-      "namespace": "mytour"
+      "namespace": "liveBnb"
     },
     "Listing": {
       "model": "Listing",
-      "namespace": "mytour"
+      "namespace": "liveBnb"
     },
     "ListingPhoto": {
       "model": "ListingPhoto",
-      "namespace": "mytour"
+      "namespace": "liveBnb"
     },
     "ListingReport": {
       "model": "ListingReport",
-      "namespace": "mytour"
+      "namespace": "liveBnb"
     },
     "Review": {
       "model": "Review",
-      "namespace": "mytour"
+      "namespace": "liveBnb"
     },
     "Session": {
       "model": "Session",
-      "namespace": "mytour"
+      "namespace": "liveBnb"
     },
     "User": {
       "model": "User",
-      "namespace": "mytour"
+      "namespace": "liveBnb"
     },
     "VerificationToken": {
       "model": "VerificationToken",
-      "namespace": "mytour"
+      "namespace": "liveBnb"
     }
   },
   "domain": {
     "namespaces": {
-      "mytour": {
+      "liveBnb": {
         "models": {
           "Account": {
             "fields": {
@@ -192,7 +192,7 @@
                 },
                 "to": {
                   "model": "User",
-                  "namespace": "mytour"
+                  "namespace": "liveBnb"
                 }
               }
             },
@@ -247,7 +247,7 @@
                   "column": "userId"
                 }
               },
-              "namespaceId": "mytour",
+              "namespaceId": "liveBnb",
               "table": "Account"
             }
           },
@@ -323,7 +323,7 @@
                 },
                 "to": {
                   "model": "User",
-                  "namespace": "mytour"
+                  "namespace": "liveBnb"
                 }
               }
             },
@@ -351,7 +351,7 @@
                   "column": "targetType"
                 }
               },
-              "namespaceId": "mytour",
+              "namespaceId": "liveBnb",
               "table": "AuditLog"
             }
           },
@@ -420,7 +420,7 @@
                 },
                 "to": {
                   "model": "Listing",
-                  "namespace": "mytour"
+                  "namespace": "liveBnb"
                 }
               }
             },
@@ -445,7 +445,7 @@
                   "column": "startsAt"
                 }
               },
-              "namespaceId": "mytour",
+              "namespaceId": "liveBnb",
               "table": "AvailabilityBlock"
             }
           },
@@ -614,7 +614,7 @@
                 },
                 "to": {
                   "model": "Listing",
-                  "namespace": "mytour"
+                  "namespace": "liveBnb"
                 }
               },
               "renter": {
@@ -630,7 +630,7 @@
                 },
                 "to": {
                   "model": "User",
-                  "namespace": "mytour"
+                  "namespace": "liveBnb"
                 }
               },
               "reviews": {
@@ -645,7 +645,7 @@
                 },
                 "to": {
                   "model": "Review",
-                  "namespace": "mytour"
+                  "namespace": "liveBnb"
                 }
               }
             },
@@ -709,7 +709,7 @@
                   "column": "updatedAt"
                 }
               },
-              "namespaceId": "mytour",
+              "namespaceId": "liveBnb",
               "table": "Booking"
             }
           },
@@ -767,7 +767,7 @@
                 },
                 "to": {
                   "model": "Listing",
-                  "namespace": "mytour"
+                  "namespace": "liveBnb"
                 }
               },
               "user": {
@@ -783,7 +783,7 @@
                 },
                 "to": {
                   "model": "User",
-                  "namespace": "mytour"
+                  "namespace": "liveBnb"
                 }
               }
             },
@@ -802,7 +802,7 @@
                   "column": "userId"
                 }
               },
-              "namespaceId": "mytour",
+              "namespaceId": "liveBnb",
               "table": "Favorite"
             }
           },
@@ -997,7 +997,7 @@
                 },
                 "to": {
                   "model": "AvailabilityBlock",
-                  "namespace": "mytour"
+                  "namespace": "liveBnb"
                 }
               },
               "bookings": {
@@ -1012,7 +1012,7 @@
                 },
                 "to": {
                   "model": "Booking",
-                  "namespace": "mytour"
+                  "namespace": "liveBnb"
                 }
               },
               "favorites": {
@@ -1027,7 +1027,7 @@
                 },
                 "to": {
                   "model": "Favorite",
-                  "namespace": "mytour"
+                  "namespace": "liveBnb"
                 }
               },
               "owner": {
@@ -1043,7 +1043,7 @@
                 },
                 "to": {
                   "model": "User",
-                  "namespace": "mytour"
+                  "namespace": "liveBnb"
                 }
               },
               "photos": {
@@ -1058,7 +1058,7 @@
                 },
                 "to": {
                   "model": "ListingPhoto",
-                  "namespace": "mytour"
+                  "namespace": "liveBnb"
                 }
               },
               "reports": {
@@ -1073,7 +1073,7 @@
                 },
                 "to": {
                   "model": "ListingReport",
-                  "namespace": "mytour"
+                  "namespace": "liveBnb"
                 }
               }
             },
@@ -1146,7 +1146,7 @@
                   "column": "updatedAt"
                 }
               },
-              "namespaceId": "mytour",
+              "namespaceId": "liveBnb",
               "table": "Listing"
             }
           },
@@ -1215,7 +1215,7 @@
                 },
                 "to": {
                   "model": "Listing",
-                  "namespace": "mytour"
+                  "namespace": "liveBnb"
                 }
               }
             },
@@ -1240,7 +1240,7 @@
                   "column": "url"
                 }
               },
-              "namespaceId": "mytour",
+              "namespaceId": "liveBnb",
               "table": "ListingPhoto"
             }
           },
@@ -1349,7 +1349,7 @@
                 },
                 "to": {
                   "model": "Listing",
-                  "namespace": "mytour"
+                  "namespace": "liveBnb"
                 }
               },
               "reporter": {
@@ -1365,7 +1365,7 @@
                 },
                 "to": {
                   "model": "User",
-                  "namespace": "mytour"
+                  "namespace": "liveBnb"
                 }
               },
               "resolvedBy": {
@@ -1381,7 +1381,7 @@
                 },
                 "to": {
                   "model": "User",
-                  "namespace": "mytour"
+                  "namespace": "liveBnb"
                 }
               }
             },
@@ -1418,7 +1418,7 @@
                   "column": "updatedAt"
                 }
               },
-              "namespaceId": "mytour",
+              "namespaceId": "liveBnb",
               "table": "ListingReport"
             }
           },
@@ -1507,7 +1507,7 @@
                 },
                 "to": {
                   "model": "Booking",
-                  "namespace": "mytour"
+                  "namespace": "liveBnb"
                 }
               },
               "reviewee": {
@@ -1523,7 +1523,7 @@
                 },
                 "to": {
                   "model": "User",
-                  "namespace": "mytour"
+                  "namespace": "liveBnb"
                 }
               },
               "reviewer": {
@@ -1539,7 +1539,7 @@
                 },
                 "to": {
                   "model": "User",
-                  "namespace": "mytour"
+                  "namespace": "liveBnb"
                 }
               }
             },
@@ -1570,7 +1570,7 @@
                   "column": "updatedAt"
                 }
               },
-              "namespaceId": "mytour",
+              "namespaceId": "liveBnb",
               "table": "Review"
             }
           },
@@ -1632,7 +1632,7 @@
                 },
                 "to": {
                   "model": "User",
-                  "namespace": "mytour"
+                  "namespace": "liveBnb"
                 }
               }
             },
@@ -1654,7 +1654,7 @@
                   "column": "userId"
                 }
               },
-              "namespaceId": "mytour",
+              "namespaceId": "liveBnb",
               "table": "Session"
             }
           },
@@ -1767,7 +1767,7 @@
                 },
                 "to": {
                   "model": "Account",
-                  "namespace": "mytour"
+                  "namespace": "liveBnb"
                 }
               },
               "auditLogs": {
@@ -1782,7 +1782,7 @@
                 },
                 "to": {
                   "model": "AuditLog",
-                  "namespace": "mytour"
+                  "namespace": "liveBnb"
                 }
               },
               "bookings": {
@@ -1797,7 +1797,7 @@
                 },
                 "to": {
                   "model": "Booking",
-                  "namespace": "mytour"
+                  "namespace": "liveBnb"
                 }
               },
               "favorites": {
@@ -1812,7 +1812,7 @@
                 },
                 "to": {
                   "model": "Favorite",
-                  "namespace": "mytour"
+                  "namespace": "liveBnb"
                 }
               },
               "listings": {
@@ -1827,7 +1827,7 @@
                 },
                 "to": {
                   "model": "Listing",
-                  "namespace": "mytour"
+                  "namespace": "liveBnb"
                 }
               },
               "reports": {
@@ -1842,7 +1842,7 @@
                 },
                 "to": {
                   "model": "ListingReport",
-                  "namespace": "mytour"
+                  "namespace": "liveBnb"
                 }
               },
               "reportsResolved": {
@@ -1857,7 +1857,7 @@
                 },
                 "to": {
                   "model": "ListingReport",
-                  "namespace": "mytour"
+                  "namespace": "liveBnb"
                 }
               },
               "reviewsReceived": {
@@ -1872,7 +1872,7 @@
                 },
                 "to": {
                   "model": "Review",
-                  "namespace": "mytour"
+                  "namespace": "liveBnb"
                 }
               },
               "reviewsWritten": {
@@ -1887,7 +1887,7 @@
                 },
                 "to": {
                   "model": "Review",
-                  "namespace": "mytour"
+                  "namespace": "liveBnb"
                 }
               },
               "sessions": {
@@ -1902,7 +1902,7 @@
                 },
                 "to": {
                   "model": "Session",
-                  "namespace": "mytour"
+                  "namespace": "liveBnb"
                 }
               }
             },
@@ -1945,7 +1945,7 @@
                   "column": "updatedAt"
                 }
               },
-              "namespaceId": "mytour",
+              "namespaceId": "liveBnb",
               "table": "User"
             }
           },
@@ -1999,7 +1999,7 @@
                   "column": "token"
                 }
               },
-              "namespaceId": "mytour",
+              "namespaceId": "liveBnb",
               "table": "VerificationToken"
             }
           }
@@ -2115,7 +2115,7 @@
   },
   "storage": {
     "namespaces": {
-      "mytour": {
+      "liveBnb": {
         "entries": {
           "table": {
             "Account": {
@@ -2217,14 +2217,14 @@
                     "columns": [
                       "userId"
                     ],
-                    "namespaceId": "mytour",
+                    "namespaceId": "liveBnb",
                     "tableName": "Account"
                   },
                   "target": {
                     "columns": [
                       "id"
                     ],
-                    "namespaceId": "mytour",
+                    "namespaceId": "liveBnb",
                     "tableName": "User"
                   }
                 }
@@ -2365,14 +2365,14 @@
                     "columns": [
                       "listingId"
                     ],
-                    "namespaceId": "mytour",
+                    "namespaceId": "liveBnb",
                     "tableName": "AvailabilityBlock"
                   },
                   "target": {
                     "columns": [
                       "id"
                     ],
-                    "namespaceId": "mytour",
+                    "namespaceId": "liveBnb",
                     "tableName": "Listing"
                   }
                 }
@@ -2611,14 +2611,14 @@
                     "columns": [
                       "userId"
                     ],
-                    "namespaceId": "mytour",
+                    "namespaceId": "liveBnb",
                     "tableName": "Favorite"
                   },
                   "target": {
                     "columns": [
                       "id"
                     ],
-                    "namespaceId": "mytour",
+                    "namespaceId": "liveBnb",
                     "tableName": "User"
                   }
                 },
@@ -2631,14 +2631,14 @@
                     "columns": [
                       "listingId"
                     ],
-                    "namespaceId": "mytour",
+                    "namespaceId": "liveBnb",
                     "tableName": "Favorite"
                   },
                   "target": {
                     "columns": [
                       "id"
                     ],
-                    "namespaceId": "mytour",
+                    "namespaceId": "liveBnb",
                     "tableName": "Listing"
                   }
                 }
@@ -2923,14 +2923,14 @@
                     "columns": [
                       "listingId"
                     ],
-                    "namespaceId": "mytour",
+                    "namespaceId": "liveBnb",
                     "tableName": "ListingPhoto"
                   },
                   "target": {
                     "columns": [
                       "id"
                     ],
-                    "namespaceId": "mytour",
+                    "namespaceId": "liveBnb",
                     "tableName": "Listing"
                   }
                 }
@@ -3195,14 +3195,14 @@
                     "columns": [
                       "userId"
                     ],
-                    "namespaceId": "mytour",
+                    "namespaceId": "liveBnb",
                     "tableName": "Session"
                   },
                   "target": {
                     "columns": [
                       "id"
                     ],
-                    "namespaceId": "mytour",
+                    "namespaceId": "liveBnb",
                     "tableName": "User"
                   }
                 }
@@ -3385,7 +3385,7 @@
             }
           }
         },
-        "id": "mytour",
+        "id": "liveBnb",
         "kind": "postgres-schema"
       },
       "public": {
@@ -3442,10 +3442,10 @@
         "kind": "postgres-schema"
       }
     },
-    "storageHash": "8f895945e72e4f9fad8ab89a7e7c8c3a7169ad696ee5d69bc9ef8edafaced15b"
+    "storageHash": "1e0d04de4cb1b4588f91d6e44640d8e9c59bc6ff22cb1e4085b6bd49da231e49"
   },
   "execution": {
-    "executionHash": "fa0d96e5ea78976122412f3e00dadaebaecbeec33fe5760fa3e0ddd7f6858e0b",
+    "executionHash": "26019ffd50e359a9c226ce2513c027502871b129fc10af73463604d91efd9e17",
     "mutations": {
       "defaults": [
         {
@@ -3456,7 +3456,7 @@
           "ref": {
             "entry": "Account",
             "field": "createdAt",
-            "namespace": "mytour"
+            "namespace": "liveBnb"
           }
         },
         {
@@ -3467,7 +3467,7 @@
           "ref": {
             "entry": "Account",
             "field": "id",
-            "namespace": "mytour"
+            "namespace": "liveBnb"
           }
         },
         {
@@ -3482,7 +3482,7 @@
           "ref": {
             "entry": "Account",
             "field": "updatedAt",
-            "namespace": "mytour"
+            "namespace": "liveBnb"
           }
         },
         {
@@ -3493,7 +3493,7 @@
           "ref": {
             "entry": "AuditLog",
             "field": "createdAt",
-            "namespace": "mytour"
+            "namespace": "liveBnb"
           }
         },
         {
@@ -3504,7 +3504,7 @@
           "ref": {
             "entry": "AuditLog",
             "field": "id",
-            "namespace": "mytour"
+            "namespace": "liveBnb"
           }
         },
         {
@@ -3515,7 +3515,7 @@
           "ref": {
             "entry": "AvailabilityBlock",
             "field": "createdAt",
-            "namespace": "mytour"
+            "namespace": "liveBnb"
           }
         },
         {
@@ -3526,7 +3526,7 @@
           "ref": {
             "entry": "AvailabilityBlock",
             "field": "id",
-            "namespace": "mytour"
+            "namespace": "liveBnb"
           }
         },
         {
@@ -3537,7 +3537,7 @@
           "ref": {
             "entry": "Booking",
             "field": "createdAt",
-            "namespace": "mytour"
+            "namespace": "liveBnb"
           }
         },
         {
@@ -3548,7 +3548,7 @@
           "ref": {
             "entry": "Booking",
             "field": "id",
-            "namespace": "mytour"
+            "namespace": "liveBnb"
           }
         },
         {
@@ -3563,7 +3563,7 @@
           "ref": {
             "entry": "Booking",
             "field": "updatedAt",
-            "namespace": "mytour"
+            "namespace": "liveBnb"
           }
         },
         {
@@ -3574,7 +3574,7 @@
           "ref": {
             "entry": "Favorite",
             "field": "createdAt",
-            "namespace": "mytour"
+            "namespace": "liveBnb"
           }
         },
         {
@@ -3585,7 +3585,7 @@
           "ref": {
             "entry": "Favorite",
             "field": "id",
-            "namespace": "mytour"
+            "namespace": "liveBnb"
           }
         },
         {
@@ -3596,7 +3596,7 @@
           "ref": {
             "entry": "Listing",
             "field": "createdAt",
-            "namespace": "mytour"
+            "namespace": "liveBnb"
           }
         },
         {
@@ -3607,7 +3607,7 @@
           "ref": {
             "entry": "Listing",
             "field": "id",
-            "namespace": "mytour"
+            "namespace": "liveBnb"
           }
         },
         {
@@ -3622,7 +3622,7 @@
           "ref": {
             "entry": "Listing",
             "field": "updatedAt",
-            "namespace": "mytour"
+            "namespace": "liveBnb"
           }
         },
         {
@@ -3633,7 +3633,7 @@
           "ref": {
             "entry": "ListingPhoto",
             "field": "createdAt",
-            "namespace": "mytour"
+            "namespace": "liveBnb"
           }
         },
         {
@@ -3644,7 +3644,7 @@
           "ref": {
             "entry": "ListingPhoto",
             "field": "id",
-            "namespace": "mytour"
+            "namespace": "liveBnb"
           }
         },
         {
@@ -3655,7 +3655,7 @@
           "ref": {
             "entry": "ListingReport",
             "field": "createdAt",
-            "namespace": "mytour"
+            "namespace": "liveBnb"
           }
         },
         {
@@ -3666,7 +3666,7 @@
           "ref": {
             "entry": "ListingReport",
             "field": "id",
-            "namespace": "mytour"
+            "namespace": "liveBnb"
           }
         },
         {
@@ -3681,7 +3681,7 @@
           "ref": {
             "entry": "ListingReport",
             "field": "updatedAt",
-            "namespace": "mytour"
+            "namespace": "liveBnb"
           }
         },
         {
@@ -3692,7 +3692,7 @@
           "ref": {
             "entry": "Review",
             "field": "createdAt",
-            "namespace": "mytour"
+            "namespace": "liveBnb"
           }
         },
         {
@@ -3703,7 +3703,7 @@
           "ref": {
             "entry": "Review",
             "field": "id",
-            "namespace": "mytour"
+            "namespace": "liveBnb"
           }
         },
         {
@@ -3718,7 +3718,7 @@
           "ref": {
             "entry": "Review",
             "field": "updatedAt",
-            "namespace": "mytour"
+            "namespace": "liveBnb"
           }
         },
         {
@@ -3729,7 +3729,7 @@
           "ref": {
             "entry": "Session",
             "field": "createdAt",
-            "namespace": "mytour"
+            "namespace": "liveBnb"
           }
         },
         {
@@ -3740,7 +3740,7 @@
           "ref": {
             "entry": "Session",
             "field": "id",
-            "namespace": "mytour"
+            "namespace": "liveBnb"
           }
         },
         {
@@ -3751,7 +3751,7 @@
           "ref": {
             "entry": "User",
             "field": "createdAt",
-            "namespace": "mytour"
+            "namespace": "liveBnb"
           }
         },
         {
@@ -3762,7 +3762,7 @@
           "ref": {
             "entry": "User",
             "field": "id",
-            "namespace": "mytour"
+            "namespace": "liveBnb"
           }
         },
         {
@@ -3777,7 +3777,7 @@
           "ref": {
             "entry": "User",
             "field": "updatedAt",
-            "namespace": "mytour"
+            "namespace": "liveBnb"
           }
         },
         {
@@ -3788,7 +3788,7 @@
           "ref": {
             "entry": "VerificationToken",
             "field": "id",
-            "namespace": "mytour"
+            "namespace": "liveBnb"
           }
         }
       ]

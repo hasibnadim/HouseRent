@@ -47,16 +47,16 @@ function statusLabel(status: string): string {
 async function ActivityContent() {
   const me = await getCurrentUser();
 
-  const myBookings = await db.orm.mytour.Booking.where({ renterId: me.id })
+  const myBookings = await db.orm.liveBnb.Booking.where({ renterId: me.id })
     .orderBy((booking) => booking.createdAt.desc())
     .all();
 
   let incoming: typeof myBookings = [];
   if (me.role === "OWNER") {
-    const mine = await db.orm.mytour.Listing.where({ ownerId: me.id }).all();
+    const mine = await db.orm.liveBnb.Listing.where({ ownerId: me.id }).all();
     const ids = mine.map((listing) => listing.id);
     if (ids.length > 0) {
-      incoming = await db.orm.mytour.Booking.where((booking) => booking.listingId.in(ids))
+      incoming = await db.orm.liveBnb.Booking.where((booking) => booking.listingId.in(ids))
         .orderBy((booking) => booking.createdAt.desc())
         .all();
     }
@@ -67,12 +67,12 @@ async function ActivityContent() {
 
   const listings =
     listingIds.length > 0
-      ? await db.orm.mytour.Listing.where((listing) => listing.id.in(listingIds))
+      ? await db.orm.liveBnb.Listing.where((listing) => listing.id.in(listingIds))
           .include("photos", (photos) => photos.orderBy((photo) => photo.sortOrder.asc()).limit(1))
           .all()
       : [];
   const renters =
-    renterIds.length > 0 ? await db.orm.mytour.User.where((user) => user.id.in(renterIds)).all() : [];
+    renterIds.length > 0 ? await db.orm.liveBnb.User.where((user) => user.id.in(renterIds)).all() : [];
 
   const listingById = new Map(listings.map((listing) => [listing.id, listing]));
   const renterById = new Map(renters.map((renter) => [renter.id, renter]));

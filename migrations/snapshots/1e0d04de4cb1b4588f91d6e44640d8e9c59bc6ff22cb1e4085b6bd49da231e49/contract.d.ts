@@ -18,9 +18,9 @@ import type {
 } from '@prisma/orm-postgres/contract/types';
 
 export type StorageHash =
-  StorageHashBase<'8f895945e72e4f9fad8ab89a7e7c8c3a7169ad696ee5d69bc9ef8edafaced15b'>;
+  StorageHashBase<'1e0d04de4cb1b4588f91d6e44640d8e9c59bc6ff22cb1e4085b6bd49da231e49'>;
 export type ExecutionHash =
-  ExecutionHashBase<'fa0d96e5ea78976122412f3e00dadaebaecbeec33fe5760fa3e0ddd7f6858e0b'>;
+  ExecutionHashBase<'26019ffd50e359a9c226ce2513c027502871b129fc10af73463604d91efd9e17'>;
 export type ProfileHash =
   ProfileHashBase<'3916f444a8a17ad749191acf9e08dad97d1a327b88c2f1d45d12f240296aa8b2'>;
 
@@ -233,7 +233,7 @@ type DefaultLiteralValue<CodecId extends string, Encoded> = CodecId extends keyo
   : Encoded;
 
 export type FieldOutputTypes = {
-  readonly mytour: {
+  readonly liveBnb: {
     readonly Account: {
       readonly access_token: CodecTypes['pg/text@1']['output'] | null;
       readonly createdAt: CodecTypes['pg/timestamptz-string@1']['output'];
@@ -381,7 +381,7 @@ export type FieldOutputTypes = {
   readonly public: Record<string, never>;
 };
 export type FieldInputTypes = {
-  readonly mytour: {
+  readonly liveBnb: {
     readonly Account: {
       readonly access_token: CodecTypes['pg/text@1']['input'] | null;
       readonly createdAt: CodecTypes['pg/timestamptz-string@1']['input'];
@@ -529,7 +529,7 @@ export type FieldInputTypes = {
   readonly public: Record<string, never>;
 };
 export type StorageColumnTypes = {
-  readonly mytour: {
+  readonly liveBnb: {
     readonly Account: {
       readonly access_token: CodecTypes['pg/text@1']['output'] | null;
       readonly createdAt: CodecTypes['pg/timestamptz-string@1']['output'];
@@ -677,7 +677,7 @@ export type StorageColumnTypes = {
   readonly public: {};
 };
 export type StorageColumnInputTypes = {
-  readonly mytour: {
+  readonly liveBnb: {
     readonly Account: {
       readonly access_token: CodecTypes['pg/text@1']['input'] | null;
       readonly createdAt: CodecTypes['pg/timestamptz-string@1']['input'];
@@ -826,7 +826,7 @@ export type StorageColumnInputTypes = {
 };
 
 export namespace Models {
-  export type mytour_Account = {
+  export type liveBnb_Account = {
     access_token: CodecTypes['pg/text@1']['output'] | null;
     createdAt: CodecTypes['pg/timestamptz-string@1']['output'];
     expires_at: CodecTypes['pg/int4@1']['output'] | null;
@@ -843,10 +843,10 @@ export namespace Models {
     type: CodecTypes['pg/text@1']['output'];
     updatedAt: CodecTypes['pg/timestamptz-string@1']['output'];
     userId: Char<36>;
-    user: mytour_User;
+    user: liveBnb_User;
     readonly [RelationKeys]?: 'user';
   };
-  export type mytour_AuditLog = {
+  export type liveBnb_AuditLog = {
     action: CodecTypes['pg/text@1']['output'];
     actorId: Char<36>;
     createdAt: CodecTypes['pg/timestamptz-string@1']['output'];
@@ -854,20 +854,20 @@ export namespace Models {
     note: CodecTypes['pg/text@1']['output'] | null;
     targetId: CodecTypes['pg/text@1']['output'];
     targetType: CodecTypes['pg/text@1']['output'];
-    actor: mytour_User;
+    actor: liveBnb_User;
     readonly [RelationKeys]?: 'actor';
   };
-  export type mytour_AvailabilityBlock = {
+  export type liveBnb_AvailabilityBlock = {
     createdAt: CodecTypes['pg/timestamptz-string@1']['output'];
     endsAt: CodecTypes['pg/timestamptz-string@1']['output'];
     id: Char<36>;
     listingId: Char<36>;
     note: CodecTypes['pg/text@1']['output'] | null;
     startsAt: CodecTypes['pg/timestamptz-string@1']['output'];
-    listing: mytour_Listing;
+    listing: liveBnb_Listing;
     readonly [RelationKeys]?: 'listing';
   };
-  export type mytour_Booking = {
+  export type liveBnb_Booking = {
     advanceAmount: CodecTypes['pg/int4@1']['output'];
     approvedAt: CodecTypes['pg/timestamptz-string@1']['output'] | null;
     cancelledAt: CodecTypes['pg/timestamptz-string@1']['output'] | null;
@@ -887,21 +887,21 @@ export namespace Models {
     status: 'PENDING' | 'APPROVED' | 'DECLINED' | 'CANCELLED' | 'COMPLETED';
     totalAmount: CodecTypes['pg/int4@1']['output'];
     updatedAt: CodecTypes['pg/timestamptz-string@1']['output'];
-    listing: mytour_Listing;
-    renter: mytour_User;
-    reviews: mytour_Review[];
+    listing: liveBnb_Listing;
+    renter: liveBnb_User;
+    reviews: liveBnb_Review[];
     readonly [RelationKeys]?: 'listing' | 'renter' | 'reviews';
   };
-  export type mytour_Favorite = {
+  export type liveBnb_Favorite = {
     createdAt: CodecTypes['pg/timestamptz-string@1']['output'];
     id: Char<36>;
     listingId: Char<36>;
     userId: Char<36>;
-    listing: mytour_Listing;
-    user: mytour_User;
+    listing: liveBnb_Listing;
+    user: liveBnb_User;
     readonly [RelationKeys]?: 'listing' | 'user';
   };
-  export type mytour_Listing = {
+  export type liveBnb_Listing = {
     addressNote: CodecTypes['pg/text@1']['output'] | null;
     advanceAmount: CodecTypes['pg/int4@1']['output'] | null;
     amenities: ReadonlyArray<CodecTypes['pg/text@1']['output']>;
@@ -924,26 +924,26 @@ export namespace Models {
     status: 'DRAFT' | 'PUBLISHED' | 'UNPUBLISHED' | 'ARCHIVED';
     title: CodecTypes['pg/text@1']['output'];
     updatedAt: CodecTypes['pg/timestamptz-string@1']['output'];
-    availabilityBlocks: mytour_AvailabilityBlock[];
-    bookings: mytour_Booking[];
-    favorites: mytour_Favorite[];
-    owner: mytour_User;
-    photos: mytour_ListingPhoto[];
-    reports: mytour_ListingReport[];
+    availabilityBlocks: liveBnb_AvailabilityBlock[];
+    bookings: liveBnb_Booking[];
+    favorites: liveBnb_Favorite[];
+    owner: liveBnb_User;
+    photos: liveBnb_ListingPhoto[];
+    reports: liveBnb_ListingReport[];
     readonly [RelationKeys]?:
       'availabilityBlocks' | 'bookings' | 'favorites' | 'owner' | 'photos' | 'reports';
   };
-  export type mytour_ListingPhoto = {
+  export type liveBnb_ListingPhoto = {
     caption: CodecTypes['pg/text@1']['output'] | null;
     createdAt: CodecTypes['pg/timestamptz-string@1']['output'];
     id: Char<36>;
     listingId: Char<36>;
     sortOrder: CodecTypes['pg/int4@1']['output'];
     url: CodecTypes['pg/text@1']['output'];
-    listing: mytour_Listing;
+    listing: liveBnb_Listing;
     readonly [RelationKeys]?: 'listing';
   };
-  export type mytour_ListingReport = {
+  export type liveBnb_ListingReport = {
     createdAt: CodecTypes['pg/timestamptz-string@1']['output'];
     id: Char<36>;
     listingId: Char<36>;
@@ -954,12 +954,12 @@ export namespace Models {
     resolvedById: Char<36> | null;
     status: 'OPEN' | 'REVIEWED' | 'DISMISSED';
     updatedAt: CodecTypes['pg/timestamptz-string@1']['output'];
-    listing: mytour_Listing;
-    reporter: mytour_User;
-    resolvedBy: mytour_User | null;
+    listing: liveBnb_Listing;
+    reporter: liveBnb_User;
+    resolvedBy: liveBnb_User | null;
     readonly [RelationKeys]?: 'listing' | 'reporter' | 'resolvedBy';
   };
-  export type mytour_Review = {
+  export type liveBnb_Review = {
     bookingId: Char<36>;
     comment: CodecTypes['pg/text@1']['output'] | null;
     createdAt: CodecTypes['pg/timestamptz-string@1']['output'];
@@ -968,21 +968,21 @@ export namespace Models {
     revieweeId: Char<36>;
     reviewerId: Char<36>;
     updatedAt: CodecTypes['pg/timestamptz-string@1']['output'];
-    booking: mytour_Booking;
-    reviewee: mytour_User;
-    reviewer: mytour_User;
+    booking: liveBnb_Booking;
+    reviewee: liveBnb_User;
+    reviewer: liveBnb_User;
     readonly [RelationKeys]?: 'booking' | 'reviewee' | 'reviewer';
   };
-  export type mytour_Session = {
+  export type liveBnb_Session = {
     createdAt: CodecTypes['pg/timestamptz-string@1']['output'];
     expires: CodecTypes['pg/timestamptz-string@1']['output'];
     id: Char<36>;
     sessionToken: CodecTypes['pg/text@1']['output'];
     userId: Char<36>;
-    user: mytour_User;
+    user: liveBnb_User;
     readonly [RelationKeys]?: 'user';
   };
-  export type mytour_User = {
+  export type liveBnb_User = {
     createdAt: CodecTypes['pg/timestamptz-string@1']['output'];
     email: CodecTypes['pg/text@1']['output'];
     emailVerified: CodecTypes['pg/timestamptz-string@1']['output'] | null;
@@ -995,16 +995,16 @@ export namespace Models {
     phone: CodecTypes['pg/text@1']['output'] | null;
     role: 'RENTER' | 'OWNER';
     updatedAt: CodecTypes['pg/timestamptz-string@1']['output'];
-    accounts: mytour_Account[];
-    auditLogs: mytour_AuditLog[];
-    bookings: mytour_Booking[];
-    favorites: mytour_Favorite[];
-    listings: mytour_Listing[];
-    reports: mytour_ListingReport[];
-    reportsResolved: mytour_ListingReport[];
-    reviewsReceived: mytour_Review[];
-    reviewsWritten: mytour_Review[];
-    sessions: mytour_Session[];
+    accounts: liveBnb_Account[];
+    auditLogs: liveBnb_AuditLog[];
+    bookings: liveBnb_Booking[];
+    favorites: liveBnb_Favorite[];
+    listings: liveBnb_Listing[];
+    reports: liveBnb_ListingReport[];
+    reportsResolved: liveBnb_ListingReport[];
+    reviewsReceived: liveBnb_Review[];
+    reviewsWritten: liveBnb_Review[];
+    sessions: liveBnb_Session[];
     readonly [RelationKeys]?:
       | 'accounts'
       | 'auditLogs'
@@ -1017,7 +1017,7 @@ export namespace Models {
       | 'reviewsWritten'
       | 'sessions';
   };
-  export type mytour_VerificationToken = {
+  export type liveBnb_VerificationToken = {
     expires: CodecTypes['pg/timestamptz-string@1']['output'];
     id: Char<36>;
     identifier: CodecTypes['pg/text@1']['output'];
@@ -1027,19 +1027,19 @@ export namespace Models {
 }
 
 export declare const models: {
-  mytour: {
-    Account: Models.mytour_Account;
-    AuditLog: Models.mytour_AuditLog;
-    AvailabilityBlock: Models.mytour_AvailabilityBlock;
-    Booking: Models.mytour_Booking;
-    Favorite: Models.mytour_Favorite;
-    Listing: Models.mytour_Listing;
-    ListingPhoto: Models.mytour_ListingPhoto;
-    ListingReport: Models.mytour_ListingReport;
-    Review: Models.mytour_Review;
-    Session: Models.mytour_Session;
-    User: Models.mytour_User;
-    VerificationToken: Models.mytour_VerificationToken;
+  liveBnb: {
+    Account: Models.liveBnb_Account;
+    AuditLog: Models.liveBnb_AuditLog;
+    AvailabilityBlock: Models.liveBnb_AvailabilityBlock;
+    Booking: Models.liveBnb_Booking;
+    Favorite: Models.liveBnb_Favorite;
+    Listing: Models.liveBnb_Listing;
+    ListingPhoto: Models.liveBnb_ListingPhoto;
+    ListingReport: Models.liveBnb_ListingReport;
+    Review: Models.liveBnb_Review;
+    Session: Models.liveBnb_Session;
+    User: Models.liveBnb_User;
+    VerificationToken: Models.liveBnb_VerificationToken;
   };
   public: {};
 };
@@ -1057,8 +1057,8 @@ export type TypeMaps = TypeMapsType<
 type ContractBase = Omit<
   ContractType<{
     readonly namespaces: {
-      readonly mytour: {
-        readonly id: 'mytour';
+      readonly liveBnb: {
+        readonly id: 'liveBnb';
         readonly kind: 'postgres-schema';
         readonly entries: {
           readonly table: {
@@ -1176,12 +1176,12 @@ type ContractBase = Omit<
               foreignKeys: readonly [
                 {
                   readonly source: {
-                    readonly namespaceId: 'mytour' & NamespaceId;
+                    readonly namespaceId: 'liveBnb' & NamespaceId;
                     readonly tableName: 'Account';
                     readonly columns: readonly ['userId'];
                   };
                   readonly target: {
-                    readonly namespaceId: 'mytour' & NamespaceId;
+                    readonly namespaceId: 'liveBnb' & NamespaceId;
                     readonly tableName: 'User';
                     readonly columns: readonly ['id'];
                   };
@@ -1307,12 +1307,12 @@ type ContractBase = Omit<
               foreignKeys: readonly [
                 {
                   readonly source: {
-                    readonly namespaceId: 'mytour' & NamespaceId;
+                    readonly namespaceId: 'liveBnb' & NamespaceId;
                     readonly tableName: 'AvailabilityBlock';
                     readonly columns: readonly ['listingId'];
                   };
                   readonly target: {
-                    readonly namespaceId: 'mytour' & NamespaceId;
+                    readonly namespaceId: 'liveBnb' & NamespaceId;
                     readonly tableName: 'Listing';
                     readonly columns: readonly ['id'];
                   };
@@ -1522,24 +1522,24 @@ type ContractBase = Omit<
               foreignKeys: readonly [
                 {
                   readonly source: {
-                    readonly namespaceId: 'mytour' & NamespaceId;
+                    readonly namespaceId: 'liveBnb' & NamespaceId;
                     readonly tableName: 'Favorite';
                     readonly columns: readonly ['userId'];
                   };
                   readonly target: {
-                    readonly namespaceId: 'mytour' & NamespaceId;
+                    readonly namespaceId: 'liveBnb' & NamespaceId;
                     readonly tableName: 'User';
                     readonly columns: readonly ['id'];
                   };
                 },
                 {
                   readonly source: {
-                    readonly namespaceId: 'mytour' & NamespaceId;
+                    readonly namespaceId: 'liveBnb' & NamespaceId;
                     readonly tableName: 'Favorite';
                     readonly columns: readonly ['listingId'];
                   };
                   readonly target: {
-                    readonly namespaceId: 'mytour' & NamespaceId;
+                    readonly namespaceId: 'liveBnb' & NamespaceId;
                     readonly tableName: 'Listing';
                     readonly columns: readonly ['id'];
                   };
@@ -1779,12 +1779,12 @@ type ContractBase = Omit<
               foreignKeys: readonly [
                 {
                   readonly source: {
-                    readonly namespaceId: 'mytour' & NamespaceId;
+                    readonly namespaceId: 'liveBnb' & NamespaceId;
                     readonly tableName: 'ListingPhoto';
                     readonly columns: readonly ['listingId'];
                   };
                   readonly target: {
-                    readonly namespaceId: 'mytour' & NamespaceId;
+                    readonly namespaceId: 'liveBnb' & NamespaceId;
                     readonly tableName: 'Listing';
                     readonly columns: readonly ['id'];
                   };
@@ -1995,12 +1995,12 @@ type ContractBase = Omit<
               foreignKeys: readonly [
                 {
                   readonly source: {
-                    readonly namespaceId: 'mytour' & NamespaceId;
+                    readonly namespaceId: 'liveBnb' & NamespaceId;
                     readonly tableName: 'Session';
                     readonly columns: readonly ['userId'];
                   };
                   readonly target: {
-                    readonly namespaceId: 'mytour' & NamespaceId;
+                    readonly namespaceId: 'liveBnb' & NamespaceId;
                     readonly tableName: 'User';
                     readonly columns: readonly ['id'];
                   };
@@ -2182,34 +2182,34 @@ type ContractBase = Omit<
   readonly target: 'postgres';
   readonly targetFamily: 'sql';
   readonly roots: {
-    readonly Account: { readonly namespace: 'mytour' & NamespaceId; readonly model: 'Account' };
-    readonly AuditLog: { readonly namespace: 'mytour' & NamespaceId; readonly model: 'AuditLog' };
+    readonly Account: { readonly namespace: 'liveBnb' & NamespaceId; readonly model: 'Account' };
+    readonly AuditLog: { readonly namespace: 'liveBnb' & NamespaceId; readonly model: 'AuditLog' };
     readonly AvailabilityBlock: {
-      readonly namespace: 'mytour' & NamespaceId;
+      readonly namespace: 'liveBnb' & NamespaceId;
       readonly model: 'AvailabilityBlock';
     };
-    readonly Booking: { readonly namespace: 'mytour' & NamespaceId; readonly model: 'Booking' };
-    readonly Favorite: { readonly namespace: 'mytour' & NamespaceId; readonly model: 'Favorite' };
-    readonly Listing: { readonly namespace: 'mytour' & NamespaceId; readonly model: 'Listing' };
+    readonly Booking: { readonly namespace: 'liveBnb' & NamespaceId; readonly model: 'Booking' };
+    readonly Favorite: { readonly namespace: 'liveBnb' & NamespaceId; readonly model: 'Favorite' };
+    readonly Listing: { readonly namespace: 'liveBnb' & NamespaceId; readonly model: 'Listing' };
     readonly ListingPhoto: {
-      readonly namespace: 'mytour' & NamespaceId;
+      readonly namespace: 'liveBnb' & NamespaceId;
       readonly model: 'ListingPhoto';
     };
     readonly ListingReport: {
-      readonly namespace: 'mytour' & NamespaceId;
+      readonly namespace: 'liveBnb' & NamespaceId;
       readonly model: 'ListingReport';
     };
-    readonly Review: { readonly namespace: 'mytour' & NamespaceId; readonly model: 'Review' };
-    readonly Session: { readonly namespace: 'mytour' & NamespaceId; readonly model: 'Session' };
-    readonly User: { readonly namespace: 'mytour' & NamespaceId; readonly model: 'User' };
+    readonly Review: { readonly namespace: 'liveBnb' & NamespaceId; readonly model: 'Review' };
+    readonly Session: { readonly namespace: 'liveBnb' & NamespaceId; readonly model: 'Session' };
+    readonly User: { readonly namespace: 'liveBnb' & NamespaceId; readonly model: 'User' };
     readonly VerificationToken: {
-      readonly namespace: 'mytour' & NamespaceId;
+      readonly namespace: 'liveBnb' & NamespaceId;
       readonly model: 'VerificationToken';
     };
   };
   readonly domain: {
     readonly namespaces: {
-      readonly mytour: {
+      readonly liveBnb: {
         readonly models: {
           readonly Account: {
             readonly fields: {
@@ -2294,7 +2294,10 @@ type ContractBase = Omit<
             };
             readonly relations: {
               readonly user: {
-                readonly to: { readonly namespace: 'mytour' & NamespaceId; readonly model: 'User' };
+                readonly to: {
+                  readonly namespace: 'liveBnb' & NamespaceId;
+                  readonly model: 'User';
+                };
                 readonly cardinality: 'N:1';
                 readonly nullable: false;
                 readonly on: {
@@ -2305,7 +2308,7 @@ type ContractBase = Omit<
             };
             readonly storage: {
               readonly table: 'Account';
-              readonly namespaceId: 'mytour';
+              readonly namespaceId: 'liveBnb';
               readonly fields: {
                 readonly access_token: { readonly column: 'access_token' };
                 readonly createdAt: { readonly column: 'createdAt' };
@@ -2370,7 +2373,10 @@ type ContractBase = Omit<
             };
             readonly relations: {
               readonly actor: {
-                readonly to: { readonly namespace: 'mytour' & NamespaceId; readonly model: 'User' };
+                readonly to: {
+                  readonly namespace: 'liveBnb' & NamespaceId;
+                  readonly model: 'User';
+                };
                 readonly cardinality: 'N:1';
                 readonly nullable: false;
                 readonly on: {
@@ -2381,7 +2387,7 @@ type ContractBase = Omit<
             };
             readonly storage: {
               readonly table: 'AuditLog';
-              readonly namespaceId: 'mytour';
+              readonly namespaceId: 'liveBnb';
               readonly fields: {
                 readonly action: { readonly column: 'action' };
                 readonly actorId: { readonly column: 'actorId' };
@@ -2440,7 +2446,7 @@ type ContractBase = Omit<
             readonly relations: {
               readonly listing: {
                 readonly to: {
-                  readonly namespace: 'mytour' & NamespaceId;
+                  readonly namespace: 'liveBnb' & NamespaceId;
                   readonly model: 'Listing';
                 };
                 readonly cardinality: 'N:1';
@@ -2453,7 +2459,7 @@ type ContractBase = Omit<
             };
             readonly storage: {
               readonly table: 'AvailabilityBlock';
-              readonly namespaceId: 'mytour';
+              readonly namespaceId: 'liveBnb';
               readonly fields: {
                 readonly createdAt: { readonly column: 'createdAt' };
                 readonly endsAt: { readonly column: 'endsAt' };
@@ -2582,7 +2588,7 @@ type ContractBase = Omit<
             readonly relations: {
               readonly listing: {
                 readonly to: {
-                  readonly namespace: 'mytour' & NamespaceId;
+                  readonly namespace: 'liveBnb' & NamespaceId;
                   readonly model: 'Listing';
                 };
                 readonly cardinality: 'N:1';
@@ -2593,7 +2599,10 @@ type ContractBase = Omit<
                 };
               };
               readonly renter: {
-                readonly to: { readonly namespace: 'mytour' & NamespaceId; readonly model: 'User' };
+                readonly to: {
+                  readonly namespace: 'liveBnb' & NamespaceId;
+                  readonly model: 'User';
+                };
                 readonly cardinality: 'N:1';
                 readonly nullable: false;
                 readonly on: {
@@ -2603,7 +2612,7 @@ type ContractBase = Omit<
               };
               readonly reviews: {
                 readonly to: {
-                  readonly namespace: 'mytour' & NamespaceId;
+                  readonly namespace: 'liveBnb' & NamespaceId;
                   readonly model: 'Review';
                 };
                 readonly cardinality: '1:N';
@@ -2615,7 +2624,7 @@ type ContractBase = Omit<
             };
             readonly storage: {
               readonly table: 'Booking';
-              readonly namespaceId: 'mytour';
+              readonly namespaceId: 'liveBnb';
               readonly fields: {
                 readonly advanceAmount: { readonly column: 'advanceAmount' };
                 readonly approvedAt: { readonly column: 'approvedAt' };
@@ -2676,7 +2685,7 @@ type ContractBase = Omit<
             readonly relations: {
               readonly listing: {
                 readonly to: {
-                  readonly namespace: 'mytour' & NamespaceId;
+                  readonly namespace: 'liveBnb' & NamespaceId;
                   readonly model: 'Listing';
                 };
                 readonly cardinality: 'N:1';
@@ -2687,7 +2696,10 @@ type ContractBase = Omit<
                 };
               };
               readonly user: {
-                readonly to: { readonly namespace: 'mytour' & NamespaceId; readonly model: 'User' };
+                readonly to: {
+                  readonly namespace: 'liveBnb' & NamespaceId;
+                  readonly model: 'User';
+                };
                 readonly cardinality: 'N:1';
                 readonly nullable: false;
                 readonly on: {
@@ -2698,7 +2710,7 @@ type ContractBase = Omit<
             };
             readonly storage: {
               readonly table: 'Favorite';
-              readonly namespaceId: 'mytour';
+              readonly namespaceId: 'liveBnb';
               readonly fields: {
                 readonly createdAt: { readonly column: 'createdAt' };
                 readonly id: { readonly column: 'id' };
@@ -2822,7 +2834,7 @@ type ContractBase = Omit<
             readonly relations: {
               readonly availabilityBlocks: {
                 readonly to: {
-                  readonly namespace: 'mytour' & NamespaceId;
+                  readonly namespace: 'liveBnb' & NamespaceId;
                   readonly model: 'AvailabilityBlock';
                 };
                 readonly cardinality: '1:N';
@@ -2833,7 +2845,7 @@ type ContractBase = Omit<
               };
               readonly bookings: {
                 readonly to: {
-                  readonly namespace: 'mytour' & NamespaceId;
+                  readonly namespace: 'liveBnb' & NamespaceId;
                   readonly model: 'Booking';
                 };
                 readonly cardinality: '1:N';
@@ -2844,7 +2856,7 @@ type ContractBase = Omit<
               };
               readonly favorites: {
                 readonly to: {
-                  readonly namespace: 'mytour' & NamespaceId;
+                  readonly namespace: 'liveBnb' & NamespaceId;
                   readonly model: 'Favorite';
                 };
                 readonly cardinality: '1:N';
@@ -2854,7 +2866,10 @@ type ContractBase = Omit<
                 };
               };
               readonly owner: {
-                readonly to: { readonly namespace: 'mytour' & NamespaceId; readonly model: 'User' };
+                readonly to: {
+                  readonly namespace: 'liveBnb' & NamespaceId;
+                  readonly model: 'User';
+                };
                 readonly cardinality: 'N:1';
                 readonly nullable: false;
                 readonly on: {
@@ -2864,7 +2879,7 @@ type ContractBase = Omit<
               };
               readonly photos: {
                 readonly to: {
-                  readonly namespace: 'mytour' & NamespaceId;
+                  readonly namespace: 'liveBnb' & NamespaceId;
                   readonly model: 'ListingPhoto';
                 };
                 readonly cardinality: '1:N';
@@ -2875,7 +2890,7 @@ type ContractBase = Omit<
               };
               readonly reports: {
                 readonly to: {
-                  readonly namespace: 'mytour' & NamespaceId;
+                  readonly namespace: 'liveBnb' & NamespaceId;
                   readonly model: 'ListingReport';
                 };
                 readonly cardinality: '1:N';
@@ -2887,7 +2902,7 @@ type ContractBase = Omit<
             };
             readonly storage: {
               readonly table: 'Listing';
-              readonly namespaceId: 'mytour';
+              readonly namespaceId: 'liveBnb';
               readonly fields: {
                 readonly addressNote: { readonly column: 'addressNote' };
                 readonly advanceAmount: { readonly column: 'advanceAmount' };
@@ -2955,7 +2970,7 @@ type ContractBase = Omit<
             readonly relations: {
               readonly listing: {
                 readonly to: {
-                  readonly namespace: 'mytour' & NamespaceId;
+                  readonly namespace: 'liveBnb' & NamespaceId;
                   readonly model: 'Listing';
                 };
                 readonly cardinality: 'N:1';
@@ -2968,7 +2983,7 @@ type ContractBase = Omit<
             };
             readonly storage: {
               readonly table: 'ListingPhoto';
-              readonly namespaceId: 'mytour';
+              readonly namespaceId: 'liveBnb';
               readonly fields: {
                 readonly caption: { readonly column: 'caption' };
                 readonly createdAt: { readonly column: 'createdAt' };
@@ -3050,7 +3065,7 @@ type ContractBase = Omit<
             readonly relations: {
               readonly listing: {
                 readonly to: {
-                  readonly namespace: 'mytour' & NamespaceId;
+                  readonly namespace: 'liveBnb' & NamespaceId;
                   readonly model: 'Listing';
                 };
                 readonly cardinality: 'N:1';
@@ -3061,7 +3076,10 @@ type ContractBase = Omit<
                 };
               };
               readonly reporter: {
-                readonly to: { readonly namespace: 'mytour' & NamespaceId; readonly model: 'User' };
+                readonly to: {
+                  readonly namespace: 'liveBnb' & NamespaceId;
+                  readonly model: 'User';
+                };
                 readonly cardinality: 'N:1';
                 readonly nullable: false;
                 readonly on: {
@@ -3070,7 +3088,10 @@ type ContractBase = Omit<
                 };
               };
               readonly resolvedBy: {
-                readonly to: { readonly namespace: 'mytour' & NamespaceId; readonly model: 'User' };
+                readonly to: {
+                  readonly namespace: 'liveBnb' & NamespaceId;
+                  readonly model: 'User';
+                };
                 readonly cardinality: 'N:1';
                 readonly nullable: true;
                 readonly on: {
@@ -3081,7 +3102,7 @@ type ContractBase = Omit<
             };
             readonly storage: {
               readonly table: 'ListingReport';
-              readonly namespaceId: 'mytour';
+              readonly namespaceId: 'liveBnb';
               readonly fields: {
                 readonly createdAt: { readonly column: 'createdAt' };
                 readonly id: { readonly column: 'id' };
@@ -3156,7 +3177,7 @@ type ContractBase = Omit<
             readonly relations: {
               readonly booking: {
                 readonly to: {
-                  readonly namespace: 'mytour' & NamespaceId;
+                  readonly namespace: 'liveBnb' & NamespaceId;
                   readonly model: 'Booking';
                 };
                 readonly cardinality: 'N:1';
@@ -3167,7 +3188,10 @@ type ContractBase = Omit<
                 };
               };
               readonly reviewee: {
-                readonly to: { readonly namespace: 'mytour' & NamespaceId; readonly model: 'User' };
+                readonly to: {
+                  readonly namespace: 'liveBnb' & NamespaceId;
+                  readonly model: 'User';
+                };
                 readonly cardinality: 'N:1';
                 readonly nullable: false;
                 readonly on: {
@@ -3176,7 +3200,10 @@ type ContractBase = Omit<
                 };
               };
               readonly reviewer: {
-                readonly to: { readonly namespace: 'mytour' & NamespaceId; readonly model: 'User' };
+                readonly to: {
+                  readonly namespace: 'liveBnb' & NamespaceId;
+                  readonly model: 'User';
+                };
                 readonly cardinality: 'N:1';
                 readonly nullable: false;
                 readonly on: {
@@ -3187,7 +3214,7 @@ type ContractBase = Omit<
             };
             readonly storage: {
               readonly table: 'Review';
-              readonly namespaceId: 'mytour';
+              readonly namespaceId: 'liveBnb';
               readonly fields: {
                 readonly bookingId: { readonly column: 'bookingId' };
                 readonly comment: { readonly column: 'comment' };
@@ -3239,7 +3266,10 @@ type ContractBase = Omit<
             };
             readonly relations: {
               readonly user: {
-                readonly to: { readonly namespace: 'mytour' & NamespaceId; readonly model: 'User' };
+                readonly to: {
+                  readonly namespace: 'liveBnb' & NamespaceId;
+                  readonly model: 'User';
+                };
                 readonly cardinality: 'N:1';
                 readonly nullable: false;
                 readonly on: {
@@ -3250,7 +3280,7 @@ type ContractBase = Omit<
             };
             readonly storage: {
               readonly table: 'Session';
-              readonly namespaceId: 'mytour';
+              readonly namespaceId: 'liveBnb';
               readonly fields: {
                 readonly createdAt: { readonly column: 'createdAt' };
                 readonly expires: { readonly column: 'expires' };
@@ -3327,7 +3357,7 @@ type ContractBase = Omit<
             readonly relations: {
               readonly accounts: {
                 readonly to: {
-                  readonly namespace: 'mytour' & NamespaceId;
+                  readonly namespace: 'liveBnb' & NamespaceId;
                   readonly model: 'Account';
                 };
                 readonly cardinality: '1:N';
@@ -3338,7 +3368,7 @@ type ContractBase = Omit<
               };
               readonly auditLogs: {
                 readonly to: {
-                  readonly namespace: 'mytour' & NamespaceId;
+                  readonly namespace: 'liveBnb' & NamespaceId;
                   readonly model: 'AuditLog';
                 };
                 readonly cardinality: '1:N';
@@ -3349,7 +3379,7 @@ type ContractBase = Omit<
               };
               readonly bookings: {
                 readonly to: {
-                  readonly namespace: 'mytour' & NamespaceId;
+                  readonly namespace: 'liveBnb' & NamespaceId;
                   readonly model: 'Booking';
                 };
                 readonly cardinality: '1:N';
@@ -3360,7 +3390,7 @@ type ContractBase = Omit<
               };
               readonly favorites: {
                 readonly to: {
-                  readonly namespace: 'mytour' & NamespaceId;
+                  readonly namespace: 'liveBnb' & NamespaceId;
                   readonly model: 'Favorite';
                 };
                 readonly cardinality: '1:N';
@@ -3371,7 +3401,7 @@ type ContractBase = Omit<
               };
               readonly listings: {
                 readonly to: {
-                  readonly namespace: 'mytour' & NamespaceId;
+                  readonly namespace: 'liveBnb' & NamespaceId;
                   readonly model: 'Listing';
                 };
                 readonly cardinality: '1:N';
@@ -3382,7 +3412,7 @@ type ContractBase = Omit<
               };
               readonly reports: {
                 readonly to: {
-                  readonly namespace: 'mytour' & NamespaceId;
+                  readonly namespace: 'liveBnb' & NamespaceId;
                   readonly model: 'ListingReport';
                 };
                 readonly cardinality: '1:N';
@@ -3393,7 +3423,7 @@ type ContractBase = Omit<
               };
               readonly reportsResolved: {
                 readonly to: {
-                  readonly namespace: 'mytour' & NamespaceId;
+                  readonly namespace: 'liveBnb' & NamespaceId;
                   readonly model: 'ListingReport';
                 };
                 readonly cardinality: '1:N';
@@ -3404,7 +3434,7 @@ type ContractBase = Omit<
               };
               readonly reviewsReceived: {
                 readonly to: {
-                  readonly namespace: 'mytour' & NamespaceId;
+                  readonly namespace: 'liveBnb' & NamespaceId;
                   readonly model: 'Review';
                 };
                 readonly cardinality: '1:N';
@@ -3415,7 +3445,7 @@ type ContractBase = Omit<
               };
               readonly reviewsWritten: {
                 readonly to: {
-                  readonly namespace: 'mytour' & NamespaceId;
+                  readonly namespace: 'liveBnb' & NamespaceId;
                   readonly model: 'Review';
                 };
                 readonly cardinality: '1:N';
@@ -3426,7 +3456,7 @@ type ContractBase = Omit<
               };
               readonly sessions: {
                 readonly to: {
-                  readonly namespace: 'mytour' & NamespaceId;
+                  readonly namespace: 'liveBnb' & NamespaceId;
                   readonly model: 'Session';
                 };
                 readonly cardinality: '1:N';
@@ -3438,7 +3468,7 @@ type ContractBase = Omit<
             };
             readonly storage: {
               readonly table: 'User';
-              readonly namespaceId: 'mytour';
+              readonly namespaceId: 'liveBnb';
               readonly fields: {
                 readonly createdAt: { readonly column: 'createdAt' };
                 readonly email: { readonly column: 'email' };
@@ -3484,7 +3514,7 @@ type ContractBase = Omit<
             readonly relations: Record<string, never>;
             readonly storage: {
               readonly table: 'VerificationToken';
-              readonly namespaceId: 'mytour';
+              readonly namespaceId: 'liveBnb';
               readonly fields: {
                 readonly expires: { readonly column: 'expires' };
                 readonly id: { readonly column: 'id' };
@@ -3614,7 +3644,7 @@ type ContractBase = Omit<
           readonly ref: {
             readonly entry: 'Account';
             readonly field: 'createdAt';
-            readonly namespace: 'mytour';
+            readonly namespace: 'liveBnb';
           };
         },
         {
@@ -3622,7 +3652,7 @@ type ContractBase = Omit<
           readonly ref: {
             readonly entry: 'Account';
             readonly field: 'id';
-            readonly namespace: 'mytour';
+            readonly namespace: 'liveBnb';
           };
         },
         {
@@ -3631,7 +3661,7 @@ type ContractBase = Omit<
           readonly ref: {
             readonly entry: 'Account';
             readonly field: 'updatedAt';
-            readonly namespace: 'mytour';
+            readonly namespace: 'liveBnb';
           };
         },
         {
@@ -3639,7 +3669,7 @@ type ContractBase = Omit<
           readonly ref: {
             readonly entry: 'AuditLog';
             readonly field: 'createdAt';
-            readonly namespace: 'mytour';
+            readonly namespace: 'liveBnb';
           };
         },
         {
@@ -3647,7 +3677,7 @@ type ContractBase = Omit<
           readonly ref: {
             readonly entry: 'AuditLog';
             readonly field: 'id';
-            readonly namespace: 'mytour';
+            readonly namespace: 'liveBnb';
           };
         },
         {
@@ -3655,7 +3685,7 @@ type ContractBase = Omit<
           readonly ref: {
             readonly entry: 'AvailabilityBlock';
             readonly field: 'createdAt';
-            readonly namespace: 'mytour';
+            readonly namespace: 'liveBnb';
           };
         },
         {
@@ -3663,7 +3693,7 @@ type ContractBase = Omit<
           readonly ref: {
             readonly entry: 'AvailabilityBlock';
             readonly field: 'id';
-            readonly namespace: 'mytour';
+            readonly namespace: 'liveBnb';
           };
         },
         {
@@ -3671,7 +3701,7 @@ type ContractBase = Omit<
           readonly ref: {
             readonly entry: 'Booking';
             readonly field: 'createdAt';
-            readonly namespace: 'mytour';
+            readonly namespace: 'liveBnb';
           };
         },
         {
@@ -3679,7 +3709,7 @@ type ContractBase = Omit<
           readonly ref: {
             readonly entry: 'Booking';
             readonly field: 'id';
-            readonly namespace: 'mytour';
+            readonly namespace: 'liveBnb';
           };
         },
         {
@@ -3688,7 +3718,7 @@ type ContractBase = Omit<
           readonly ref: {
             readonly entry: 'Booking';
             readonly field: 'updatedAt';
-            readonly namespace: 'mytour';
+            readonly namespace: 'liveBnb';
           };
         },
         {
@@ -3696,7 +3726,7 @@ type ContractBase = Omit<
           readonly ref: {
             readonly entry: 'Favorite';
             readonly field: 'createdAt';
-            readonly namespace: 'mytour';
+            readonly namespace: 'liveBnb';
           };
         },
         {
@@ -3704,7 +3734,7 @@ type ContractBase = Omit<
           readonly ref: {
             readonly entry: 'Favorite';
             readonly field: 'id';
-            readonly namespace: 'mytour';
+            readonly namespace: 'liveBnb';
           };
         },
         {
@@ -3712,7 +3742,7 @@ type ContractBase = Omit<
           readonly ref: {
             readonly entry: 'Listing';
             readonly field: 'createdAt';
-            readonly namespace: 'mytour';
+            readonly namespace: 'liveBnb';
           };
         },
         {
@@ -3720,7 +3750,7 @@ type ContractBase = Omit<
           readonly ref: {
             readonly entry: 'Listing';
             readonly field: 'id';
-            readonly namespace: 'mytour';
+            readonly namespace: 'liveBnb';
           };
         },
         {
@@ -3729,7 +3759,7 @@ type ContractBase = Omit<
           readonly ref: {
             readonly entry: 'Listing';
             readonly field: 'updatedAt';
-            readonly namespace: 'mytour';
+            readonly namespace: 'liveBnb';
           };
         },
         {
@@ -3737,7 +3767,7 @@ type ContractBase = Omit<
           readonly ref: {
             readonly entry: 'ListingPhoto';
             readonly field: 'createdAt';
-            readonly namespace: 'mytour';
+            readonly namespace: 'liveBnb';
           };
         },
         {
@@ -3745,7 +3775,7 @@ type ContractBase = Omit<
           readonly ref: {
             readonly entry: 'ListingPhoto';
             readonly field: 'id';
-            readonly namespace: 'mytour';
+            readonly namespace: 'liveBnb';
           };
         },
         {
@@ -3753,7 +3783,7 @@ type ContractBase = Omit<
           readonly ref: {
             readonly entry: 'ListingReport';
             readonly field: 'createdAt';
-            readonly namespace: 'mytour';
+            readonly namespace: 'liveBnb';
           };
         },
         {
@@ -3761,7 +3791,7 @@ type ContractBase = Omit<
           readonly ref: {
             readonly entry: 'ListingReport';
             readonly field: 'id';
-            readonly namespace: 'mytour';
+            readonly namespace: 'liveBnb';
           };
         },
         {
@@ -3770,7 +3800,7 @@ type ContractBase = Omit<
           readonly ref: {
             readonly entry: 'ListingReport';
             readonly field: 'updatedAt';
-            readonly namespace: 'mytour';
+            readonly namespace: 'liveBnb';
           };
         },
         {
@@ -3778,7 +3808,7 @@ type ContractBase = Omit<
           readonly ref: {
             readonly entry: 'Review';
             readonly field: 'createdAt';
-            readonly namespace: 'mytour';
+            readonly namespace: 'liveBnb';
           };
         },
         {
@@ -3786,7 +3816,7 @@ type ContractBase = Omit<
           readonly ref: {
             readonly entry: 'Review';
             readonly field: 'id';
-            readonly namespace: 'mytour';
+            readonly namespace: 'liveBnb';
           };
         },
         {
@@ -3795,7 +3825,7 @@ type ContractBase = Omit<
           readonly ref: {
             readonly entry: 'Review';
             readonly field: 'updatedAt';
-            readonly namespace: 'mytour';
+            readonly namespace: 'liveBnb';
           };
         },
         {
@@ -3803,7 +3833,7 @@ type ContractBase = Omit<
           readonly ref: {
             readonly entry: 'Session';
             readonly field: 'createdAt';
-            readonly namespace: 'mytour';
+            readonly namespace: 'liveBnb';
           };
         },
         {
@@ -3811,7 +3841,7 @@ type ContractBase = Omit<
           readonly ref: {
             readonly entry: 'Session';
             readonly field: 'id';
-            readonly namespace: 'mytour';
+            readonly namespace: 'liveBnb';
           };
         },
         {
@@ -3819,7 +3849,7 @@ type ContractBase = Omit<
           readonly ref: {
             readonly entry: 'User';
             readonly field: 'createdAt';
-            readonly namespace: 'mytour';
+            readonly namespace: 'liveBnb';
           };
         },
         {
@@ -3827,7 +3857,7 @@ type ContractBase = Omit<
           readonly ref: {
             readonly entry: 'User';
             readonly field: 'id';
-            readonly namespace: 'mytour';
+            readonly namespace: 'liveBnb';
           };
         },
         {
@@ -3836,7 +3866,7 @@ type ContractBase = Omit<
           readonly ref: {
             readonly entry: 'User';
             readonly field: 'updatedAt';
-            readonly namespace: 'mytour';
+            readonly namespace: 'liveBnb';
           };
         },
         {
@@ -3844,7 +3874,7 @@ type ContractBase = Omit<
           readonly ref: {
             readonly entry: 'VerificationToken';
             readonly field: 'id';
-            readonly namespace: 'mytour';
+            readonly namespace: 'liveBnb';
           };
         },
       ];

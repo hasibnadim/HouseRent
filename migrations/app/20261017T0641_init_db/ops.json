@@ -1,7 +1,7 @@
 [
   {
-    "id": "schema.mytour",
-    "label": "Create schema \"mytour\"",
+    "id": "schema.liveBnb",
+    "label": "Create schema \"liveBnb\"",
     "operationClass": "additive",
     "target": {
       "id": "postgres"
@@ -9,8 +9,8 @@
     "precheck": [],
     "execute": [
       {
-        "description": "Create schema \"mytour\"",
-        "sql": "CREATE SCHEMA IF NOT EXISTS \"mytour\"",
+        "description": "Create schema \"liveBnb\"",
+        "sql": "CREATE SCHEMA IF NOT EXISTS \"liveBnb\"",
         "params": []
       }
     ],
@@ -41,7 +41,7 @@
     "target": {
       "id": "postgres",
       "details": {
-        "schema": "mytour",
+        "schema": "liveBnb",
         "objectType": "table",
         "name": "Account"
       }
@@ -51,14 +51,14 @@
         "description": "ensure table \"Account\" does not exist",
         "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
         "params": [
-          "\"mytour\".\"Account\""
+          "\"liveBnb\".\"Account\""
         ]
       }
     ],
     "execute": [
       {
         "description": "create table \"Account\"",
-        "sql": "CREATE TABLE \"mytour\".\"Account\" (\n  \"access_token\" text,\n  \"createdAt\" timestamptz NOT NULL,\n  \"expires_at\" int4,\n  \"id\" character(36) NOT NULL,\n  \"id_token\" text,\n  \"oauth_token\" text,\n  \"oauth_token_secret\" text,\n  \"provider\" text NOT NULL,\n  \"providerAccountId\" text NOT NULL,\n  \"refresh_token\" text,\n  \"scope\" text,\n  \"session_state\" text,\n  \"token_type\" text,\n  \"type\" text NOT NULL,\n  \"updatedAt\" timestamptz NOT NULL,\n  \"userId\" character(36) NOT NULL,\n  PRIMARY KEY (\"id\")\n)",
+        "sql": "CREATE TABLE \"liveBnb\".\"Account\" (\n  \"access_token\" text,\n  \"createdAt\" timestamptz NOT NULL,\n  \"expires_at\" int4,\n  \"id\" character(36) NOT NULL,\n  \"id_token\" text,\n  \"oauth_token\" text,\n  \"oauth_token_secret\" text,\n  \"provider\" text NOT NULL,\n  \"providerAccountId\" text NOT NULL,\n  \"refresh_token\" text,\n  \"scope\" text,\n  \"session_state\" text,\n  \"token_type\" text,\n  \"type\" text NOT NULL,\n  \"updatedAt\" timestamptz NOT NULL,\n  \"userId\" character(36) NOT NULL,\n  PRIMARY KEY (\"id\")\n)",
         "params": []
       }
     ],
@@ -67,7 +67,7 @@
         "description": "verify table \"Account\" exists",
         "sql": "SELECT (to_regclass($1)) IS NOT NULL AS \"result\"",
         "params": [
-          "\"mytour\".\"Account\""
+          "\"liveBnb\".\"Account\""
         ]
       }
     ]
@@ -80,7 +80,7 @@
     "target": {
       "id": "postgres",
       "details": {
-        "schema": "mytour",
+        "schema": "liveBnb",
         "objectType": "table",
         "name": "AuditLog"
       }
@@ -90,14 +90,14 @@
         "description": "ensure table \"AuditLog\" does not exist",
         "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
         "params": [
-          "\"mytour\".\"AuditLog\""
+          "\"liveBnb\".\"AuditLog\""
         ]
       }
     ],
     "execute": [
       {
         "description": "create table \"AuditLog\"",
-        "sql": "CREATE TABLE \"mytour\".\"AuditLog\" (\n  \"action\" text NOT NULL,\n  \"actorId\" character(36) NOT NULL,\n  \"createdAt\" timestamptz NOT NULL,\n  \"id\" character(36) NOT NULL,\n  \"note\" text,\n  \"targetId\" text NOT NULL,\n  \"targetType\" text NOT NULL,\n  PRIMARY KEY (\"id\")\n)",
+        "sql": "CREATE TABLE \"liveBnb\".\"AuditLog\" (\n  \"action\" text NOT NULL,\n  \"actorId\" character(36) NOT NULL,\n  \"createdAt\" timestamptz NOT NULL,\n  \"id\" character(36) NOT NULL,\n  \"note\" text,\n  \"targetId\" text NOT NULL,\n  \"targetType\" text NOT NULL,\n  PRIMARY KEY (\"id\")\n)",
         "params": []
       }
     ],
@@ -106,7 +106,7 @@
         "description": "verify table \"AuditLog\" exists",
         "sql": "SELECT (to_regclass($1)) IS NOT NULL AS \"result\"",
         "params": [
-          "\"mytour\".\"AuditLog\""
+          "\"liveBnb\".\"AuditLog\""
         ]
       }
     ]
@@ -119,7 +119,7 @@
     "target": {
       "id": "postgres",
       "details": {
-        "schema": "mytour",
+        "schema": "liveBnb",
         "objectType": "table",
         "name": "AvailabilityBlock"
       }
@@ -129,14 +129,14 @@
         "description": "ensure table \"AvailabilityBlock\" does not exist",
         "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
         "params": [
-          "\"mytour\".\"AvailabilityBlock\""
+          "\"liveBnb\".\"AvailabilityBlock\""
         ]
       }
     ],
     "execute": [
       {
         "description": "create table \"AvailabilityBlock\"",
-        "sql": "CREATE TABLE \"mytour\".\"AvailabilityBlock\" (\n  \"createdAt\" timestamptz NOT NULL,\n  \"endsAt\" timestamptz NOT NULL,\n  \"id\" character(36) NOT NULL,\n  \"listingId\" character(36) NOT NULL,\n  \"note\" text,\n  \"startsAt\" timestamptz NOT NULL,\n  PRIMARY KEY (\"id\")\n)",
+        "sql": "CREATE TABLE \"liveBnb\".\"AvailabilityBlock\" (\n  \"createdAt\" timestamptz NOT NULL,\n  \"endsAt\" timestamptz NOT NULL,\n  \"id\" character(36) NOT NULL,\n  \"listingId\" character(36) NOT NULL,\n  \"note\" text,\n  \"startsAt\" timestamptz NOT NULL,\n  PRIMARY KEY (\"id\")\n)",
         "params": []
       }
     ],
@@ -145,7 +145,7 @@
         "description": "verify table \"AvailabilityBlock\" exists",
         "sql": "SELECT (to_regclass($1)) IS NOT NULL AS \"result\"",
         "params": [
-          "\"mytour\".\"AvailabilityBlock\""
+          "\"liveBnb\".\"AvailabilityBlock\""
         ]
       }
     ]
@@ -158,7 +158,7 @@
     "target": {
       "id": "postgres",
       "details": {
-        "schema": "mytour",
+        "schema": "liveBnb",
         "objectType": "table",
         "name": "Booking"
       }
@@ -168,14 +168,14 @@
         "description": "ensure table \"Booking\" does not exist",
         "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
         "params": [
-          "\"mytour\".\"Booking\""
+          "\"liveBnb\".\"Booking\""
         ]
       }
     ],
     "execute": [
       {
         "description": "create table \"Booking\"",
-        "sql": "CREATE TABLE \"mytour\".\"Booking\" (\n  \"advanceAmount\" int4 DEFAULT 0 NOT NULL,\n  \"approvedAt\" timestamptz,\n  \"cancelledAt\" timestamptz,\n  \"checkIn\" timestamptz NOT NULL,\n  \"checkOut\" timestamptz NOT NULL,\n  \"completedAt\" timestamptz,\n  \"createdAt\" timestamptz NOT NULL,\n  \"declineReason\" text,\n  \"declinedAt\" timestamptz,\n  \"discountAmount\" int4 DEFAULT 0 NOT NULL,\n  \"id\" character(36) NOT NULL,\n  \"listingId\" character(36) NOT NULL,\n  \"monthlyRentSnapshot\" int4 NOT NULL,\n  \"renterId\" character(36) NOT NULL,\n  \"renterNote\" text,\n  \"serviceChargeAmount\" int4 DEFAULT 0 NOT NULL,\n  \"status\" text DEFAULT 'PENDING' NOT NULL,\n  \"totalAmount\" int4 NOT NULL,\n  \"updatedAt\" timestamptz NOT NULL,\n  PRIMARY KEY (\"id\"),\n  CONSTRAINT \"Booking_status_check_cd3064cb\" CHECK (\"status\" IN ('PENDING', 'APPROVED', 'DECLINED', 'CANCELLED', 'COMPLETED'))\n)",
+        "sql": "CREATE TABLE \"liveBnb\".\"Booking\" (\n  \"advanceAmount\" int4 DEFAULT 0 NOT NULL,\n  \"approvedAt\" timestamptz,\n  \"cancelledAt\" timestamptz,\n  \"checkIn\" timestamptz NOT NULL,\n  \"checkOut\" timestamptz NOT NULL,\n  \"completedAt\" timestamptz,\n  \"createdAt\" timestamptz NOT NULL,\n  \"declineReason\" text,\n  \"declinedAt\" timestamptz,\n  \"discountAmount\" int4 DEFAULT 0 NOT NULL,\n  \"id\" character(36) NOT NULL,\n  \"listingId\" character(36) NOT NULL,\n  \"monthlyRentSnapshot\" int4 NOT NULL,\n  \"renterId\" character(36) NOT NULL,\n  \"renterNote\" text,\n  \"serviceChargeAmount\" int4 DEFAULT 0 NOT NULL,\n  \"status\" text DEFAULT 'PENDING' NOT NULL,\n  \"totalAmount\" int4 NOT NULL,\n  \"updatedAt\" timestamptz NOT NULL,\n  PRIMARY KEY (\"id\"),\n  CONSTRAINT \"Booking_status_check_cd3064cb\" CHECK (\"status\" IN ('PENDING', 'APPROVED', 'DECLINED', 'CANCELLED', 'COMPLETED'))\n)",
         "params": []
       }
     ],
@@ -184,7 +184,7 @@
         "description": "verify table \"Booking\" exists",
         "sql": "SELECT (to_regclass($1)) IS NOT NULL AS \"result\"",
         "params": [
-          "\"mytour\".\"Booking\""
+          "\"liveBnb\".\"Booking\""
         ]
       }
     ]
@@ -197,7 +197,7 @@
     "target": {
       "id": "postgres",
       "details": {
-        "schema": "mytour",
+        "schema": "liveBnb",
         "objectType": "table",
         "name": "Favorite"
       }
@@ -207,14 +207,14 @@
         "description": "ensure table \"Favorite\" does not exist",
         "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
         "params": [
-          "\"mytour\".\"Favorite\""
+          "\"liveBnb\".\"Favorite\""
         ]
       }
     ],
     "execute": [
       {
         "description": "create table \"Favorite\"",
-        "sql": "CREATE TABLE \"mytour\".\"Favorite\" (\n  \"createdAt\" timestamptz NOT NULL,\n  \"id\" character(36) NOT NULL,\n  \"listingId\" character(36) NOT NULL,\n  \"userId\" character(36) NOT NULL,\n  PRIMARY KEY (\"id\")\n)",
+        "sql": "CREATE TABLE \"liveBnb\".\"Favorite\" (\n  \"createdAt\" timestamptz NOT NULL,\n  \"id\" character(36) NOT NULL,\n  \"listingId\" character(36) NOT NULL,\n  \"userId\" character(36) NOT NULL,\n  PRIMARY KEY (\"id\")\n)",
         "params": []
       }
     ],
@@ -223,7 +223,7 @@
         "description": "verify table \"Favorite\" exists",
         "sql": "SELECT (to_regclass($1)) IS NOT NULL AS \"result\"",
         "params": [
-          "\"mytour\".\"Favorite\""
+          "\"liveBnb\".\"Favorite\""
         ]
       }
     ]
@@ -236,7 +236,7 @@
     "target": {
       "id": "postgres",
       "details": {
-        "schema": "mytour",
+        "schema": "liveBnb",
         "objectType": "table",
         "name": "Listing"
       }
@@ -246,14 +246,14 @@
         "description": "ensure table \"Listing\" does not exist",
         "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
         "params": [
-          "\"mytour\".\"Listing\""
+          "\"liveBnb\".\"Listing\""
         ]
       }
     ],
     "execute": [
       {
         "description": "create table \"Listing\"",
-        "sql": "CREATE TABLE \"mytour\".\"Listing\" (\n  \"addressNote\" text,\n  \"advanceAmount\" int4,\n  \"amenities\" text[] NOT NULL,\n  \"area\" text NOT NULL,\n  \"availableFrom\" timestamptz,\n  \"availableTo\" timestamptz,\n  \"bathrooms\" int4 NOT NULL,\n  \"bedrooms\" int4 NOT NULL,\n  \"city\" text NOT NULL,\n  \"createdAt\" timestamptz NOT NULL,\n  \"description\" text NOT NULL,\n  \"furnished\" bool DEFAULT false NOT NULL,\n  \"houseRules\" text,\n  \"id\" character(36) NOT NULL,\n  \"monthlyRent\" int4 NOT NULL,\n  \"ownerId\" character(36) NOT NULL,\n  \"propertyType\" text NOT NULL,\n  \"serviceChargeNote\" text,\n  \"sizeSqft\" int4 NOT NULL,\n  \"status\" text DEFAULT 'DRAFT' NOT NULL,\n  \"title\" text NOT NULL,\n  \"updatedAt\" timestamptz NOT NULL,\n  PRIMARY KEY (\"id\"),\n  CONSTRAINT \"Listing_amenities_elem_not_null_8aca8596\" CHECK (array_position(\"amenities\", NULL) IS NULL),\n  CONSTRAINT \"Listing_propertyType_check_64a3c017\" CHECK (\"propertyType\" IN ('APARTMENT', 'HOUSE', 'ROOM', 'VILLA', 'OTHER')),\n  CONSTRAINT \"Listing_status_check_962311ea\" CHECK (\"status\" IN ('DRAFT', 'PUBLISHED', 'UNPUBLISHED', 'ARCHIVED'))\n)",
+        "sql": "CREATE TABLE \"liveBnb\".\"Listing\" (\n  \"addressNote\" text,\n  \"advanceAmount\" int4,\n  \"amenities\" text[] NOT NULL,\n  \"area\" text NOT NULL,\n  \"availableFrom\" timestamptz,\n  \"availableTo\" timestamptz,\n  \"bathrooms\" int4 NOT NULL,\n  \"bedrooms\" int4 NOT NULL,\n  \"city\" text NOT NULL,\n  \"createdAt\" timestamptz NOT NULL,\n  \"description\" text NOT NULL,\n  \"furnished\" bool DEFAULT false NOT NULL,\n  \"houseRules\" text,\n  \"id\" character(36) NOT NULL,\n  \"monthlyRent\" int4 NOT NULL,\n  \"ownerId\" character(36) NOT NULL,\n  \"propertyType\" text NOT NULL,\n  \"serviceChargeNote\" text,\n  \"sizeSqft\" int4 NOT NULL,\n  \"status\" text DEFAULT 'DRAFT' NOT NULL,\n  \"title\" text NOT NULL,\n  \"updatedAt\" timestamptz NOT NULL,\n  PRIMARY KEY (\"id\"),\n  CONSTRAINT \"Listing_amenities_elem_not_null_8aca8596\" CHECK (array_position(\"amenities\", NULL) IS NULL),\n  CONSTRAINT \"Listing_propertyType_check_64a3c017\" CHECK (\"propertyType\" IN ('APARTMENT', 'HOUSE', 'ROOM', 'VILLA', 'OTHER')),\n  CONSTRAINT \"Listing_status_check_962311ea\" CHECK (\"status\" IN ('DRAFT', 'PUBLISHED', 'UNPUBLISHED', 'ARCHIVED'))\n)",
         "params": []
       }
     ],
@@ -262,7 +262,7 @@
         "description": "verify table \"Listing\" exists",
         "sql": "SELECT (to_regclass($1)) IS NOT NULL AS \"result\"",
         "params": [
-          "\"mytour\".\"Listing\""
+          "\"liveBnb\".\"Listing\""
         ]
       }
     ]
@@ -275,7 +275,7 @@
     "target": {
       "id": "postgres",
       "details": {
-        "schema": "mytour",
+        "schema": "liveBnb",
         "objectType": "table",
         "name": "ListingPhoto"
       }
@@ -285,14 +285,14 @@
         "description": "ensure table \"ListingPhoto\" does not exist",
         "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
         "params": [
-          "\"mytour\".\"ListingPhoto\""
+          "\"liveBnb\".\"ListingPhoto\""
         ]
       }
     ],
     "execute": [
       {
         "description": "create table \"ListingPhoto\"",
-        "sql": "CREATE TABLE \"mytour\".\"ListingPhoto\" (\n  \"caption\" text,\n  \"createdAt\" timestamptz NOT NULL,\n  \"id\" character(36) NOT NULL,\n  \"listingId\" character(36) NOT NULL,\n  \"sortOrder\" int4 DEFAULT 0 NOT NULL,\n  \"url\" text NOT NULL,\n  PRIMARY KEY (\"id\")\n)",
+        "sql": "CREATE TABLE \"liveBnb\".\"ListingPhoto\" (\n  \"caption\" text,\n  \"createdAt\" timestamptz NOT NULL,\n  \"id\" character(36) NOT NULL,\n  \"listingId\" character(36) NOT NULL,\n  \"sortOrder\" int4 DEFAULT 0 NOT NULL,\n  \"url\" text NOT NULL,\n  PRIMARY KEY (\"id\")\n)",
         "params": []
       }
     ],
@@ -301,7 +301,7 @@
         "description": "verify table \"ListingPhoto\" exists",
         "sql": "SELECT (to_regclass($1)) IS NOT NULL AS \"result\"",
         "params": [
-          "\"mytour\".\"ListingPhoto\""
+          "\"liveBnb\".\"ListingPhoto\""
         ]
       }
     ]
@@ -314,7 +314,7 @@
     "target": {
       "id": "postgres",
       "details": {
-        "schema": "mytour",
+        "schema": "liveBnb",
         "objectType": "table",
         "name": "ListingReport"
       }
@@ -324,14 +324,14 @@
         "description": "ensure table \"ListingReport\" does not exist",
         "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
         "params": [
-          "\"mytour\".\"ListingReport\""
+          "\"liveBnb\".\"ListingReport\""
         ]
       }
     ],
     "execute": [
       {
         "description": "create table \"ListingReport\"",
-        "sql": "CREATE TABLE \"mytour\".\"ListingReport\" (\n  \"createdAt\" timestamptz NOT NULL,\n  \"id\" character(36) NOT NULL,\n  \"listingId\" character(36) NOT NULL,\n  \"reason\" text NOT NULL,\n  \"reporterId\" character(36) NOT NULL,\n  \"resolutionNote\" text,\n  \"resolvedAt\" timestamptz,\n  \"resolvedById\" character(36),\n  \"status\" text DEFAULT 'OPEN' NOT NULL,\n  \"updatedAt\" timestamptz NOT NULL,\n  PRIMARY KEY (\"id\"),\n  CONSTRAINT \"ListingReport_status_check_029bb120\" CHECK (\"status\" IN ('OPEN', 'REVIEWED', 'DISMISSED'))\n)",
+        "sql": "CREATE TABLE \"liveBnb\".\"ListingReport\" (\n  \"createdAt\" timestamptz NOT NULL,\n  \"id\" character(36) NOT NULL,\n  \"listingId\" character(36) NOT NULL,\n  \"reason\" text NOT NULL,\n  \"reporterId\" character(36) NOT NULL,\n  \"resolutionNote\" text,\n  \"resolvedAt\" timestamptz,\n  \"resolvedById\" character(36),\n  \"status\" text DEFAULT 'OPEN' NOT NULL,\n  \"updatedAt\" timestamptz NOT NULL,\n  PRIMARY KEY (\"id\"),\n  CONSTRAINT \"ListingReport_status_check_029bb120\" CHECK (\"status\" IN ('OPEN', 'REVIEWED', 'DISMISSED'))\n)",
         "params": []
       }
     ],
@@ -340,7 +340,7 @@
         "description": "verify table \"ListingReport\" exists",
         "sql": "SELECT (to_regclass($1)) IS NOT NULL AS \"result\"",
         "params": [
-          "\"mytour\".\"ListingReport\""
+          "\"liveBnb\".\"ListingReport\""
         ]
       }
     ]
@@ -353,7 +353,7 @@
     "target": {
       "id": "postgres",
       "details": {
-        "schema": "mytour",
+        "schema": "liveBnb",
         "objectType": "table",
         "name": "Review"
       }
@@ -363,14 +363,14 @@
         "description": "ensure table \"Review\" does not exist",
         "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
         "params": [
-          "\"mytour\".\"Review\""
+          "\"liveBnb\".\"Review\""
         ]
       }
     ],
     "execute": [
       {
         "description": "create table \"Review\"",
-        "sql": "CREATE TABLE \"mytour\".\"Review\" (\n  \"bookingId\" character(36) NOT NULL,\n  \"comment\" text,\n  \"createdAt\" timestamptz NOT NULL,\n  \"id\" character(36) NOT NULL,\n  \"rating\" int4 NOT NULL,\n  \"revieweeId\" character(36) NOT NULL,\n  \"reviewerId\" character(36) NOT NULL,\n  \"updatedAt\" timestamptz NOT NULL,\n  PRIMARY KEY (\"id\")\n)",
+        "sql": "CREATE TABLE \"liveBnb\".\"Review\" (\n  \"bookingId\" character(36) NOT NULL,\n  \"comment\" text,\n  \"createdAt\" timestamptz NOT NULL,\n  \"id\" character(36) NOT NULL,\n  \"rating\" int4 NOT NULL,\n  \"revieweeId\" character(36) NOT NULL,\n  \"reviewerId\" character(36) NOT NULL,\n  \"updatedAt\" timestamptz NOT NULL,\n  PRIMARY KEY (\"id\")\n)",
         "params": []
       }
     ],
@@ -379,7 +379,7 @@
         "description": "verify table \"Review\" exists",
         "sql": "SELECT (to_regclass($1)) IS NOT NULL AS \"result\"",
         "params": [
-          "\"mytour\".\"Review\""
+          "\"liveBnb\".\"Review\""
         ]
       }
     ]
@@ -392,7 +392,7 @@
     "target": {
       "id": "postgres",
       "details": {
-        "schema": "mytour",
+        "schema": "liveBnb",
         "objectType": "table",
         "name": "Session"
       }
@@ -402,14 +402,14 @@
         "description": "ensure table \"Session\" does not exist",
         "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
         "params": [
-          "\"mytour\".\"Session\""
+          "\"liveBnb\".\"Session\""
         ]
       }
     ],
     "execute": [
       {
         "description": "create table \"Session\"",
-        "sql": "CREATE TABLE \"mytour\".\"Session\" (\n  \"createdAt\" timestamptz NOT NULL,\n  \"expires\" timestamptz NOT NULL,\n  \"id\" character(36) NOT NULL,\n  \"sessionToken\" text NOT NULL,\n  \"userId\" character(36) NOT NULL,\n  PRIMARY KEY (\"id\")\n)",
+        "sql": "CREATE TABLE \"liveBnb\".\"Session\" (\n  \"createdAt\" timestamptz NOT NULL,\n  \"expires\" timestamptz NOT NULL,\n  \"id\" character(36) NOT NULL,\n  \"sessionToken\" text NOT NULL,\n  \"userId\" character(36) NOT NULL,\n  PRIMARY KEY (\"id\")\n)",
         "params": []
       }
     ],
@@ -418,7 +418,7 @@
         "description": "verify table \"Session\" exists",
         "sql": "SELECT (to_regclass($1)) IS NOT NULL AS \"result\"",
         "params": [
-          "\"mytour\".\"Session\""
+          "\"liveBnb\".\"Session\""
         ]
       }
     ]
@@ -431,7 +431,7 @@
     "target": {
       "id": "postgres",
       "details": {
-        "schema": "mytour",
+        "schema": "liveBnb",
         "objectType": "table",
         "name": "User"
       }
@@ -441,14 +441,14 @@
         "description": "ensure table \"User\" does not exist",
         "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
         "params": [
-          "\"mytour\".\"User\""
+          "\"liveBnb\".\"User\""
         ]
       }
     ],
     "execute": [
       {
         "description": "create table \"User\"",
-        "sql": "CREATE TABLE \"mytour\".\"User\" (\n  \"createdAt\" timestamptz NOT NULL,\n  \"email\" text NOT NULL,\n  \"emailVerified\" timestamptz,\n  \"id\" character(36) NOT NULL,\n  \"image\" text,\n  \"isAdmin\" bool DEFAULT false NOT NULL,\n  \"isSuspended\" bool DEFAULT false NOT NULL,\n  \"name\" text,\n  \"passwordHash\" text,\n  \"phone\" text,\n  \"role\" text DEFAULT 'RENTER' NOT NULL,\n  \"updatedAt\" timestamptz NOT NULL,\n  PRIMARY KEY (\"id\"),\n  CONSTRAINT \"User_role_check_e7d7f8cc\" CHECK (\"role\" IN ('RENTER', 'OWNER'))\n)",
+        "sql": "CREATE TABLE \"liveBnb\".\"User\" (\n  \"createdAt\" timestamptz NOT NULL,\n  \"email\" text NOT NULL,\n  \"emailVerified\" timestamptz,\n  \"id\" character(36) NOT NULL,\n  \"image\" text,\n  \"isAdmin\" bool DEFAULT false NOT NULL,\n  \"isSuspended\" bool DEFAULT false NOT NULL,\n  \"name\" text,\n  \"passwordHash\" text,\n  \"phone\" text,\n  \"role\" text DEFAULT 'RENTER' NOT NULL,\n  \"updatedAt\" timestamptz NOT NULL,\n  PRIMARY KEY (\"id\"),\n  CONSTRAINT \"User_role_check_e7d7f8cc\" CHECK (\"role\" IN ('RENTER', 'OWNER'))\n)",
         "params": []
       }
     ],
@@ -457,7 +457,7 @@
         "description": "verify table \"User\" exists",
         "sql": "SELECT (to_regclass($1)) IS NOT NULL AS \"result\"",
         "params": [
-          "\"mytour\".\"User\""
+          "\"liveBnb\".\"User\""
         ]
       }
     ]
@@ -470,7 +470,7 @@
     "target": {
       "id": "postgres",
       "details": {
-        "schema": "mytour",
+        "schema": "liveBnb",
         "objectType": "table",
         "name": "VerificationToken"
       }
@@ -480,14 +480,14 @@
         "description": "ensure table \"VerificationToken\" does not exist",
         "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
         "params": [
-          "\"mytour\".\"VerificationToken\""
+          "\"liveBnb\".\"VerificationToken\""
         ]
       }
     ],
     "execute": [
       {
         "description": "create table \"VerificationToken\"",
-        "sql": "CREATE TABLE \"mytour\".\"VerificationToken\" (\n  \"expires\" timestamptz NOT NULL,\n  \"id\" character(36) NOT NULL,\n  \"identifier\" text NOT NULL,\n  \"token\" text NOT NULL,\n  PRIMARY KEY (\"id\")\n)",
+        "sql": "CREATE TABLE \"liveBnb\".\"VerificationToken\" (\n  \"expires\" timestamptz NOT NULL,\n  \"id\" character(36) NOT NULL,\n  \"identifier\" text NOT NULL,\n  \"token\" text NOT NULL,\n  PRIMARY KEY (\"id\")\n)",
         "params": []
       }
     ],
@@ -496,7 +496,7 @@
         "description": "verify table \"VerificationToken\" exists",
         "sql": "SELECT (to_regclass($1)) IS NOT NULL AS \"result\"",
         "params": [
-          "\"mytour\".\"VerificationToken\""
+          "\"liveBnb\".\"VerificationToken\""
         ]
       }
     ]
@@ -508,7 +508,7 @@
     "target": {
       "id": "postgres",
       "details": {
-        "schema": "mytour",
+        "schema": "liveBnb",
         "objectType": "unique",
         "name": "Account_provider_providerAccountId_key",
         "table": "Account"
@@ -520,15 +520,15 @@
         "sql": "SELECT NOT EXISTS (SELECT 1 AS \"one\" FROM \"pg_constraint\" AS \"c\" INNER JOIN \"pg_namespace\" AS \"n\" ON \"n\".\"oid\" = \"c\".\"connamespace\" WHERE (\"c\".\"conname\" = $1 AND \"n\".\"nspname\" = $2 AND \"c\".\"conrelid\" = to_regclass($3))) AS \"result\"",
         "params": [
           "Account_provider_providerAccountId_key",
-          "mytour",
-          "\"mytour\".\"Account\""
+          "liveBnb",
+          "\"liveBnb\".\"Account\""
         ]
       }
     ],
     "execute": [
       {
         "description": "add unique constraint \"Account_provider_providerAccountId_key\"",
-        "sql": "ALTER TABLE \"mytour\".\"Account\" ADD CONSTRAINT \"Account_provider_providerAccountId_key\" UNIQUE (\"provider\", \"providerAccountId\")"
+        "sql": "ALTER TABLE \"liveBnb\".\"Account\" ADD CONSTRAINT \"Account_provider_providerAccountId_key\" UNIQUE (\"provider\", \"providerAccountId\")"
       }
     ],
     "postcheck": [
@@ -537,8 +537,8 @@
         "sql": "SELECT EXISTS (SELECT 1 AS \"one\" FROM \"pg_constraint\" AS \"c\" INNER JOIN \"pg_namespace\" AS \"n\" ON \"n\".\"oid\" = \"c\".\"connamespace\" WHERE (\"c\".\"conname\" = $1 AND \"n\".\"nspname\" = $2 AND \"c\".\"conrelid\" = to_regclass($3))) AS \"result\"",
         "params": [
           "Account_provider_providerAccountId_key",
-          "mytour",
-          "\"mytour\".\"Account\""
+          "liveBnb",
+          "\"liveBnb\".\"Account\""
         ]
       }
     ]
@@ -550,7 +550,7 @@
     "target": {
       "id": "postgres",
       "details": {
-        "schema": "mytour",
+        "schema": "liveBnb",
         "objectType": "unique",
         "name": "Favorite_userId_listingId_key",
         "table": "Favorite"
@@ -562,15 +562,15 @@
         "sql": "SELECT NOT EXISTS (SELECT 1 AS \"one\" FROM \"pg_constraint\" AS \"c\" INNER JOIN \"pg_namespace\" AS \"n\" ON \"n\".\"oid\" = \"c\".\"connamespace\" WHERE (\"c\".\"conname\" = $1 AND \"n\".\"nspname\" = $2 AND \"c\".\"conrelid\" = to_regclass($3))) AS \"result\"",
         "params": [
           "Favorite_userId_listingId_key",
-          "mytour",
-          "\"mytour\".\"Favorite\""
+          "liveBnb",
+          "\"liveBnb\".\"Favorite\""
         ]
       }
     ],
     "execute": [
       {
         "description": "add unique constraint \"Favorite_userId_listingId_key\"",
-        "sql": "ALTER TABLE \"mytour\".\"Favorite\" ADD CONSTRAINT \"Favorite_userId_listingId_key\" UNIQUE (\"userId\", \"listingId\")"
+        "sql": "ALTER TABLE \"liveBnb\".\"Favorite\" ADD CONSTRAINT \"Favorite_userId_listingId_key\" UNIQUE (\"userId\", \"listingId\")"
       }
     ],
     "postcheck": [
@@ -579,8 +579,8 @@
         "sql": "SELECT EXISTS (SELECT 1 AS \"one\" FROM \"pg_constraint\" AS \"c\" INNER JOIN \"pg_namespace\" AS \"n\" ON \"n\".\"oid\" = \"c\".\"connamespace\" WHERE (\"c\".\"conname\" = $1 AND \"n\".\"nspname\" = $2 AND \"c\".\"conrelid\" = to_regclass($3))) AS \"result\"",
         "params": [
           "Favorite_userId_listingId_key",
-          "mytour",
-          "\"mytour\".\"Favorite\""
+          "liveBnb",
+          "\"liveBnb\".\"Favorite\""
         ]
       }
     ]
@@ -592,7 +592,7 @@
     "target": {
       "id": "postgres",
       "details": {
-        "schema": "mytour",
+        "schema": "liveBnb",
         "objectType": "unique",
         "name": "Review_bookingId_reviewerId_key",
         "table": "Review"
@@ -604,15 +604,15 @@
         "sql": "SELECT NOT EXISTS (SELECT 1 AS \"one\" FROM \"pg_constraint\" AS \"c\" INNER JOIN \"pg_namespace\" AS \"n\" ON \"n\".\"oid\" = \"c\".\"connamespace\" WHERE (\"c\".\"conname\" = $1 AND \"n\".\"nspname\" = $2 AND \"c\".\"conrelid\" = to_regclass($3))) AS \"result\"",
         "params": [
           "Review_bookingId_reviewerId_key",
-          "mytour",
-          "\"mytour\".\"Review\""
+          "liveBnb",
+          "\"liveBnb\".\"Review\""
         ]
       }
     ],
     "execute": [
       {
         "description": "add unique constraint \"Review_bookingId_reviewerId_key\"",
-        "sql": "ALTER TABLE \"mytour\".\"Review\" ADD CONSTRAINT \"Review_bookingId_reviewerId_key\" UNIQUE (\"bookingId\", \"reviewerId\")"
+        "sql": "ALTER TABLE \"liveBnb\".\"Review\" ADD CONSTRAINT \"Review_bookingId_reviewerId_key\" UNIQUE (\"bookingId\", \"reviewerId\")"
       }
     ],
     "postcheck": [
@@ -621,8 +621,8 @@
         "sql": "SELECT EXISTS (SELECT 1 AS \"one\" FROM \"pg_constraint\" AS \"c\" INNER JOIN \"pg_namespace\" AS \"n\" ON \"n\".\"oid\" = \"c\".\"connamespace\" WHERE (\"c\".\"conname\" = $1 AND \"n\".\"nspname\" = $2 AND \"c\".\"conrelid\" = to_regclass($3))) AS \"result\"",
         "params": [
           "Review_bookingId_reviewerId_key",
-          "mytour",
-          "\"mytour\".\"Review\""
+          "liveBnb",
+          "\"liveBnb\".\"Review\""
         ]
       }
     ]
@@ -634,7 +634,7 @@
     "target": {
       "id": "postgres",
       "details": {
-        "schema": "mytour",
+        "schema": "liveBnb",
         "objectType": "unique",
         "name": "Session_sessionToken_key",
         "table": "Session"
@@ -646,15 +646,15 @@
         "sql": "SELECT NOT EXISTS (SELECT 1 AS \"one\" FROM \"pg_constraint\" AS \"c\" INNER JOIN \"pg_namespace\" AS \"n\" ON \"n\".\"oid\" = \"c\".\"connamespace\" WHERE (\"c\".\"conname\" = $1 AND \"n\".\"nspname\" = $2 AND \"c\".\"conrelid\" = to_regclass($3))) AS \"result\"",
         "params": [
           "Session_sessionToken_key",
-          "mytour",
-          "\"mytour\".\"Session\""
+          "liveBnb",
+          "\"liveBnb\".\"Session\""
         ]
       }
     ],
     "execute": [
       {
         "description": "add unique constraint \"Session_sessionToken_key\"",
-        "sql": "ALTER TABLE \"mytour\".\"Session\" ADD CONSTRAINT \"Session_sessionToken_key\" UNIQUE (\"sessionToken\")"
+        "sql": "ALTER TABLE \"liveBnb\".\"Session\" ADD CONSTRAINT \"Session_sessionToken_key\" UNIQUE (\"sessionToken\")"
       }
     ],
     "postcheck": [
@@ -663,8 +663,8 @@
         "sql": "SELECT EXISTS (SELECT 1 AS \"one\" FROM \"pg_constraint\" AS \"c\" INNER JOIN \"pg_namespace\" AS \"n\" ON \"n\".\"oid\" = \"c\".\"connamespace\" WHERE (\"c\".\"conname\" = $1 AND \"n\".\"nspname\" = $2 AND \"c\".\"conrelid\" = to_regclass($3))) AS \"result\"",
         "params": [
           "Session_sessionToken_key",
-          "mytour",
-          "\"mytour\".\"Session\""
+          "liveBnb",
+          "\"liveBnb\".\"Session\""
         ]
       }
     ]
@@ -676,7 +676,7 @@
     "target": {
       "id": "postgres",
       "details": {
-        "schema": "mytour",
+        "schema": "liveBnb",
         "objectType": "unique",
         "name": "User_email_key",
         "table": "User"
@@ -688,15 +688,15 @@
         "sql": "SELECT NOT EXISTS (SELECT 1 AS \"one\" FROM \"pg_constraint\" AS \"c\" INNER JOIN \"pg_namespace\" AS \"n\" ON \"n\".\"oid\" = \"c\".\"connamespace\" WHERE (\"c\".\"conname\" = $1 AND \"n\".\"nspname\" = $2 AND \"c\".\"conrelid\" = to_regclass($3))) AS \"result\"",
         "params": [
           "User_email_key",
-          "mytour",
-          "\"mytour\".\"User\""
+          "liveBnb",
+          "\"liveBnb\".\"User\""
         ]
       }
     ],
     "execute": [
       {
         "description": "add unique constraint \"User_email_key\"",
-        "sql": "ALTER TABLE \"mytour\".\"User\" ADD CONSTRAINT \"User_email_key\" UNIQUE (\"email\")"
+        "sql": "ALTER TABLE \"liveBnb\".\"User\" ADD CONSTRAINT \"User_email_key\" UNIQUE (\"email\")"
       }
     ],
     "postcheck": [
@@ -705,8 +705,8 @@
         "sql": "SELECT EXISTS (SELECT 1 AS \"one\" FROM \"pg_constraint\" AS \"c\" INNER JOIN \"pg_namespace\" AS \"n\" ON \"n\".\"oid\" = \"c\".\"connamespace\" WHERE (\"c\".\"conname\" = $1 AND \"n\".\"nspname\" = $2 AND \"c\".\"conrelid\" = to_regclass($3))) AS \"result\"",
         "params": [
           "User_email_key",
-          "mytour",
-          "\"mytour\".\"User\""
+          "liveBnb",
+          "\"liveBnb\".\"User\""
         ]
       }
     ]
@@ -718,7 +718,7 @@
     "target": {
       "id": "postgres",
       "details": {
-        "schema": "mytour",
+        "schema": "liveBnb",
         "objectType": "unique",
         "name": "User_phone_key",
         "table": "User"
@@ -730,15 +730,15 @@
         "sql": "SELECT NOT EXISTS (SELECT 1 AS \"one\" FROM \"pg_constraint\" AS \"c\" INNER JOIN \"pg_namespace\" AS \"n\" ON \"n\".\"oid\" = \"c\".\"connamespace\" WHERE (\"c\".\"conname\" = $1 AND \"n\".\"nspname\" = $2 AND \"c\".\"conrelid\" = to_regclass($3))) AS \"result\"",
         "params": [
           "User_phone_key",
-          "mytour",
-          "\"mytour\".\"User\""
+          "liveBnb",
+          "\"liveBnb\".\"User\""
         ]
       }
     ],
     "execute": [
       {
         "description": "add unique constraint \"User_phone_key\"",
-        "sql": "ALTER TABLE \"mytour\".\"User\" ADD CONSTRAINT \"User_phone_key\" UNIQUE (\"phone\")"
+        "sql": "ALTER TABLE \"liveBnb\".\"User\" ADD CONSTRAINT \"User_phone_key\" UNIQUE (\"phone\")"
       }
     ],
     "postcheck": [
@@ -747,8 +747,8 @@
         "sql": "SELECT EXISTS (SELECT 1 AS \"one\" FROM \"pg_constraint\" AS \"c\" INNER JOIN \"pg_namespace\" AS \"n\" ON \"n\".\"oid\" = \"c\".\"connamespace\" WHERE (\"c\".\"conname\" = $1 AND \"n\".\"nspname\" = $2 AND \"c\".\"conrelid\" = to_regclass($3))) AS \"result\"",
         "params": [
           "User_phone_key",
-          "mytour",
-          "\"mytour\".\"User\""
+          "liveBnb",
+          "\"liveBnb\".\"User\""
         ]
       }
     ]
@@ -760,7 +760,7 @@
     "target": {
       "id": "postgres",
       "details": {
-        "schema": "mytour",
+        "schema": "liveBnb",
         "objectType": "unique",
         "name": "VerificationToken_identifier_token_key",
         "table": "VerificationToken"
@@ -772,15 +772,15 @@
         "sql": "SELECT NOT EXISTS (SELECT 1 AS \"one\" FROM \"pg_constraint\" AS \"c\" INNER JOIN \"pg_namespace\" AS \"n\" ON \"n\".\"oid\" = \"c\".\"connamespace\" WHERE (\"c\".\"conname\" = $1 AND \"n\".\"nspname\" = $2 AND \"c\".\"conrelid\" = to_regclass($3))) AS \"result\"",
         "params": [
           "VerificationToken_identifier_token_key",
-          "mytour",
-          "\"mytour\".\"VerificationToken\""
+          "liveBnb",
+          "\"liveBnb\".\"VerificationToken\""
         ]
       }
     ],
     "execute": [
       {
         "description": "add unique constraint \"VerificationToken_identifier_token_key\"",
-        "sql": "ALTER TABLE \"mytour\".\"VerificationToken\" ADD CONSTRAINT \"VerificationToken_identifier_token_key\" UNIQUE (\"identifier\", \"token\")"
+        "sql": "ALTER TABLE \"liveBnb\".\"VerificationToken\" ADD CONSTRAINT \"VerificationToken_identifier_token_key\" UNIQUE (\"identifier\", \"token\")"
       }
     ],
     "postcheck": [
@@ -789,8 +789,8 @@
         "sql": "SELECT EXISTS (SELECT 1 AS \"one\" FROM \"pg_constraint\" AS \"c\" INNER JOIN \"pg_namespace\" AS \"n\" ON \"n\".\"oid\" = \"c\".\"connamespace\" WHERE (\"c\".\"conname\" = $1 AND \"n\".\"nspname\" = $2 AND \"c\".\"conrelid\" = to_regclass($3))) AS \"result\"",
         "params": [
           "VerificationToken_identifier_token_key",
-          "mytour",
-          "\"mytour\".\"VerificationToken\""
+          "liveBnb",
+          "\"liveBnb\".\"VerificationToken\""
         ]
       }
     ]
@@ -802,7 +802,7 @@
     "target": {
       "id": "postgres",
       "details": {
-        "schema": "mytour",
+        "schema": "liveBnb",
         "objectType": "index",
         "name": "Account_userId_idx_a489d58a",
         "table": "Account"
@@ -813,14 +813,14 @@
         "description": "ensure index \"Account_userId_idx_a489d58a\" does not exist",
         "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
         "params": [
-          "\"mytour\".\"Account_userId_idx_a489d58a\""
+          "\"liveBnb\".\"Account_userId_idx_a489d58a\""
         ]
       }
     ],
     "execute": [
       {
         "description": "create index \"Account_userId_idx_a489d58a\"",
-        "sql": "CREATE INDEX \"Account_userId_idx_a489d58a\" ON \"mytour\".\"Account\" (\"userId\")",
+        "sql": "CREATE INDEX \"Account_userId_idx_a489d58a\" ON \"liveBnb\".\"Account\" (\"userId\")",
         "params": []
       }
     ],
@@ -829,7 +829,7 @@
         "description": "verify index \"Account_userId_idx_a489d58a\" exists",
         "sql": "SELECT (to_regclass($1)) IS NOT NULL AS \"result\"",
         "params": [
-          "\"mytour\".\"Account_userId_idx_a489d58a\""
+          "\"liveBnb\".\"Account_userId_idx_a489d58a\""
         ]
       }
     ]
@@ -841,7 +841,7 @@
     "target": {
       "id": "postgres",
       "details": {
-        "schema": "mytour",
+        "schema": "liveBnb",
         "objectType": "index",
         "name": "audit_actor_recent_0e9f1adf",
         "table": "AuditLog"
@@ -852,14 +852,14 @@
         "description": "ensure index \"audit_actor_recent_0e9f1adf\" does not exist",
         "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
         "params": [
-          "\"mytour\".\"audit_actor_recent_0e9f1adf\""
+          "\"liveBnb\".\"audit_actor_recent_0e9f1adf\""
         ]
       }
     ],
     "execute": [
       {
         "description": "create index \"audit_actor_recent_0e9f1adf\"",
-        "sql": "CREATE INDEX \"audit_actor_recent_0e9f1adf\" ON \"mytour\".\"AuditLog\" (\"actorId\", \"createdAt\")",
+        "sql": "CREATE INDEX \"audit_actor_recent_0e9f1adf\" ON \"liveBnb\".\"AuditLog\" (\"actorId\", \"createdAt\")",
         "params": []
       }
     ],
@@ -868,7 +868,7 @@
         "description": "verify index \"audit_actor_recent_0e9f1adf\" exists",
         "sql": "SELECT (to_regclass($1)) IS NOT NULL AS \"result\"",
         "params": [
-          "\"mytour\".\"audit_actor_recent_0e9f1adf\""
+          "\"liveBnb\".\"audit_actor_recent_0e9f1adf\""
         ]
       }
     ]
@@ -880,7 +880,7 @@
     "target": {
       "id": "postgres",
       "details": {
-        "schema": "mytour",
+        "schema": "liveBnb",
         "objectType": "index",
         "name": "AvailabilityBlock_listingId_idx_953decda",
         "table": "AvailabilityBlock"
@@ -891,14 +891,14 @@
         "description": "ensure index \"AvailabilityBlock_listingId_idx_953decda\" does not exist",
         "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
         "params": [
-          "\"mytour\".\"AvailabilityBlock_listingId_idx_953decda\""
+          "\"liveBnb\".\"AvailabilityBlock_listingId_idx_953decda\""
         ]
       }
     ],
     "execute": [
       {
         "description": "create index \"AvailabilityBlock_listingId_idx_953decda\"",
-        "sql": "CREATE INDEX \"AvailabilityBlock_listingId_idx_953decda\" ON \"mytour\".\"AvailabilityBlock\" (\"listingId\")",
+        "sql": "CREATE INDEX \"AvailabilityBlock_listingId_idx_953decda\" ON \"liveBnb\".\"AvailabilityBlock\" (\"listingId\")",
         "params": []
       }
     ],
@@ -907,7 +907,7 @@
         "description": "verify index \"AvailabilityBlock_listingId_idx_953decda\" exists",
         "sql": "SELECT (to_regclass($1)) IS NOT NULL AS \"result\"",
         "params": [
-          "\"mytour\".\"AvailabilityBlock_listingId_idx_953decda\""
+          "\"liveBnb\".\"AvailabilityBlock_listingId_idx_953decda\""
         ]
       }
     ]
@@ -919,7 +919,7 @@
     "target": {
       "id": "postgres",
       "details": {
-        "schema": "mytour",
+        "schema": "liveBnb",
         "objectType": "index",
         "name": "availability_listing_start_7b8c2bae",
         "table": "AvailabilityBlock"
@@ -930,14 +930,14 @@
         "description": "ensure index \"availability_listing_start_7b8c2bae\" does not exist",
         "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
         "params": [
-          "\"mytour\".\"availability_listing_start_7b8c2bae\""
+          "\"liveBnb\".\"availability_listing_start_7b8c2bae\""
         ]
       }
     ],
     "execute": [
       {
         "description": "create index \"availability_listing_start_7b8c2bae\"",
-        "sql": "CREATE INDEX \"availability_listing_start_7b8c2bae\" ON \"mytour\".\"AvailabilityBlock\" (\"listingId\", \"startsAt\")",
+        "sql": "CREATE INDEX \"availability_listing_start_7b8c2bae\" ON \"liveBnb\".\"AvailabilityBlock\" (\"listingId\", \"startsAt\")",
         "params": []
       }
     ],
@@ -946,7 +946,7 @@
         "description": "verify index \"availability_listing_start_7b8c2bae\" exists",
         "sql": "SELECT (to_regclass($1)) IS NOT NULL AS \"result\"",
         "params": [
-          "\"mytour\".\"availability_listing_start_7b8c2bae\""
+          "\"liveBnb\".\"availability_listing_start_7b8c2bae\""
         ]
       }
     ]
@@ -958,7 +958,7 @@
     "target": {
       "id": "postgres",
       "details": {
-        "schema": "mytour",
+        "schema": "liveBnb",
         "objectType": "index",
         "name": "booking_listing_dates_533749d6",
         "table": "Booking"
@@ -969,14 +969,14 @@
         "description": "ensure index \"booking_listing_dates_533749d6\" does not exist",
         "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
         "params": [
-          "\"mytour\".\"booking_listing_dates_533749d6\""
+          "\"liveBnb\".\"booking_listing_dates_533749d6\""
         ]
       }
     ],
     "execute": [
       {
         "description": "create index \"booking_listing_dates_533749d6\"",
-        "sql": "CREATE INDEX \"booking_listing_dates_533749d6\" ON \"mytour\".\"Booking\" (\"listingId\", \"status\", \"checkIn\", \"checkOut\")",
+        "sql": "CREATE INDEX \"booking_listing_dates_533749d6\" ON \"liveBnb\".\"Booking\" (\"listingId\", \"status\", \"checkIn\", \"checkOut\")",
         "params": []
       }
     ],
@@ -985,7 +985,7 @@
         "description": "verify index \"booking_listing_dates_533749d6\" exists",
         "sql": "SELECT (to_regclass($1)) IS NOT NULL AS \"result\"",
         "params": [
-          "\"mytour\".\"booking_listing_dates_533749d6\""
+          "\"liveBnb\".\"booking_listing_dates_533749d6\""
         ]
       }
     ]
@@ -997,7 +997,7 @@
     "target": {
       "id": "postgres",
       "details": {
-        "schema": "mytour",
+        "schema": "liveBnb",
         "objectType": "index",
         "name": "booking_renter_status_9a7f078e",
         "table": "Booking"
@@ -1008,14 +1008,14 @@
         "description": "ensure index \"booking_renter_status_9a7f078e\" does not exist",
         "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
         "params": [
-          "\"mytour\".\"booking_renter_status_9a7f078e\""
+          "\"liveBnb\".\"booking_renter_status_9a7f078e\""
         ]
       }
     ],
     "execute": [
       {
         "description": "create index \"booking_renter_status_9a7f078e\"",
-        "sql": "CREATE INDEX \"booking_renter_status_9a7f078e\" ON \"mytour\".\"Booking\" (\"renterId\", \"status\")",
+        "sql": "CREATE INDEX \"booking_renter_status_9a7f078e\" ON \"liveBnb\".\"Booking\" (\"renterId\", \"status\")",
         "params": []
       }
     ],
@@ -1024,7 +1024,7 @@
         "description": "verify index \"booking_renter_status_9a7f078e\" exists",
         "sql": "SELECT (to_regclass($1)) IS NOT NULL AS \"result\"",
         "params": [
-          "\"mytour\".\"booking_renter_status_9a7f078e\""
+          "\"liveBnb\".\"booking_renter_status_9a7f078e\""
         ]
       }
     ]
@@ -1036,7 +1036,7 @@
     "target": {
       "id": "postgres",
       "details": {
-        "schema": "mytour",
+        "schema": "liveBnb",
         "objectType": "index",
         "name": "Favorite_listingId_idx_953decda",
         "table": "Favorite"
@@ -1047,14 +1047,14 @@
         "description": "ensure index \"Favorite_listingId_idx_953decda\" does not exist",
         "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
         "params": [
-          "\"mytour\".\"Favorite_listingId_idx_953decda\""
+          "\"liveBnb\".\"Favorite_listingId_idx_953decda\""
         ]
       }
     ],
     "execute": [
       {
         "description": "create index \"Favorite_listingId_idx_953decda\"",
-        "sql": "CREATE INDEX \"Favorite_listingId_idx_953decda\" ON \"mytour\".\"Favorite\" (\"listingId\")",
+        "sql": "CREATE INDEX \"Favorite_listingId_idx_953decda\" ON \"liveBnb\".\"Favorite\" (\"listingId\")",
         "params": []
       }
     ],
@@ -1063,7 +1063,7 @@
         "description": "verify index \"Favorite_listingId_idx_953decda\" exists",
         "sql": "SELECT (to_regclass($1)) IS NOT NULL AS \"result\"",
         "params": [
-          "\"mytour\".\"Favorite_listingId_idx_953decda\""
+          "\"liveBnb\".\"Favorite_listingId_idx_953decda\""
         ]
       }
     ]
@@ -1075,7 +1075,7 @@
     "target": {
       "id": "postgres",
       "details": {
-        "schema": "mytour",
+        "schema": "liveBnb",
         "objectType": "index",
         "name": "Favorite_userId_idx_a489d58a",
         "table": "Favorite"
@@ -1086,14 +1086,14 @@
         "description": "ensure index \"Favorite_userId_idx_a489d58a\" does not exist",
         "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
         "params": [
-          "\"mytour\".\"Favorite_userId_idx_a489d58a\""
+          "\"liveBnb\".\"Favorite_userId_idx_a489d58a\""
         ]
       }
     ],
     "execute": [
       {
         "description": "create index \"Favorite_userId_idx_a489d58a\"",
-        "sql": "CREATE INDEX \"Favorite_userId_idx_a489d58a\" ON \"mytour\".\"Favorite\" (\"userId\")",
+        "sql": "CREATE INDEX \"Favorite_userId_idx_a489d58a\" ON \"liveBnb\".\"Favorite\" (\"userId\")",
         "params": []
       }
     ],
@@ -1102,7 +1102,7 @@
         "description": "verify index \"Favorite_userId_idx_a489d58a\" exists",
         "sql": "SELECT (to_regclass($1)) IS NOT NULL AS \"result\"",
         "params": [
-          "\"mytour\".\"Favorite_userId_idx_a489d58a\""
+          "\"liveBnb\".\"Favorite_userId_idx_a489d58a\""
         ]
       }
     ]
@@ -1114,7 +1114,7 @@
     "target": {
       "id": "postgres",
       "details": {
-        "schema": "mytour",
+        "schema": "liveBnb",
         "objectType": "index",
         "name": "listing_browse_3a3c3d1e",
         "table": "Listing"
@@ -1125,14 +1125,14 @@
         "description": "ensure index \"listing_browse_3a3c3d1e\" does not exist",
         "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
         "params": [
-          "\"mytour\".\"listing_browse_3a3c3d1e\""
+          "\"liveBnb\".\"listing_browse_3a3c3d1e\""
         ]
       }
     ],
     "execute": [
       {
         "description": "create index \"listing_browse_3a3c3d1e\"",
-        "sql": "CREATE INDEX \"listing_browse_3a3c3d1e\" ON \"mytour\".\"Listing\" (\"status\", \"monthlyRent\")",
+        "sql": "CREATE INDEX \"listing_browse_3a3c3d1e\" ON \"liveBnb\".\"Listing\" (\"status\", \"monthlyRent\")",
         "params": []
       }
     ],
@@ -1141,7 +1141,7 @@
         "description": "verify index \"listing_browse_3a3c3d1e\" exists",
         "sql": "SELECT (to_regclass($1)) IS NOT NULL AS \"result\"",
         "params": [
-          "\"mytour\".\"listing_browse_3a3c3d1e\""
+          "\"liveBnb\".\"listing_browse_3a3c3d1e\""
         ]
       }
     ]
@@ -1153,7 +1153,7 @@
     "target": {
       "id": "postgres",
       "details": {
-        "schema": "mytour",
+        "schema": "liveBnb",
         "objectType": "index",
         "name": "listing_location_be494fa7",
         "table": "Listing"
@@ -1164,14 +1164,14 @@
         "description": "ensure index \"listing_location_be494fa7\" does not exist",
         "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
         "params": [
-          "\"mytour\".\"listing_location_be494fa7\""
+          "\"liveBnb\".\"listing_location_be494fa7\""
         ]
       }
     ],
     "execute": [
       {
         "description": "create index \"listing_location_be494fa7\"",
-        "sql": "CREATE INDEX \"listing_location_be494fa7\" ON \"mytour\".\"Listing\" (\"city\", \"area\")",
+        "sql": "CREATE INDEX \"listing_location_be494fa7\" ON \"liveBnb\".\"Listing\" (\"city\", \"area\")",
         "params": []
       }
     ],
@@ -1180,7 +1180,7 @@
         "description": "verify index \"listing_location_be494fa7\" exists",
         "sql": "SELECT (to_regclass($1)) IS NOT NULL AS \"result\"",
         "params": [
-          "\"mytour\".\"listing_location_be494fa7\""
+          "\"liveBnb\".\"listing_location_be494fa7\""
         ]
       }
     ]
@@ -1192,7 +1192,7 @@
     "target": {
       "id": "postgres",
       "details": {
-        "schema": "mytour",
+        "schema": "liveBnb",
         "objectType": "index",
         "name": "listing_owner_e2d0c1ef",
         "table": "Listing"
@@ -1203,14 +1203,14 @@
         "description": "ensure index \"listing_owner_e2d0c1ef\" does not exist",
         "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
         "params": [
-          "\"mytour\".\"listing_owner_e2d0c1ef\""
+          "\"liveBnb\".\"listing_owner_e2d0c1ef\""
         ]
       }
     ],
     "execute": [
       {
         "description": "create index \"listing_owner_e2d0c1ef\"",
-        "sql": "CREATE INDEX \"listing_owner_e2d0c1ef\" ON \"mytour\".\"Listing\" (\"ownerId\")",
+        "sql": "CREATE INDEX \"listing_owner_e2d0c1ef\" ON \"liveBnb\".\"Listing\" (\"ownerId\")",
         "params": []
       }
     ],
@@ -1219,7 +1219,7 @@
         "description": "verify index \"listing_owner_e2d0c1ef\" exists",
         "sql": "SELECT (to_regclass($1)) IS NOT NULL AS \"result\"",
         "params": [
-          "\"mytour\".\"listing_owner_e2d0c1ef\""
+          "\"liveBnb\".\"listing_owner_e2d0c1ef\""
         ]
       }
     ]
@@ -1231,7 +1231,7 @@
     "target": {
       "id": "postgres",
       "details": {
-        "schema": "mytour",
+        "schema": "liveBnb",
         "objectType": "index",
         "name": "ListingPhoto_listingId_idx_953decda",
         "table": "ListingPhoto"
@@ -1242,14 +1242,14 @@
         "description": "ensure index \"ListingPhoto_listingId_idx_953decda\" does not exist",
         "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
         "params": [
-          "\"mytour\".\"ListingPhoto_listingId_idx_953decda\""
+          "\"liveBnb\".\"ListingPhoto_listingId_idx_953decda\""
         ]
       }
     ],
     "execute": [
       {
         "description": "create index \"ListingPhoto_listingId_idx_953decda\"",
-        "sql": "CREATE INDEX \"ListingPhoto_listingId_idx_953decda\" ON \"mytour\".\"ListingPhoto\" (\"listingId\")",
+        "sql": "CREATE INDEX \"ListingPhoto_listingId_idx_953decda\" ON \"liveBnb\".\"ListingPhoto\" (\"listingId\")",
         "params": []
       }
     ],
@@ -1258,7 +1258,7 @@
         "description": "verify index \"ListingPhoto_listingId_idx_953decda\" exists",
         "sql": "SELECT (to_regclass($1)) IS NOT NULL AS \"result\"",
         "params": [
-          "\"mytour\".\"ListingPhoto_listingId_idx_953decda\""
+          "\"liveBnb\".\"ListingPhoto_listingId_idx_953decda\""
         ]
       }
     ]
@@ -1270,7 +1270,7 @@
     "target": {
       "id": "postgres",
       "details": {
-        "schema": "mytour",
+        "schema": "liveBnb",
         "objectType": "index",
         "name": "listing_photo_order_c6074c87",
         "table": "ListingPhoto"
@@ -1281,14 +1281,14 @@
         "description": "ensure index \"listing_photo_order_c6074c87\" does not exist",
         "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
         "params": [
-          "\"mytour\".\"listing_photo_order_c6074c87\""
+          "\"liveBnb\".\"listing_photo_order_c6074c87\""
         ]
       }
     ],
     "execute": [
       {
         "description": "create index \"listing_photo_order_c6074c87\"",
-        "sql": "CREATE INDEX \"listing_photo_order_c6074c87\" ON \"mytour\".\"ListingPhoto\" (\"listingId\", \"sortOrder\")",
+        "sql": "CREATE INDEX \"listing_photo_order_c6074c87\" ON \"liveBnb\".\"ListingPhoto\" (\"listingId\", \"sortOrder\")",
         "params": []
       }
     ],
@@ -1297,7 +1297,7 @@
         "description": "verify index \"listing_photo_order_c6074c87\" exists",
         "sql": "SELECT (to_regclass($1)) IS NOT NULL AS \"result\"",
         "params": [
-          "\"mytour\".\"listing_photo_order_c6074c87\""
+          "\"liveBnb\".\"listing_photo_order_c6074c87\""
         ]
       }
     ]
@@ -1309,7 +1309,7 @@
     "target": {
       "id": "postgres",
       "details": {
-        "schema": "mytour",
+        "schema": "liveBnb",
         "objectType": "index",
         "name": "report_listing_status_1b030a2f",
         "table": "ListingReport"
@@ -1320,14 +1320,14 @@
         "description": "ensure index \"report_listing_status_1b030a2f\" does not exist",
         "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
         "params": [
-          "\"mytour\".\"report_listing_status_1b030a2f\""
+          "\"liveBnb\".\"report_listing_status_1b030a2f\""
         ]
       }
     ],
     "execute": [
       {
         "description": "create index \"report_listing_status_1b030a2f\"",
-        "sql": "CREATE INDEX \"report_listing_status_1b030a2f\" ON \"mytour\".\"ListingReport\" (\"listingId\", \"status\")",
+        "sql": "CREATE INDEX \"report_listing_status_1b030a2f\" ON \"liveBnb\".\"ListingReport\" (\"listingId\", \"status\")",
         "params": []
       }
     ],
@@ -1336,7 +1336,7 @@
         "description": "verify index \"report_listing_status_1b030a2f\" exists",
         "sql": "SELECT (to_regclass($1)) IS NOT NULL AS \"result\"",
         "params": [
-          "\"mytour\".\"report_listing_status_1b030a2f\""
+          "\"liveBnb\".\"report_listing_status_1b030a2f\""
         ]
       }
     ]
@@ -1348,7 +1348,7 @@
     "target": {
       "id": "postgres",
       "details": {
-        "schema": "mytour",
+        "schema": "liveBnb",
         "objectType": "index",
         "name": "report_reporter_aa245831",
         "table": "ListingReport"
@@ -1359,14 +1359,14 @@
         "description": "ensure index \"report_reporter_aa245831\" does not exist",
         "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
         "params": [
-          "\"mytour\".\"report_reporter_aa245831\""
+          "\"liveBnb\".\"report_reporter_aa245831\""
         ]
       }
     ],
     "execute": [
       {
         "description": "create index \"report_reporter_aa245831\"",
-        "sql": "CREATE INDEX \"report_reporter_aa245831\" ON \"mytour\".\"ListingReport\" (\"reporterId\")",
+        "sql": "CREATE INDEX \"report_reporter_aa245831\" ON \"liveBnb\".\"ListingReport\" (\"reporterId\")",
         "params": []
       }
     ],
@@ -1375,7 +1375,7 @@
         "description": "verify index \"report_reporter_aa245831\" exists",
         "sql": "SELECT (to_regclass($1)) IS NOT NULL AS \"result\"",
         "params": [
-          "\"mytour\".\"report_reporter_aa245831\""
+          "\"liveBnb\".\"report_reporter_aa245831\""
         ]
       }
     ]
@@ -1387,7 +1387,7 @@
     "target": {
       "id": "postgres",
       "details": {
-        "schema": "mytour",
+        "schema": "liveBnb",
         "objectType": "index",
         "name": "review_reviewee_recent_c43c7af7",
         "table": "Review"
@@ -1398,14 +1398,14 @@
         "description": "ensure index \"review_reviewee_recent_c43c7af7\" does not exist",
         "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
         "params": [
-          "\"mytour\".\"review_reviewee_recent_c43c7af7\""
+          "\"liveBnb\".\"review_reviewee_recent_c43c7af7\""
         ]
       }
     ],
     "execute": [
       {
         "description": "create index \"review_reviewee_recent_c43c7af7\"",
-        "sql": "CREATE INDEX \"review_reviewee_recent_c43c7af7\" ON \"mytour\".\"Review\" (\"revieweeId\", \"createdAt\")",
+        "sql": "CREATE INDEX \"review_reviewee_recent_c43c7af7\" ON \"liveBnb\".\"Review\" (\"revieweeId\", \"createdAt\")",
         "params": []
       }
     ],
@@ -1414,7 +1414,7 @@
         "description": "verify index \"review_reviewee_recent_c43c7af7\" exists",
         "sql": "SELECT (to_regclass($1)) IS NOT NULL AS \"result\"",
         "params": [
-          "\"mytour\".\"review_reviewee_recent_c43c7af7\""
+          "\"liveBnb\".\"review_reviewee_recent_c43c7af7\""
         ]
       }
     ]
@@ -1426,7 +1426,7 @@
     "target": {
       "id": "postgres",
       "details": {
-        "schema": "mytour",
+        "schema": "liveBnb",
         "objectType": "index",
         "name": "Session_userId_idx_a489d58a",
         "table": "Session"
@@ -1437,14 +1437,14 @@
         "description": "ensure index \"Session_userId_idx_a489d58a\" does not exist",
         "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
         "params": [
-          "\"mytour\".\"Session_userId_idx_a489d58a\""
+          "\"liveBnb\".\"Session_userId_idx_a489d58a\""
         ]
       }
     ],
     "execute": [
       {
         "description": "create index \"Session_userId_idx_a489d58a\"",
-        "sql": "CREATE INDEX \"Session_userId_idx_a489d58a\" ON \"mytour\".\"Session\" (\"userId\")",
+        "sql": "CREATE INDEX \"Session_userId_idx_a489d58a\" ON \"liveBnb\".\"Session\" (\"userId\")",
         "params": []
       }
     ],
@@ -1453,7 +1453,7 @@
         "description": "verify index \"Session_userId_idx_a489d58a\" exists",
         "sql": "SELECT (to_regclass($1)) IS NOT NULL AS \"result\"",
         "params": [
-          "\"mytour\".\"Session_userId_idx_a489d58a\""
+          "\"liveBnb\".\"Session_userId_idx_a489d58a\""
         ]
       }
     ]
@@ -1465,7 +1465,7 @@
     "target": {
       "id": "postgres",
       "details": {
-        "schema": "mytour",
+        "schema": "liveBnb",
         "objectType": "foreignKey",
         "name": "Account_userId_fkey",
         "table": "Account"
@@ -1477,15 +1477,15 @@
         "sql": "SELECT NOT EXISTS (SELECT 1 AS \"one\" FROM \"pg_constraint\" AS \"c\" INNER JOIN \"pg_namespace\" AS \"n\" ON \"n\".\"oid\" = \"c\".\"connamespace\" WHERE (\"c\".\"conname\" = $1 AND \"n\".\"nspname\" = $2 AND \"c\".\"conrelid\" = to_regclass($3))) AS \"result\"",
         "params": [
           "Account_userId_fkey",
-          "mytour",
-          "\"mytour\".\"Account\""
+          "liveBnb",
+          "\"liveBnb\".\"Account\""
         ]
       }
     ],
     "execute": [
       {
         "description": "add FK \"Account_userId_fkey\"",
-        "sql": "ALTER TABLE \"mytour\".\"Account\"\nADD CONSTRAINT \"Account_userId_fkey\"\nFOREIGN KEY (\"userId\")\nREFERENCES \"mytour\".\"User\" (\"id\")\nON DELETE CASCADE"
+        "sql": "ALTER TABLE \"liveBnb\".\"Account\"\nADD CONSTRAINT \"Account_userId_fkey\"\nFOREIGN KEY (\"userId\")\nREFERENCES \"liveBnb\".\"User\" (\"id\")\nON DELETE CASCADE"
       }
     ],
     "postcheck": [
@@ -1494,8 +1494,8 @@
         "sql": "SELECT EXISTS (SELECT 1 AS \"one\" FROM \"pg_constraint\" AS \"c\" INNER JOIN \"pg_namespace\" AS \"n\" ON \"n\".\"oid\" = \"c\".\"connamespace\" WHERE (\"c\".\"conname\" = $1 AND \"n\".\"nspname\" = $2 AND \"c\".\"conrelid\" = to_regclass($3))) AS \"result\"",
         "params": [
           "Account_userId_fkey",
-          "mytour",
-          "\"mytour\".\"Account\""
+          "liveBnb",
+          "\"liveBnb\".\"Account\""
         ]
       }
     ]
@@ -1507,7 +1507,7 @@
     "target": {
       "id": "postgres",
       "details": {
-        "schema": "mytour",
+        "schema": "liveBnb",
         "objectType": "foreignKey",
         "name": "AvailabilityBlock_listingId_fkey",
         "table": "AvailabilityBlock"
@@ -1519,15 +1519,15 @@
         "sql": "SELECT NOT EXISTS (SELECT 1 AS \"one\" FROM \"pg_constraint\" AS \"c\" INNER JOIN \"pg_namespace\" AS \"n\" ON \"n\".\"oid\" = \"c\".\"connamespace\" WHERE (\"c\".\"conname\" = $1 AND \"n\".\"nspname\" = $2 AND \"c\".\"conrelid\" = to_regclass($3))) AS \"result\"",
         "params": [
           "AvailabilityBlock_listingId_fkey",
-          "mytour",
-          "\"mytour\".\"AvailabilityBlock\""
+          "liveBnb",
+          "\"liveBnb\".\"AvailabilityBlock\""
         ]
       }
     ],
     "execute": [
       {
         "description": "add FK \"AvailabilityBlock_listingId_fkey\"",
-        "sql": "ALTER TABLE \"mytour\".\"AvailabilityBlock\"\nADD CONSTRAINT \"AvailabilityBlock_listingId_fkey\"\nFOREIGN KEY (\"listingId\")\nREFERENCES \"mytour\".\"Listing\" (\"id\")\nON DELETE CASCADE"
+        "sql": "ALTER TABLE \"liveBnb\".\"AvailabilityBlock\"\nADD CONSTRAINT \"AvailabilityBlock_listingId_fkey\"\nFOREIGN KEY (\"listingId\")\nREFERENCES \"liveBnb\".\"Listing\" (\"id\")\nON DELETE CASCADE"
       }
     ],
     "postcheck": [
@@ -1536,8 +1536,8 @@
         "sql": "SELECT EXISTS (SELECT 1 AS \"one\" FROM \"pg_constraint\" AS \"c\" INNER JOIN \"pg_namespace\" AS \"n\" ON \"n\".\"oid\" = \"c\".\"connamespace\" WHERE (\"c\".\"conname\" = $1 AND \"n\".\"nspname\" = $2 AND \"c\".\"conrelid\" = to_regclass($3))) AS \"result\"",
         "params": [
           "AvailabilityBlock_listingId_fkey",
-          "mytour",
-          "\"mytour\".\"AvailabilityBlock\""
+          "liveBnb",
+          "\"liveBnb\".\"AvailabilityBlock\""
         ]
       }
     ]
@@ -1549,7 +1549,7 @@
     "target": {
       "id": "postgres",
       "details": {
-        "schema": "mytour",
+        "schema": "liveBnb",
         "objectType": "foreignKey",
         "name": "Favorite_userId_fkey",
         "table": "Favorite"
@@ -1561,15 +1561,15 @@
         "sql": "SELECT NOT EXISTS (SELECT 1 AS \"one\" FROM \"pg_constraint\" AS \"c\" INNER JOIN \"pg_namespace\" AS \"n\" ON \"n\".\"oid\" = \"c\".\"connamespace\" WHERE (\"c\".\"conname\" = $1 AND \"n\".\"nspname\" = $2 AND \"c\".\"conrelid\" = to_regclass($3))) AS \"result\"",
         "params": [
           "Favorite_userId_fkey",
-          "mytour",
-          "\"mytour\".\"Favorite\""
+          "liveBnb",
+          "\"liveBnb\".\"Favorite\""
         ]
       }
     ],
     "execute": [
       {
         "description": "add FK \"Favorite_userId_fkey\"",
-        "sql": "ALTER TABLE \"mytour\".\"Favorite\"\nADD CONSTRAINT \"Favorite_userId_fkey\"\nFOREIGN KEY (\"userId\")\nREFERENCES \"mytour\".\"User\" (\"id\")\nON DELETE CASCADE"
+        "sql": "ALTER TABLE \"liveBnb\".\"Favorite\"\nADD CONSTRAINT \"Favorite_userId_fkey\"\nFOREIGN KEY (\"userId\")\nREFERENCES \"liveBnb\".\"User\" (\"id\")\nON DELETE CASCADE"
       }
     ],
     "postcheck": [
@@ -1578,8 +1578,8 @@
         "sql": "SELECT EXISTS (SELECT 1 AS \"one\" FROM \"pg_constraint\" AS \"c\" INNER JOIN \"pg_namespace\" AS \"n\" ON \"n\".\"oid\" = \"c\".\"connamespace\" WHERE (\"c\".\"conname\" = $1 AND \"n\".\"nspname\" = $2 AND \"c\".\"conrelid\" = to_regclass($3))) AS \"result\"",
         "params": [
           "Favorite_userId_fkey",
-          "mytour",
-          "\"mytour\".\"Favorite\""
+          "liveBnb",
+          "\"liveBnb\".\"Favorite\""
         ]
       }
     ]
@@ -1591,7 +1591,7 @@
     "target": {
       "id": "postgres",
       "details": {
-        "schema": "mytour",
+        "schema": "liveBnb",
         "objectType": "foreignKey",
         "name": "Favorite_listingId_fkey",
         "table": "Favorite"
@@ -1603,15 +1603,15 @@
         "sql": "SELECT NOT EXISTS (SELECT 1 AS \"one\" FROM \"pg_constraint\" AS \"c\" INNER JOIN \"pg_namespace\" AS \"n\" ON \"n\".\"oid\" = \"c\".\"connamespace\" WHERE (\"c\".\"conname\" = $1 AND \"n\".\"nspname\" = $2 AND \"c\".\"conrelid\" = to_regclass($3))) AS \"result\"",
         "params": [
           "Favorite_listingId_fkey",
-          "mytour",
-          "\"mytour\".\"Favorite\""
+          "liveBnb",
+          "\"liveBnb\".\"Favorite\""
         ]
       }
     ],
     "execute": [
       {
         "description": "add FK \"Favorite_listingId_fkey\"",
-        "sql": "ALTER TABLE \"mytour\".\"Favorite\"\nADD CONSTRAINT \"Favorite_listingId_fkey\"\nFOREIGN KEY (\"listingId\")\nREFERENCES \"mytour\".\"Listing\" (\"id\")\nON DELETE CASCADE"
+        "sql": "ALTER TABLE \"liveBnb\".\"Favorite\"\nADD CONSTRAINT \"Favorite_listingId_fkey\"\nFOREIGN KEY (\"listingId\")\nREFERENCES \"liveBnb\".\"Listing\" (\"id\")\nON DELETE CASCADE"
       }
     ],
     "postcheck": [
@@ -1620,8 +1620,8 @@
         "sql": "SELECT EXISTS (SELECT 1 AS \"one\" FROM \"pg_constraint\" AS \"c\" INNER JOIN \"pg_namespace\" AS \"n\" ON \"n\".\"oid\" = \"c\".\"connamespace\" WHERE (\"c\".\"conname\" = $1 AND \"n\".\"nspname\" = $2 AND \"c\".\"conrelid\" = to_regclass($3))) AS \"result\"",
         "params": [
           "Favorite_listingId_fkey",
-          "mytour",
-          "\"mytour\".\"Favorite\""
+          "liveBnb",
+          "\"liveBnb\".\"Favorite\""
         ]
       }
     ]
@@ -1633,7 +1633,7 @@
     "target": {
       "id": "postgres",
       "details": {
-        "schema": "mytour",
+        "schema": "liveBnb",
         "objectType": "foreignKey",
         "name": "ListingPhoto_listingId_fkey",
         "table": "ListingPhoto"
@@ -1645,15 +1645,15 @@
         "sql": "SELECT NOT EXISTS (SELECT 1 AS \"one\" FROM \"pg_constraint\" AS \"c\" INNER JOIN \"pg_namespace\" AS \"n\" ON \"n\".\"oid\" = \"c\".\"connamespace\" WHERE (\"c\".\"conname\" = $1 AND \"n\".\"nspname\" = $2 AND \"c\".\"conrelid\" = to_regclass($3))) AS \"result\"",
         "params": [
           "ListingPhoto_listingId_fkey",
-          "mytour",
-          "\"mytour\".\"ListingPhoto\""
+          "liveBnb",
+          "\"liveBnb\".\"ListingPhoto\""
         ]
       }
     ],
     "execute": [
       {
         "description": "add FK \"ListingPhoto_listingId_fkey\"",
-        "sql": "ALTER TABLE \"mytour\".\"ListingPhoto\"\nADD CONSTRAINT \"ListingPhoto_listingId_fkey\"\nFOREIGN KEY (\"listingId\")\nREFERENCES \"mytour\".\"Listing\" (\"id\")\nON DELETE CASCADE"
+        "sql": "ALTER TABLE \"liveBnb\".\"ListingPhoto\"\nADD CONSTRAINT \"ListingPhoto_listingId_fkey\"\nFOREIGN KEY (\"listingId\")\nREFERENCES \"liveBnb\".\"Listing\" (\"id\")\nON DELETE CASCADE"
       }
     ],
     "postcheck": [
@@ -1662,8 +1662,8 @@
         "sql": "SELECT EXISTS (SELECT 1 AS \"one\" FROM \"pg_constraint\" AS \"c\" INNER JOIN \"pg_namespace\" AS \"n\" ON \"n\".\"oid\" = \"c\".\"connamespace\" WHERE (\"c\".\"conname\" = $1 AND \"n\".\"nspname\" = $2 AND \"c\".\"conrelid\" = to_regclass($3))) AS \"result\"",
         "params": [
           "ListingPhoto_listingId_fkey",
-          "mytour",
-          "\"mytour\".\"ListingPhoto\""
+          "liveBnb",
+          "\"liveBnb\".\"ListingPhoto\""
         ]
       }
     ]
@@ -1675,7 +1675,7 @@
     "target": {
       "id": "postgres",
       "details": {
-        "schema": "mytour",
+        "schema": "liveBnb",
         "objectType": "foreignKey",
         "name": "Session_userId_fkey",
         "table": "Session"
@@ -1687,15 +1687,15 @@
         "sql": "SELECT NOT EXISTS (SELECT 1 AS \"one\" FROM \"pg_constraint\" AS \"c\" INNER JOIN \"pg_namespace\" AS \"n\" ON \"n\".\"oid\" = \"c\".\"connamespace\" WHERE (\"c\".\"conname\" = $1 AND \"n\".\"nspname\" = $2 AND \"c\".\"conrelid\" = to_regclass($3))) AS \"result\"",
         "params": [
           "Session_userId_fkey",
-          "mytour",
-          "\"mytour\".\"Session\""
+          "liveBnb",
+          "\"liveBnb\".\"Session\""
         ]
       }
     ],
     "execute": [
       {
         "description": "add FK \"Session_userId_fkey\"",
-        "sql": "ALTER TABLE \"mytour\".\"Session\"\nADD CONSTRAINT \"Session_userId_fkey\"\nFOREIGN KEY (\"userId\")\nREFERENCES \"mytour\".\"User\" (\"id\")\nON DELETE CASCADE"
+        "sql": "ALTER TABLE \"liveBnb\".\"Session\"\nADD CONSTRAINT \"Session_userId_fkey\"\nFOREIGN KEY (\"userId\")\nREFERENCES \"liveBnb\".\"User\" (\"id\")\nON DELETE CASCADE"
       }
     ],
     "postcheck": [
@@ -1704,8 +1704,8 @@
         "sql": "SELECT EXISTS (SELECT 1 AS \"one\" FROM \"pg_constraint\" AS \"c\" INNER JOIN \"pg_namespace\" AS \"n\" ON \"n\".\"oid\" = \"c\".\"connamespace\" WHERE (\"c\".\"conname\" = $1 AND \"n\".\"nspname\" = $2 AND \"c\".\"conrelid\" = to_regclass($3))) AS \"result\"",
         "params": [
           "Session_userId_fkey",
-          "mytour",
-          "\"mytour\".\"Session\""
+          "liveBnb",
+          "\"liveBnb\".\"Session\""
         ]
       }
     ]

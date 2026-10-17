@@ -1,6 +1,6 @@
 #!/usr/bin/env -S node
-import type { Contract as End } from '../../snapshots/8f895945e72e4f9fad8ab89a7e7c8c3a7169ad696ee5d69bc9ef8edafaced15b/contract';
-import endContract from '../../snapshots/8f895945e72e4f9fad8ab89a7e7c8c3a7169ad696ee5d69bc9ef8edafaced15b/contract.json' with { type: 'json' };
+import type { Contract as End } from '../../snapshots/1e0d04de4cb1b4588f91d6e44640d8e9c59bc6ff22cb1e4085b6bd49da231e49/contract';
+import endContract from '../../snapshots/1e0d04de4cb1b4588f91d6e44640d8e9c59bc6ff22cb1e4085b6bd49da231e49/contract.json' with { type: 'json' };
 import {
   Migration,
   MigrationCLI,
@@ -16,10 +16,10 @@ export default class M extends Migration<never, End> {
 
   override get operations() {
     return [
-      this.createSchema({ schema: 'mytour' }),
+      this.createSchema({ schema: 'liveBnb' }),
       this.createSchema({ schema: 'public' }),
       this.createTable({
-        schema: 'mytour',
+        schema: 'liveBnb',
         table: 'Account',
         columns: [
           col('access_token', 'text', { codecRef: { codecId: 'pg/text@1' } }),
@@ -54,7 +54,7 @@ export default class M extends Migration<never, End> {
         constraints: [primaryKey(['id'])],
       }),
       this.createTable({
-        schema: 'mytour',
+        schema: 'liveBnb',
         table: 'AuditLog',
         columns: [
           col('action', 'text', { notNull: true, codecRef: { codecId: 'pg/text@1' } }),
@@ -77,7 +77,7 @@ export default class M extends Migration<never, End> {
         constraints: [primaryKey(['id'])],
       }),
       this.createTable({
-        schema: 'mytour',
+        schema: 'liveBnb',
         table: 'AvailabilityBlock',
         columns: [
           col('createdAt', 'timestamptz', {
@@ -105,7 +105,7 @@ export default class M extends Migration<never, End> {
         constraints: [primaryKey(['id'])],
       }),
       this.createTable({
-        schema: 'mytour',
+        schema: 'liveBnb',
         table: 'Booking',
         columns: [
           col('advanceAmount', 'int4', {
@@ -174,7 +174,7 @@ export default class M extends Migration<never, End> {
         ],
       }),
       this.createTable({
-        schema: 'mytour',
+        schema: 'liveBnb',
         table: 'Favorite',
         columns: [
           col('createdAt', 'timestamptz', {
@@ -197,7 +197,7 @@ export default class M extends Migration<never, End> {
         constraints: [primaryKey(['id'])],
       }),
       this.createTable({
-        schema: 'mytour',
+        schema: 'liveBnb',
         table: 'Listing',
         columns: [
           col('addressNote', 'text', { codecRef: { codecId: 'pg/text@1' } }),
@@ -263,7 +263,7 @@ export default class M extends Migration<never, End> {
         ],
       }),
       this.createTable({
-        schema: 'mytour',
+        schema: 'liveBnb',
         table: 'ListingPhoto',
         columns: [
           col('caption', 'text', { codecRef: { codecId: 'pg/text@1' } }),
@@ -289,7 +289,7 @@ export default class M extends Migration<never, End> {
         constraints: [primaryKey(['id'])],
       }),
       this.createTable({
-        schema: 'mytour',
+        schema: 'liveBnb',
         table: 'ListingReport',
         columns: [
           col('createdAt', 'timestamptz', {
@@ -333,7 +333,7 @@ export default class M extends Migration<never, End> {
         ],
       }),
       this.createTable({
-        schema: 'mytour',
+        schema: 'liveBnb',
         table: 'Review',
         columns: [
           col('bookingId', 'character(36)', {
@@ -366,7 +366,7 @@ export default class M extends Migration<never, End> {
         constraints: [primaryKey(['id'])],
       }),
       this.createTable({
-        schema: 'mytour',
+        schema: 'liveBnb',
         table: 'Session',
         columns: [
           col('createdAt', 'timestamptz', {
@@ -390,7 +390,7 @@ export default class M extends Migration<never, End> {
         constraints: [primaryKey(['id'])],
       }),
       this.createTable({
-        schema: 'mytour',
+        schema: 'liveBnb',
         table: 'User',
         columns: [
           col('createdAt', 'timestamptz', {
@@ -433,7 +433,7 @@ export default class M extends Migration<never, End> {
         ],
       }),
       this.createTable({
-        schema: 'mytour',
+        schema: 'liveBnb',
         table: 'VerificationToken',
         columns: [
           col('expires', 'timestamptz', {
@@ -450,206 +450,206 @@ export default class M extends Migration<never, End> {
         constraints: [primaryKey(['id'])],
       }),
       this.addUnique({
-        schema: 'mytour',
+        schema: 'liveBnb',
         table: 'Account',
         constraint: 'Account_provider_providerAccountId_key',
         columns: ['provider', 'providerAccountId'],
       }),
       this.addUnique({
-        schema: 'mytour',
+        schema: 'liveBnb',
         table: 'Favorite',
         constraint: 'Favorite_userId_listingId_key',
         columns: ['userId', 'listingId'],
       }),
       this.addUnique({
-        schema: 'mytour',
+        schema: 'liveBnb',
         table: 'Review',
         constraint: 'Review_bookingId_reviewerId_key',
         columns: ['bookingId', 'reviewerId'],
       }),
       this.addUnique({
-        schema: 'mytour',
+        schema: 'liveBnb',
         table: 'Session',
         constraint: 'Session_sessionToken_key',
         columns: ['sessionToken'],
       }),
       this.addUnique({
-        schema: 'mytour',
+        schema: 'liveBnb',
         table: 'User',
         constraint: 'User_email_key',
         columns: ['email'],
       }),
       this.addUnique({
-        schema: 'mytour',
+        schema: 'liveBnb',
         table: 'User',
         constraint: 'User_phone_key',
         columns: ['phone'],
       }),
       this.addUnique({
-        schema: 'mytour',
+        schema: 'liveBnb',
         table: 'VerificationToken',
         constraint: 'VerificationToken_identifier_token_key',
         columns: ['identifier', 'token'],
       }),
       this.createIndex({
-        schema: 'mytour',
+        schema: 'liveBnb',
         table: 'Account',
         index: 'Account_userId_idx_a489d58a',
         columns: ['userId'],
       }),
       this.createIndex({
-        schema: 'mytour',
+        schema: 'liveBnb',
         table: 'AuditLog',
         index: 'audit_actor_recent_0e9f1adf',
         columns: ['actorId', 'createdAt'],
       }),
       this.createIndex({
-        schema: 'mytour',
+        schema: 'liveBnb',
         table: 'AvailabilityBlock',
         index: 'AvailabilityBlock_listingId_idx_953decda',
         columns: ['listingId'],
       }),
       this.createIndex({
-        schema: 'mytour',
+        schema: 'liveBnb',
         table: 'AvailabilityBlock',
         index: 'availability_listing_start_7b8c2bae',
         columns: ['listingId', 'startsAt'],
       }),
       this.createIndex({
-        schema: 'mytour',
+        schema: 'liveBnb',
         table: 'Booking',
         index: 'booking_listing_dates_533749d6',
         columns: ['listingId', 'status', 'checkIn', 'checkOut'],
       }),
       this.createIndex({
-        schema: 'mytour',
+        schema: 'liveBnb',
         table: 'Booking',
         index: 'booking_renter_status_9a7f078e',
         columns: ['renterId', 'status'],
       }),
       this.createIndex({
-        schema: 'mytour',
+        schema: 'liveBnb',
         table: 'Favorite',
         index: 'Favorite_listingId_idx_953decda',
         columns: ['listingId'],
       }),
       this.createIndex({
-        schema: 'mytour',
+        schema: 'liveBnb',
         table: 'Favorite',
         index: 'Favorite_userId_idx_a489d58a',
         columns: ['userId'],
       }),
       this.createIndex({
-        schema: 'mytour',
+        schema: 'liveBnb',
         table: 'Listing',
         index: 'listing_browse_3a3c3d1e',
         columns: ['status', 'monthlyRent'],
       }),
       this.createIndex({
-        schema: 'mytour',
+        schema: 'liveBnb',
         table: 'Listing',
         index: 'listing_location_be494fa7',
         columns: ['city', 'area'],
       }),
       this.createIndex({
-        schema: 'mytour',
+        schema: 'liveBnb',
         table: 'Listing',
         index: 'listing_owner_e2d0c1ef',
         columns: ['ownerId'],
       }),
       this.createIndex({
-        schema: 'mytour',
+        schema: 'liveBnb',
         table: 'ListingPhoto',
         index: 'ListingPhoto_listingId_idx_953decda',
         columns: ['listingId'],
       }),
       this.createIndex({
-        schema: 'mytour',
+        schema: 'liveBnb',
         table: 'ListingPhoto',
         index: 'listing_photo_order_c6074c87',
         columns: ['listingId', 'sortOrder'],
       }),
       this.createIndex({
-        schema: 'mytour',
+        schema: 'liveBnb',
         table: 'ListingReport',
         index: 'report_listing_status_1b030a2f',
         columns: ['listingId', 'status'],
       }),
       this.createIndex({
-        schema: 'mytour',
+        schema: 'liveBnb',
         table: 'ListingReport',
         index: 'report_reporter_aa245831',
         columns: ['reporterId'],
       }),
       this.createIndex({
-        schema: 'mytour',
+        schema: 'liveBnb',
         table: 'Review',
         index: 'review_reviewee_recent_c43c7af7',
         columns: ['revieweeId', 'createdAt'],
       }),
       this.createIndex({
-        schema: 'mytour',
+        schema: 'liveBnb',
         table: 'Session',
         index: 'Session_userId_idx_a489d58a',
         columns: ['userId'],
       }),
       this.addForeignKey({
-        schema: 'mytour',
+        schema: 'liveBnb',
         table: 'Account',
         foreignKey: {
           name: 'Account_userId_fkey',
           columns: ['userId'],
-          references: { schema: 'mytour', table: 'User', columns: ['id'] },
+          references: { schema: 'liveBnb', table: 'User', columns: ['id'] },
           onDelete: 'cascade',
         },
       }),
       this.addForeignKey({
-        schema: 'mytour',
+        schema: 'liveBnb',
         table: 'AvailabilityBlock',
         foreignKey: {
           name: 'AvailabilityBlock_listingId_fkey',
           columns: ['listingId'],
-          references: { schema: 'mytour', table: 'Listing', columns: ['id'] },
+          references: { schema: 'liveBnb', table: 'Listing', columns: ['id'] },
           onDelete: 'cascade',
         },
       }),
       this.addForeignKey({
-        schema: 'mytour',
+        schema: 'liveBnb',
         table: 'Favorite',
         foreignKey: {
           name: 'Favorite_userId_fkey',
           columns: ['userId'],
-          references: { schema: 'mytour', table: 'User', columns: ['id'] },
+          references: { schema: 'liveBnb', table: 'User', columns: ['id'] },
           onDelete: 'cascade',
         },
       }),
       this.addForeignKey({
-        schema: 'mytour',
+        schema: 'liveBnb',
         table: 'Favorite',
         foreignKey: {
           name: 'Favorite_listingId_fkey',
           columns: ['listingId'],
-          references: { schema: 'mytour', table: 'Listing', columns: ['id'] },
+          references: { schema: 'liveBnb', table: 'Listing', columns: ['id'] },
           onDelete: 'cascade',
         },
       }),
       this.addForeignKey({
-        schema: 'mytour',
+        schema: 'liveBnb',
         table: 'ListingPhoto',
         foreignKey: {
           name: 'ListingPhoto_listingId_fkey',
           columns: ['listingId'],
-          references: { schema: 'mytour', table: 'Listing', columns: ['id'] },
+          references: { schema: 'liveBnb', table: 'Listing', columns: ['id'] },
           onDelete: 'cascade',
         },
       }),
       this.addForeignKey({
-        schema: 'mytour',
+        schema: 'liveBnb',
         table: 'Session',
         foreignKey: {
           name: 'Session_userId_fkey',
           columns: ['userId'],
-          references: { schema: 'mytour', table: 'User', columns: ['id'] },
+          references: { schema: 'liveBnb', table: 'User', columns: ['id'] },
           onDelete: 'cascade',
         },
       }),

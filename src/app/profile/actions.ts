@@ -29,13 +29,13 @@ export async function updateProfile(_prev: FormState, formData: FormData): Promi
   const phone = phoneRaw || null;
 
   if (phone) {
-    const existing = await db.orm.mytour.User.where({ phone }).first();
+    const existing = await db.orm.liveBnb.User.where({ phone }).first();
     if (existing && existing.id !== me.id) {
       return { status: "error", message: "That phone number is already linked to another account." };
     }
   }
 
-  await db.orm.mytour.User.where({ email: me.email }).update({
+  await db.orm.liveBnb.User.where({ email: me.email }).update({
     name,
     phone,
     image: imageRaw || null,
@@ -65,7 +65,7 @@ export async function changePassword(_prev: FormState, formData: FormData): Prom
     return { status: "error", message: "New passwords do not match." };
   }
 
-  const record = await db.orm.mytour.User.where({ email: me.email }).first();
+  const record = await db.orm.liveBnb.User.where({ email: me.email }).first();
   if (!record?.passwordHash) {
     return { status: "error", message: "This account has no password to change." };
   }
@@ -76,7 +76,7 @@ export async function changePassword(_prev: FormState, formData: FormData): Prom
   }
 
   const passwordHash = await hash(next, 12);
-  await db.orm.mytour.User.where({ email: me.email }).update({ passwordHash });
+  await db.orm.liveBnb.User.where({ email: me.email }).update({ passwordHash });
 
   refresh();
   return { status: "success", message: "Password updated." };

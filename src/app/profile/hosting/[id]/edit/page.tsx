@@ -25,7 +25,7 @@ async function EditListingContent({ params }: { params: Promise<{ id: string }> 
     notFound();
   }
 
-  const listings = await db.orm.mytour.Listing.where({ ownerId: user.id })
+  const listings = await db.orm.liveBnb.Listing.where({ ownerId: user.id })
     .include("photos", (photos) => photos.orderBy((photo) => photo.sortOrder.asc()))
     .all();
   const listing = listings.find((row) => row.id === id);

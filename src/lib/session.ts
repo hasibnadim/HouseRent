@@ -14,7 +14,7 @@ export async function getCurrentUser(): Promise<CurrentUser> {
     redirect("/login");
   }
 
-  const user = await db.orm.mytour.User.where({ email }).first();
+  const user = await db.orm.liveBnb.User.where({ email }).first();
 
   if (!user || user.isSuspended) {
     redirect("/login");

@@ -142,9 +142,9 @@ function parseListingForm(formData: FormData, allowStatuses: readonly ListingSta
 }
 
 async function syncPhotos(listingId: Char<36>, urls: string[]) {
-  await db.orm.mytour.ListingPhoto.where({ listingId }).deleteAll();
+  await db.orm.liveBnb.ListingPhoto.where({ listingId }).deleteAll();
   for (const [index, url] of urls.entries()) {
-    await db.orm.mytour.ListingPhoto.create({ listingId, url, sortOrder: index });
+    await db.orm.liveBnb.ListingPhoto.create({ listingId, url, sortOrder: index });
   }
 }
 
@@ -163,7 +163,7 @@ export async function createListing(_prev: FormState, formData: FormData): Promi
 
   const { photoUrls, ...fields } = data;
   // Availability windows are derived from the booking schedule, never entered by hand.
-  const listing = await db.orm.mytour.Listing.create({ ...fields, ownerId: me.id, availableFrom: null, availableTo: null });
+  const listing = await db.orm.liveBnb.Listing.create({ ...fields, ownerId: me.id, availableFrom: null, availableTo: null });
   await syncPhotos(listing.id, photoUrls);
 
   redirect("/profile/hosting");
@@ -180,7 +180,7 @@ export async function updateListing(_prev: FormState, formData: FormData): Promi
     return { status: "error", message: "Listing not found." };
   }
 
-  const existing = await db.orm.mytour.Listing.where({ id: listingId }).first();
+  const existing = await db.orm.liveBnb.Listing.where({ id: listingId }).first();
   if (!existing || existing.ownerId !== me.id) {
     return { status: "error", message: "Listing not found." };
   }
@@ -193,7 +193,7 @@ export async function updateListing(_prev: FormState, formData: FormData): Promi
   }
 
   const { photoUrls, ...fields } = data;
-  await db.orm.mytour.Listing.where({ id: listingId }).update(fields);
+  await db.orm.liveBnb.Listing.where({ id: listingId }).update(fields);
   await syncPhotos(listingId, photoUrls);
 
   redirect("/profile/hosting");
@@ -210,12 +210,12 @@ export async function deleteListing(_prev: FormState, formData: FormData): Promi
     return { status: "error", message: "Listing not found." };
   }
 
-  const existing = await db.orm.mytour.Listing.where({ id: listingId }).first();
+  const existing = await db.orm.liveBnb.Listing.where({ id: listingId }).first();
   if (!existing || existing.ownerId !== me.id) {
     return { status: "error", message: "Listing not found." };
   }
 
-  const bookings = await db.orm.mytour.Booking.where({ listingId }).all();
+  const bookings = await db.orm.liveBnb.Booking.where({ listingId }).all();
   const active = bookings.some((booking) => booking.status === "PENDING" || booking.status === "APPROVED");
   if (active) {
     return {
@@ -225,8 +225,8 @@ export async function deleteListing(_prev: FormState, formData: FormData): Promi
   }
 
   try {
-    await db.orm.mytour.ListingPhoto.where({ listingId }).deleteAll();
-    await db.orm.mytour.Listing.where({ id: listingId }).delete();
+    await db.orm.liveBnb.ListingPhoto.where({ listingId }).deleteAll();
+    await db.orm.liveBnb.Listing.where({ id: listingId }).delete();
   } catch {
     return {
       status: "error",
